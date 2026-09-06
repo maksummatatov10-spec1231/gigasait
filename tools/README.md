@@ -93,3 +93,10 @@ country, stock, isNew, colors, supplier, description, specs{}, images[], source{
 4. Мобильный интернет/другая сеть или `--proxy`.
 5. В самом конце: дописать артикулы в `tools/ids.txt` — способ `wb.cards` работает даже тогда,
    когда всё остальное отдаёт 429.
+
+## Передача каталога частями (`split_products.py`)
+Если файлы можно загружать только до 25 МБ: двойной клик по `tools/split_products.bat` (или
+`python split_products.py`, `--mb 20` для другого размера). Скрипт найдёт `marketplace/products`
+и `marketplace/js/products.js`, нарежет их на `tools/parts/часть1.zip, часть2.zip, …` по ≤24 МБ.
+Папки товаров не разрываются между частями, внутри сохранены пути `marketplace/products/...`,
+поэтому распаковка всех частей в корень репозитория восстанавливает каталог целиком.
