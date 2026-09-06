@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GIGASAIT Market — Маркетплейс</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/market.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>">
+</head>
+<body>
+
+<!-- ===== ШАПКА ===== -->
+<header class="header">
+  <div class="header-top">
+    <a class="logo" href="#/">
+      <span class="logo-mark">🛍️</span>
+      <span class="logo-text">GIGA<span>MARKET</span></span>
+    </a>
+
+    <button class="btn btn-catalog" id="catalogBtn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span data-i18n="catalog">Каталог</span>
+    </button>
+
+    <form class="search" id="searchForm" role="search">
+      <input type="search" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Искать товары, бренды, категории…" autocomplete="off">
+      <button type="submit" class="search-btn" aria-label="Найти">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <div class="search-suggest" id="searchSuggest"></div>
+    </form>
+
+    <button class="country-btn" id="countryBtn" title="Страна">
+      <span id="countryFlag">🇷🇺</span>
+      <span id="countryName">Россия</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+
+    <nav class="header-nav">
+      <a href="#/favorites" class="nav-item" id="navFav">
+        <span class="nav-icon">♡</span>
+        <span class="nav-badge" id="favBadge">0</span>
+        <span class="nav-label" data-i18n="favorites">Избранное</span>
+      </a>
+      <a href="#/orders" class="nav-item">
+        <span class="nav-icon">📦</span>
+        <span class="nav-label" data-i18n="orders">Заказы</span>
+      </a>
+      <a href="#/cart" class="nav-item" id="navCart">
+        <span class="nav-icon">🛒</span>
+        <span class="nav-badge" id="cartBadge">0</span>
+        <span class="nav-label" data-i18n="cart">Корзина</span>
+      </a>
+      <button class="nav-item" id="themeToggle" title="Тема">
+        <span class="nav-icon theme-icon">🌙</span>
+        <span class="nav-label" data-i18n="theme">Тема</span>
+      </button>
+      <a href="#/settings" class="nav-item">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label" data-i18n="settings">Настройки</span>
+      </a>
+      <a href="../index.html" class="nav-item nav-exit" id="logoutBtn">
+        <span class="nav-icon">⏏</span>
+        <span class="nav-label" data-i18n="logout">Выйти</span>
+      </a>
+    </nav>
+  </div>
+
+  <div class="header-cats" id="headerCats"></div>
+</header>
+
+<!-- ===== ВЫПАДАЮЩИЙ КАТАЛОГ ===== -->
+<div class="catalog-drop" id="catalogDrop">
+  <div class="catalog-drop-inner">
+    <aside class="catalog-drop-list" id="catalogDropList"></aside>
+    <section class="catalog-drop-subs" id="catalogDropSubs"></section>
+  </div>
+</div>
+
+<!-- ===== ВЫБОР СТРАНЫ ===== -->
+<div class="popover" id="countryPop">
+  <div class="popover-title" data-i18n="deliverTo">Доставка в</div>
+  <div id="countryList"></div>
+</div>
+
+<!-- ===== КОНТЕНТ (SPA) ===== -->
+<main class="page" id="app"></main>
+
+<!-- ===== ПОДВАЛ ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="logo"><span class="logo-mark">🛍️</span><span class="logo-text">GIGA<span>MARKET</span></span></div>
+      <p data-i18n="footerAbout">GIGASAIT Market — учебный проект маркетплейса.</p>
+      <p class="demo-notice" data-i18n="demoNotice">Демо-режим: оплата и доставка имитируются, реальные деньги не списываются.</p>
+    </div>
+    <div class="footer-col">
+      <b data-i18n="footerHelp">Помощь</b>
+      <a href="#/" data-i18n="footerDelivery">Доставка и оплата</a>
+      <a href="#/" data-i18n="footerReturns">Возврат</a>
+      <a href="#/" data-i18n="footerContacts">Контакты</a>
+    </div>
+    <div class="footer-col">
+      <b>GIGASAIT</b>
+      <a href="../index.html" data-i18n="backToHub">На главную GIGASAIT</a>
+      <a href="../games/index.html">🎮 Games</a>
+      <a href="../community/index.html">💬 Community</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© <span id="year"></span> GIGASAIT Market • <span id="ver">v0.1.0</span></div>
+</footer>
+
+<!-- ===== МОБИЛЬНАЯ НИЖНЯЯ ПАНЕЛЬ ===== -->
+<nav class="bottom-nav">
+  <a href="#/" data-route="/"><span>🏠</span><small data-i18n="home">Главная</small></a>
+  <button id="mCatalogBtn"><span>☰</span><small data-i18n="catalog">Каталог</small></button>
+  <a href="#/favorites" data-route="/favorites"><span>♡</span><small data-i18n="favorites">Избранное</small></a>
+  <a href="#/cart" data-route="/cart"><span>🛒</span><small data-i18n="cart">Корзина</small></a>
+  <a href="#/settings" data-route="/settings"><span>⚙️</span><small data-i18n="settings">Настройки</small></a>
+</nav>
+
+<div class="toast-wrap" id="toasts"></div>
+<div class="overlay" id="overlay"></div>
+
+<script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

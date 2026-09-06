@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GIGASAIT — Игры</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/hub.css">
+  <style>
+    .soon { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px 20px; animation: rise .8s var(--transition) both; }
+    .soon .ic { font-size: 96px; filter: drop-shadow(0 0 30px #ff5c8a); margin-bottom: 20px; }
+    .soon h1 { font-family: var(--font-display); font-size: clamp(36px,7vw,72px); letter-spacing:-2px; }
+    .soon p { color: var(--text-2); font-size: 18px; margin: 14px 0 30px; max-width: 480px; }
+    .soon .back { display:inline-flex; align-items:center; gap:8px; padding: 14px 24px; border-radius: 14px; background: #ff5c8a; color:#fff; font-weight:800; transition: var(--transition); }
+    .soon .back:hover { transform: translateY(-2px); box-shadow: 0 12px 30px #ff5c8a66; }
+  </style>
+</head>
+<body>
+  <div class="bg-orbs" aria-hidden="true"><span class="orb orb-1"></span><span class="orb orb-2"></span><span class="orb orb-3"></span></div>
+  <header class="hub-header">
+    <a class="logo" href="../index.html"><span class="logo-mark">⚡</span><span class="logo-text">GIGA<span>SAIT</span></span></a>
+    <div class="hub-actions">
+      <button id="themeToggle" class="icon-btn" title="Тема">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+  <main class="soon">
+    <div class="ic">🎮</div>
+    <h1 data-ru="Игры" data-en="Games">Игры</h1>
+    <p data-ru="Мини-игры, рекорды и таблицы лидеров появятся здесь." data-en="Mini-games, records and leaderboards will appear here.">Мини-игры, рекорды и таблицы лидеров появятся здесь.</p>
+    <a class="back" href="../index.html" data-ru="← На главную" data-en="← Back to hub">← На главную</a>
+  </main>
+  <script>
+    (function(){
+      var root=document.documentElement, t=localStorage.getItem('giga.theme'); try{t=JSON.parse(t)}catch(e){}
+      root.setAttribute('data-theme', t==='light'?'light':'dark');
+      document.getElementById('themeToggle').onclick=function(){var n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);localStorage.setItem('giga.theme',n);};
+      var l=localStorage.getItem('giga.lang'); try{l=JSON.parse(l)}catch(e){}
+      if(l==='en'){document.querySelectorAll('[data-en]').forEach(function(e){e.textContent=e.dataset.en});}
+    })();
+  </script>
+</body>
+</html>

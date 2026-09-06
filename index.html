@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GIGASAIT — Мега мульти сайт</title>
+  <meta name="description" content="GIGASAIT — маркетплейс, игры и сообщество в одном месте">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/hub.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+  <div class="bg-orbs" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+  </div>
+
+  <header class="hub-header">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">⚡</span>
+      <span class="logo-text">GIGA<span>SAIT</span></span>
+    </a>
+    <div class="hub-actions">
+      <select id="hubLang" class="hub-select" aria-label="Язык">
+        <option value="ru">Русский</option>
+        <option value="en">English</option>
+      </select>
+      <button id="themeToggle" class="icon-btn" title="Сменить тему" aria-label="Сменить тему">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="hub">
+    <section class="hero">
+      <p class="hero-kicker" data-i18n="kicker">Добро пожаловать в</p>
+      <h1 class="hero-title">GIGA<span>SAIT</span></h1>
+      <p class="hero-sub" data-i18n="subtitle">Один сайт — три мира. Выбери, куда отправиться.</p>
+    </section>
+
+    <section class="cards" aria-label="Разделы сайта">
+      <a class="card card-market" href="marketplace/index.html">
+        <div class="card-glow"></div>
+        <div class="card-icon">🛍️</div>
+        <h2 data-i18n="market">Маркетплейс</h2>
+        <p data-i18n="marketDesc">Тысячи товаров, корзина, избранное, поиск по странам и категориям.</p>
+        <span class="card-cta" data-i18n="open">Открыть →</span>
+        <span class="badge badge-live" data-i18n="live">Доступно</span>
+      </a>
+
+      <a class="card card-games" href="games/index.html">
+        <div class="card-glow"></div>
+        <div class="card-icon">🎮</div>
+        <h2 data-i18n="games">Игры</h2>
+        <p data-i18n="gamesDesc">Мини-игры прямо в браузере. Рекорды, таблицы лидеров и достижения.</p>
+        <span class="card-cta" data-i18n="open">Открыть →</span>
+        <span class="badge badge-soon" data-i18n="soon">Скоро</span>
+      </a>
+
+      <a class="card card-community" href="community/index.html">
+        <div class="card-glow"></div>
+        <div class="card-icon">💬</div>
+        <h2 data-i18n="community">Сообщество</h2>
+        <p data-i18n="communityDesc">Форум, чаты, профили и обсуждения. Общайся и делись идеями.</p>
+        <span class="card-cta" data-i18n="open">Открыть →</span>
+        <span class="badge badge-soon" data-i18n="soon">Скоро</span>
+      </a>
+    </section>
+
+    <section class="stats">
+      <div class="stat"><b>1000+</b><span data-i18n="statProducts">товаров</span></div>
+      <div class="stat"><b>30</b><span data-i18n="statLangs">языков</span></div>
+      <div class="stat"><b>5</b><span data-i18n="statCountries">стран</span></div>
+      <div class="stat"><b>24/7</b><span data-i18n="statOnline">онлайн</span></div>
+    </section>
+  </main>
+
+  <footer class="hub-footer">
+    <span>© <span id="year"></span> GIGASAIT</span>
+    <span class="dot">•</span>
+    <span id="version">v0.1.0</span>
+  </footer>
+
+  <script src="assets/js/hub.js"></script>
+</body>
+</html>
