@@ -52,7 +52,7 @@ try:
 except Exception:
     pass
 
-VERSION = '3.2'
+VERSION = '3.3'
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CFG_PATH = os.path.join(ROOT, 'tools', 'import_config.json')
 IDS_PATH = os.path.join(ROOT, 'tools', 'ids.txt')
@@ -194,7 +194,7 @@ class Endpoint:
         with self.lock:
             delta = self.last + self.interval * OPTS.get('delay_mult', 1.0) - time.time()
             if delta > 0:
-                time.sleep(delta + random.random() * 0.5)
+                time.sleep(delta + random.random() * 0.3)
             self.last = time.time()
 
     def blocked(self, e):
@@ -209,13 +209,13 @@ class Endpoint:
 
 
 EP = {
-    'wb.recom':   Endpoint('wb.recom', 2, cool=60),
-    'wb.cards':   Endpoint('wb.cards', 1.5, cool=60),
-    'wb.seller':  Endpoint('wb.seller', 3, cool=60),
-    'wb.catalog': Endpoint('wb.catalog', 5, cool=120),
-    'wb.search':  Endpoint('wb.search', 6, cool=150),
-    'ym':         Endpoint('ym', 2.5, cool=180),
-    'oz':         Endpoint('oz', 4, cool=240),
+    'wb.recom':   Endpoint('wb.recom', 0.7, cool=45),
+    'wb.cards':   Endpoint('wb.cards', 0.5, cool=45),
+    'wb.seller':  Endpoint('wb.seller', 1.0, cool=45),
+    'wb.catalog': Endpoint('wb.catalog', 1.7, cool=90),
+    'wb.search':  Endpoint('wb.search', 2.0, cool=90),
+    'ym':         Endpoint('ym', 0.9, cool=120),
+    'oz':         Endpoint('oz', 1.5, cool=180),
 }
 
 
@@ -298,26 +298,47 @@ def stems(s):
     return {w[:6] for w in words(s)}
 
 
+def prefix(w):
+    """Основа слова для сравнения: 'стулья'/'стул' -> 'сту', 'кольцо'/'кольца' -> 'кольц', 'духи'/'духов' -> 'дух'."""
+    return w[:5] if len(w) >= 6 else w[:max(3, len(w) - 1)]
+
+
+def word_in(q, title_words):
+    p = prefix(q)
+    return any(t.startswith(p) for t in title_words)
+
+
 def query_alts(q):
-    """Запрос в конфиге может содержать варианты через |: 'парфюмерная вода|духи'.
-    Первый вариант — основной поисковый запрос, остальные помогают искать и проверять соответствие."""
-    return [x.strip() for x in (q or '').split('|') if x.strip()]
+    """Запрос в конфиге: варианты через |, минус-слова через -слово (для всех вариантов):
+    'микроволновая печь|микроволновка -крышка -чехол'. Первый вариант — основной поисковый запрос."""
+    out = []
+    for x in (q or '').split('|'):
+        x = ' '.join(t for t in x.split() if not t.startswith('-')).strip()
+        if x:
+            out.append(x)
+    return out
+
+
+def query_negatives(q):
+    return [t[1:].lower().replace('ё', 'е') for t in (q or '').split() if t.startswith('-') and len(t) > 2]
 
 
 def text_relevant(title, query):
     """Название товара соответствует запросу?
-    1 слово — оно должно быть в названии; 2 слова — оба; 3+ — главное слово и все кроме одного."""
-    ts = stems(title)
+    1 слово — оно должно быть в названии; 2 слова — оба; 3+ — главное слово и все кроме одного.
+    Минус-слова запроса в названии — сразу нет."""
+    tw = words(title)
+    if any(word_in(n, tw) for n in query_negatives(query)):
+        return False
     for alt in query_alts(query):
         ws = words(alt)
         if not ws:
             continue
-        qs = [w[:6] for w in ws]
-        matched = sum(1 for q in qs if q in ts)
-        if len(qs) <= 2:
-            if matched == len(qs):
+        matched = sum(1 for q in ws if word_in(q, tw))
+        if len(ws) <= 2:
+            if matched == len(ws):
                 return True
-        elif qs[0] in ts and matched >= len(qs) - 1:
+        elif word_in(ws[0], tw) and matched >= len(ws) - 1:
             return True
     return False
 
@@ -370,29 +391,36 @@ def wb_subject_for(query, hint=None):
     if key in _subj_cache:
         return _subj_cache[key]
     best, best_score = None, 0
-    hs = stems(hint)
+    hw = words(hint)
     for alt in query_alts(query):
         ws = words(alt)
         if not ws:
             continue
-        qs = {w[:6] for w in ws}
-        head = ws[0][:6]
         for lf in wb_menu():
-            ns = stems(lf['name'])
-            if head not in ns:
+            nw = words(lf['name'])
+            if not word_in(ws[0], nw):
                 continue
-            ps = stems(' '.join(lf['path']))
-            score = len(qs & ns) * 10 + len(qs & ps) * 4 + len(hs & (ps | ns)) * 3 - abs(len(ns) - len(qs)) * 3
+            pw = words(' '.join(lf['path']))
+            # все слова запроса должны быть в названии категории или в пути к ней («Женщинам > Куртки»)
+            if not all(word_in(q, nw + pw) for q in ws):
+                continue
+            score = sum(1 for q in ws if word_in(q, nw)) * 10 + sum(1 for q in ws if word_in(q, pw)) * 4 \
+                + sum(1 for h in hw if word_in(h, nw + pw)) * 3 - abs(len(nw) - len(ws)) * 3
             if score > best_score:
                 best, best_score = lf, score
+        if best:
+            break          # категория найдена по основному варианту — синонимы не нужны
     _subj_cache[key] = best
     return best
 
 
 def item_relevant(item, query):
     """Товар подходит подкатегории: либо по названию, либо WB сам отнёс его к нужной категории (subjectId)."""
-    if text_relevant(item.get('name') or item.get('title') or '', query):
+    name = item.get('name') or item.get('title') or ''
+    if text_relevant(name, query):
         return True
+    if any(word_in(n, words(name)) for n in query_negatives(query)):
+        return False
     if item.get('subjectId'):
         lf = wb_subject_for(query)
         if lf and int(item['subjectId']) == lf['subject']:
@@ -898,9 +926,10 @@ def all_products():
 
 
 def relevance(name, query):
+    tw = words(name)
     best = 0
     for alt in query_alts(query):
-        best = max(best, len(stems(alt) & stems(name)))
+        best = max(best, sum(1 for q in words(alt) if word_in(q, tw)))
     return best + (5 if text_relevant(name, query) else 0)
 
 
