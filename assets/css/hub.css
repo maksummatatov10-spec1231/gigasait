@@ -148,3 +148,22 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .theme-switch:hover .ts-track, .theme-switch:focus-visible .ts-track { box-shadow: 0 0 0 4px rgba(124,92,255,.25); }
 .theme-switch:focus-visible { outline: none; }
 [dir="rtl"] .ts-knob { left: auto; right: 3px; } [dir="rtl"][data-theme="light"] .ts-knob { transform: translateX(-32px); }
+
+/* ===== Мобильная версия хаба (html.is-mobile ставит assets/js/device.js) ===== */
+html.is-mobile .bg-orbs { display: none; }
+html.is-mobile .hub-header { padding: 10px 14px; backdrop-filter: none; }
+html.is-mobile .hub-actions { gap: 6px; }
+html.is-mobile .hub-select { max-width: 120px; font-size: 13px; }
+html.is-mobile .icon-btn, html.is-mobile .theme-switch { min-height: 44px; }
+html.is-mobile .hub { padding: 22px 14px 30px; }
+html.is-mobile .hero { margin-bottom: 26px; animation: none; }
+html.is-mobile .hero-title { font-size: clamp(38px, 13vw, 56px); letter-spacing: -2px; }
+html.is-mobile .hero-sub { font-size: 15px; margin-top: 12px; }
+html.is-mobile .cards { grid-template-columns: 1fr; gap: 14px; }
+html.is-mobile .card { padding: 26px 20px 20px; animation: none; }
+html.is-mobile .card:hover { transform: none; }
+html.is-mobile .card-img { margin: -26px -20px 6px; height: 150px; }
+html.is-mobile .card-cta { min-height: 44px; display: inline-flex; align-items: center; }
+html.is-mobile .stats { gap: 12px 26px; margin-top: 28px; animation: none; }
+html.is-mobile .hub-footer { flex-wrap: wrap; text-align: center; padding: 18px 14px calc(18px + env(safe-area-inset-bottom)); }
+html.is-mobile.is-tablet .cards { grid-template-columns: 1fr 1fr; }

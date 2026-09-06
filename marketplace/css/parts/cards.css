@@ -1,0 +1,61 @@
+/* ---------- Сетка товаров ---------- */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; }
+.card { position: relative; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; transition: transform var(--t), box-shadow var(--t), border-color var(--t); animation: fade .4s var(--t) both; will-change: transform; }
+.card:hover { transform: translateY(-5px); box-shadow: var(--shadow), 0 0 0 1px var(--accent-soft); border-color: var(--border-2); }
+.card-img { position: relative; aspect-ratio: 1; background: var(--bg-3); overflow: hidden; }
+.card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--t), opacity .4s; opacity: 0; }
+.card-img img.ok, .card-img img[data-fb] { opacity: 1; }
+.card-img::before { content: ''; position: absolute; inset: 0; background: var(--skeleton); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+.card-img:has(img.ok)::before, .card-img:has(img[data-fb])::before { display: none; }
+.card:hover .card-img img { transform: scale(1.05); }
+.card-labels { position: absolute; top: 10px; left: 10px; display: flex; flex-direction: column; gap: 5px; }
+.label { padding: 4px 8px; border-radius: 7px; font-size: 11px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: .3px; }
+.label-discount { background: var(--pink); }
+.label-new { background: var(--green); }
+.label-hit { background: var(--yellow); color: #222; }
+.card-actions { position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; gap: 6px; z-index: 2; }
+.fav-btn, .cmp-btn { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.9); color: #333; display: grid; place-items: center; font-size: 18px; transition: var(--t); box-shadow: var(--shadow-sm); }
+.fav-btn:hover, .cmp-btn:hover { transform: scale(1.1); }
+.cmp-btn { font-size: 15px; opacity: 0; }
+.card:hover .cmp-btn, .cmp-btn.active { opacity: 1; }
+.cmp-btn.active { background: var(--accent); color: #fff; }
+@media (hover: none) { .cmp-btn { opacity: 1; } }
+.fav-btn.active { color: var(--pink); }
+.fav-btn.active .heart { animation: beat .35s var(--t); }
+@keyframes beat { 50% { transform: scale(1.35); } }
+.card-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.card-price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.card-price b { font-size: 18px; font-weight: 800; }
+.card-price s { color: var(--text-3); font-size: 13px; }
+.card-price .pct { color: var(--pink); font-weight: 800; font-size: 13px; }
+.card-title { font-size: 14px; font-weight: 500; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.7em; }
+.card-title:hover { color: var(--accent); }
+.card-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-2); }
+.card-meta .star { color: var(--yellow); }
+.card-meta .flag { margin-left: auto; font-size: 14px; }
+.card-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.tag { padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
+.tag.active, .tag:hover { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+button.tag, a.tag { cursor: pointer; transition: var(--t); }
+.card .btn { margin-top: auto; height: 40px; }
+.card .btn.in-cart { background: var(--green); }
+
+/* --- карточки: быстрый просмотр, описание, вид списком --- */
+.qv-btn { position: absolute; left: 50%; bottom: 12px; transform: translate(-50%, 10px); opacity: 0; padding: 8px 14px; border-radius: 999px; background: rgba(15,18,40,.85); color: #fff; font-size: 12px; font-weight: 700; backdrop-filter: blur(6px); transition: var(--t); white-space: nowrap; }
+.card:hover .qv-btn { opacity: 1; transform: translate(-50%, 0); }
+@media (hover: none) { .qv-btn { display: none; } }
+.label-low { background: #f97316; }
+.card-desc { display: none; color: var(--text-2); font-size: 13px; line-height: 1.5; }
+.grid.list { grid-template-columns: 1fr; gap: 12px; }
+.grid.list .card { flex-direction: row; align-items: stretch; }
+.grid.list .card-img { width: 200px; flex-shrink: 0; aspect-ratio: 1; }
+.grid.list .card-body { padding: 16px 20px; gap: 8px; }
+.grid.list .card-title { -webkit-line-clamp: 2; font-size: 16px; font-weight: 600; min-height: 0; }
+.grid.list .card-desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.grid.list .card-body .btn { align-self: flex-start; margin-top: auto; }
+.grid.list .card-actions { top: 12px; right: 12px; flex-direction: row; }
+.view-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 11px; overflow: hidden; height: 42px; background: var(--surface-2); }
+.view-toggle button { width: 42px; font-size: 17px; color: var(--text-3); transition: var(--t); }
+.view-toggle button.active { background: var(--accent-soft); color: var(--accent); }
+.cat-banner-top { height: 180px; margin-bottom: 20px; }
+@media (max-width: 700px) { .grid.list .card-img { width: 120px; } .grid.list .card-body { padding: 10px 12px; } .grid.list .card-desc { display: none; } .view-toggle, #perPage { display: none; } .cat-banner-top { height: 120px; } .cat-banner-top span { font-size: 20px; } }

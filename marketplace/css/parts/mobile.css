@@ -1,0 +1,246 @@
+/* ---------- Адаптив и мобильная версия ----------
+   Два механизма:
+   1) обычные @media по ширине — планшеты, узкие окна;
+   2) класс html.is-mobile — ставится device.js, когда это телефон/планшет с тач-экраном
+      (или пользователь принудительно выбрал «Телефон» в настройках). Даёт настоящую мобильную вёрстку:
+      крупные кнопки (≥44px), нижняя панель, компактная шапка, отключённые тяжёлые эффекты. */
+.bottom-nav { display: none; }
+
+@media (max-width: 1100px) {
+  .product { grid-template-columns: 1fr 1fr; }
+  .product .buy-box { grid-column: 1 / -1; position: static; }
+  .gallery { position: static; }
+}
+@media (max-width: 960px) {
+  .nav-item .nav-label { display: none; }
+  .nav-item { width: 46px; height: 46px; }
+  .country-btn #countryName, .lang-btn-top #langCode { display: none; }
+  .catalog { grid-template-columns: 1fr; }
+  .filters { position: fixed; inset: 0 auto 0 0; width: min(340px, 90vw); max-height: none; border-radius: 0; z-index: 90; transform: translateX(-100%); transition: transform var(--t); }
+  body.rtl .filters { inset: 0 0 0 auto; transform: translateX(100%); }
+  .filters.open { transform: none; }
+  .filters-close { display: block; }
+  .filters-toggle { display: inline-flex; }
+  .cart-layout, .checkout { grid-template-columns: 1fr; }
+  .summary { position: static; }
+  .catalog-drop-inner { grid-template-columns: 1fr; }
+  .catalog-drop-list { flex-direction: row; overflow-x: auto; scrollbar-width: none; }
+  .catalog-drop-list button { flex-shrink: 0; }
+}
+@media (max-width: 700px) {
+  .header-top { gap: 8px; flex-wrap: wrap; height: auto; padding: 10px 0; }
+  .btn-catalog { display: none; }
+  .search { order: 5; flex-basis: 100%; }
+  .header-nav .nav-item:not(.nav-exit) { display: none; }
+  .header-nav { margin-left: auto; }
+  .header-cats { display: none; }
+  .catalog-drop { top: 0; z-index: 95; }
+  .page { padding-bottom: 100px; }
+  .product { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .card-body { padding: 10px; }
+  .card-price b { font-size: 16px; }
+  .cart-item { grid-template-columns: 80px 1fr; }
+  .cart-item img { width: 80px; height: 80px; }
+  .cart-item .ci-right { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; }
+  .form-grid { grid-template-columns: 1fr; }
+  .radio-cards { grid-template-columns: 1fr; }
+  .card-form .form-grid { grid-template-columns: 1fr 1fr; }
+  .bottom-nav { display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; background: var(--bg-2); border-top: 1px solid var(--border); padding: 6px 0 max(6px, env(safe-area-inset-bottom)); }
+  .bottom-nav a, .bottom-nav button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 10px; color: var(--text-2); font-weight: 600; padding: 4px 0; }
+  .bottom-nav a span, .bottom-nav button span { font-size: 20px; }
+  .bottom-nav .active { color: var(--accent); }
+  .footer { padding-bottom: 80px; }
+}
+
+/* ===== Мобильная версия (html.is-mobile) ===== */
+html.is-mobile { --header-h: 56px; --r: 14px; --r-lg: 18px; }
+html.is-mobile body { font-size: 15px; -webkit-tap-highlight-color: transparent; }
+html.is-mobile .page { width: calc(100% - 24px); padding: 12px 0 calc(84px + env(safe-area-inset-bottom)); }
+html.is-mobile .container, html.is-mobile .header-top, html.is-mobile .footer-inner, html.is-mobile .footer-bottom { width: calc(100% - 24px); }
+/* Отключаем тяжёлые эффекты: размытые пятна, blur, тени, hover-анимации */
+html.is-mobile .bg-orbs { display: none !important; }
+html.is-mobile body.live-bg { background: var(--bg); }
+html.is-mobile .header { backdrop-filter: none; background: var(--bg-2); }
+html.is-mobile .overlay, html.is-mobile .modal-wrap { backdrop-filter: none; }
+html.is-mobile .card:hover { transform: none; box-shadow: none; }
+html.is-mobile .card:hover .card-img img { transform: none; }
+html.is-mobile .promo { animation: fade .4s var(--t); background-size: 100% 100%; }
+html.is-mobile .promo .shape { display: none; }
+html.is-mobile .page > * { animation: none; }
+html.is-mobile .card { animation: none; }
+/* Шапка: логотип, страна/язык, тумблер, поиск снизу на всю ширину */
+html.is-mobile .header-top { flex-wrap: wrap; height: auto; padding: 8px 0; gap: 8px; }
+html.is-mobile .logo { font-size: 16px; }
+html.is-mobile .btn-catalog, html.is-mobile .header-cats, html.is-mobile .header-nav .nav-item:not(.nav-exit) { display: none; }
+html.is-mobile .header-nav .nav-exit { width: 44px; height: 44px; } html.is-mobile .header-nav .nav-exit .nav-label { display: none; }
+html.is-mobile .header-nav { margin-inline-start: auto; }
+html.is-mobile .search { order: 10; flex-basis: 100%; min-width: 0; }
+html.is-mobile .search input { height: 46px; font-size: 16px; } /* 16px — iOS не зумит поле */
+html.is-mobile .search-btn { width: 38px; height: 38px; }
+html.is-mobile .country-btn { height: 40px; padding: 0 10px; font-size: 13px; }
+html.is-mobile .country-btn #countryName, html.is-mobile .lang-btn-top #langCode { display: none; }
+html.is-mobile .lang-btn-top { display: flex; }
+html.is-mobile .theme-switch { height: 40px; }
+html.is-mobile .search-suggest { position: fixed; top: var(--m-suggest-top, 110px); left: 8px; right: 8px; max-height: calc(100vh - 200px); overflow: auto; }
+html.is-mobile .popover { left: 8px !important; right: 8px; width: auto; min-width: 0; max-height: 70vh; overflow: auto; }
+html.is-mobile .popover button { padding: 13px 14px; font-size: 15px; }
+/* Каталог-дропдаун: список категорий плиткой */
+html.is-mobile .catalog-drop { top: 0; z-index: 95; padding-top: 8px; }
+html.is-mobile .catalog-drop-inner { grid-template-columns: 1fr; gap: 12px; padding: 8px 0 100px; width: calc(100% - 24px); }
+html.is-mobile .catalog-drop-list { flex-direction: row; flex-wrap: nowrap; overflow-x: auto; gap: 6px; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+html.is-mobile .catalog-drop-list button { flex: 0 0 auto; padding: 9px 12px; font-size: 13px; }
+html.is-mobile .catalog-drop-list button .ic-img { width: 22px; height: 22px; }
+html.is-mobile .cat-banner { height: 110px; } html.is-mobile .cat-banner span { font-size: 20px; padding: 12px 14px; }
+html.is-mobile .catalog-drop-subs h3 { font-size: 18px; flex-wrap: wrap; }
+html.is-mobile .catalog-drop-subs .subs-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+html.is-mobile .catalog-drop-subs .subs-grid a { padding: 12px; font-size: 14px; }
+/* Кнопки, поля, тапы ≥ 44px */
+html.is-mobile .btn { min-height: 44px; }
+html.is-mobile .btn-sm { min-height: 40px; }
+html.is-mobile .btn-lg { height: 52px; }
+html.is-mobile .tag { padding: 7px 10px; font-size: 12px; }
+html.is-mobile .fav-btn, html.is-mobile .cmp-btn { width: 40px; height: 40px; opacity: 1; }
+html.is-mobile .cmp-btn:not(.active) { display: none; }
+html.is-mobile .qv-btn { display: none; }
+html.is-mobile .select { height: 44px; font-size: 14px; }
+html.is-mobile .field input, html.is-mobile .field textarea, html.is-mobile .field select { font-size: 16px; min-height: 46px; }
+html.is-mobile .qty { height: 42px; } html.is-mobile .qty button { width: 42px; }
+html.is-mobile .switch { transform: scale(1.1); }
+/* Главная */
+html.is-mobile .promo { padding: 22px 18px; margin-bottom: 18px; border-radius: var(--r-lg); }
+html.is-mobile .promo::after { display: none; }
+html.is-mobile .promo h1 { font-size: 24px; } html.is-mobile .promo p { font-size: 14px; }
+html.is-mobile .promo .btn { margin-top: 16px; }
+html.is-mobile .promo-stats { gap: 18px; margin-top: 20px; } html.is-mobile .promo-stats b { font-size: 20px; }
+html.is-mobile .features { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 22px; }
+html.is-mobile .features > div { padding: 10px; gap: 8px; flex-direction: column; align-items: flex-start; }
+html.is-mobile .features span { font-size: 22px; } html.is-mobile .features small { display: none; }
+html.is-mobile .section { margin-bottom: 26px; }
+html.is-mobile .section-head h2 { font-size: 18px; }
+html.is-mobile .cat-grid { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 6px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+html.is-mobile .cat-grid::-webkit-scrollbar { display: none; }
+html.is-mobile .cat-tile { flex: 0 0 120px; scroll-snap-align: start; }
+html.is-mobile .cat-tile-name { font-size: 12px; padding: 20px 8px 8px; }
+html.is-mobile .deal { grid-template-columns: 1fr; padding: 16px; gap: 14px; }
+html.is-mobile .deal-img { max-width: 100%; aspect-ratio: 16 / 10; }
+html.is-mobile .deal-timer b { font-size: 18px; }
+/* Горизонтальные ленты товаров на главной / в карточке — вместо огромных сеток */
+html.is-mobile .grid-6 { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 6px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+html.is-mobile .grid-6::-webkit-scrollbar { display: none; }
+html.is-mobile .grid-6 .card { flex: 0 0 46vw; max-width: 200px; scroll-snap-align: start; }
+/* Каталог */
+html.is-mobile .grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+html.is-mobile .card { border-radius: 12px; }
+html.is-mobile .card-body { padding: 8px 10px 10px; gap: 4px; }
+html.is-mobile .card-price b { font-size: 15px; } html.is-mobile .card-price s, html.is-mobile .card-price .pct { font-size: 12px; }
+html.is-mobile .card-title { font-size: 13px; min-height: 2.6em; }
+html.is-mobile .card-meta { font-size: 11px; }
+html.is-mobile .card-tags { display: none; }
+html.is-mobile .card-body .btn { height: 40px; font-size: 13px; padding: 0 10px; }
+html.is-mobile .label { font-size: 10px; padding: 3px 6px; }
+html.is-mobile .breadcrumbs { font-size: 12px; white-space: nowrap; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; margin-bottom: 10px; }
+html.is-mobile .catalog-top { margin-bottom: 10px; }
+html.is-mobile .catalog-top h1 { font-size: 20px; }
+html.is-mobile .catalog-controls { width: 100%; }
+html.is-mobile .catalog-controls .select { flex: 1; min-width: 0; padding-inline-start: 10px; }
+html.is-mobile .view-toggle, html.is-mobile #perPage { display: none; }
+html.is-mobile .filters-toggle { display: inline-flex; }
+html.is-mobile .filters { position: fixed; inset: auto 0 0 0; width: 100%; max-height: 88vh; border-radius: 20px 20px 0 0; transform: translateY(100%); transition: transform .3s var(--t); z-index: 90; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+html.is-mobile .filters.open { transform: none; }
+html.is-mobile .filters-close { display: block; }
+html.is-mobile .filters-head { position: sticky; top: -20px; background: var(--surface); padding: 6px 0; z-index: 1; }
+html.is-mobile .filters-head::before { content: ''; position: absolute; top: -2px; left: 50%; width: 40px; height: 4px; border-radius: 4px; background: var(--border-2); transform: translateX(-50%); }
+html.is-mobile .active-filters { overflow-x: auto; flex-wrap: nowrap; white-space: nowrap; scrollbar-width: none; padding-bottom: 4px; }
+html.is-mobile .cat-banner-top { height: 100px; margin-bottom: 12px; } html.is-mobile .cat-banner-top span { font-size: 18px; padding: 10px 14px; }
+html.is-mobile .load-more .btn { width: 100%; }
+/* Товар */
+html.is-mobile .product { grid-template-columns: 1fr; gap: 16px; }
+html.is-mobile .gallery-main { border-radius: 14px; }
+html.is-mobile .gallery-thumbs { overflow-x: auto; scrollbar-width: none; } html.is-mobile .gallery-thumbs img { width: 60px; height: 60px; flex-shrink: 0; }
+html.is-mobile .zoom-hint { display: none; }
+html.is-mobile .p-info h1 { font-size: 18px; }
+html.is-mobile .p-meta { gap: 10px; font-size: 13px; }
+html.is-mobile .p-block { margin-bottom: 18px; } html.is-mobile .p-block p { font-size: 14px; }
+html.is-mobile .spec { flex-direction: column; gap: 2px; } html.is-mobile .spec span:last-child { text-align: start; }
+html.is-mobile .together-row { overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; } html.is-mobile .together-item { flex: 0 0 130px; }
+/* Липкая панель покупки снизу */
+html.is-mobile .buy-box { position: fixed; left: 0; right: 0; bottom: calc(58px + env(safe-area-inset-bottom)); z-index: 55; border-radius: 16px 16px 0 0; padding: 10px 12px; gap: 8px; box-shadow: 0 -8px 30px rgba(0,0,0,.25); }
+/* в липкой панели на телефоне сведения о доставке/бонусах сворачиваются в одну строку, чтобы панель была компактной */
+html.is-mobile .buy-box .buy-info { display: none; }
+html.is-mobile .buy-info-mobile { display: block; padding: 14px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--border); }
+html.is-mobile.is-tablet .buy-info-mobile { display: none; }
+html.is-mobile .buy-box .bonus-line, html.is-mobile .buy-box .stock-ok, html.is-mobile .buy-box .stock-low { font-size: 12px; display: inline-block; margin: 0 8px 0 0; }
+html.is-mobile .buy-box .buy-price { gap: 8px; } html.is-mobile .buy-box .buy-price b { font-size: 20px; }
+html.is-mobile .buy-box .buy-row { gap: 8px; }
+html.is-mobile .buy-box .buy-row:last-of-type .btn { min-height: 40px; height: 40px; font-size: 13px; }
+html.is-mobile .buy-box .buy-row:last-of-type #buyNow { flex: 1; }
+html.is-mobile .buy-box .buy-row #addBtn { flex: 1; height: 46px; }
+html.is-mobile .product + .section { margin-top: 20px; }
+html.is-mobile body:has(.buy-box) .page { padding-bottom: calc(240px + env(safe-area-inset-bottom)); }
+html.is-mobile .buy-box .stock-low { font-size: 12px; }
+html.is-mobile .review-form { padding: 12px; }
+/* Корзина / оформление */
+html.is-mobile .cart-item { grid-template-columns: 72px 1fr; gap: 10px; padding: 10px; }
+html.is-mobile .cart-item img { width: 72px; height: 72px; }
+html.is-mobile .cart-item .ci-title { font-size: 14px; }
+html.is-mobile .cart-item .ci-actions { flex-wrap: wrap; gap: 6px 10px; }
+html.is-mobile .cart-item .ci-actions .btn-sm { padding: 0 8px; font-size: 12px; min-height: 36px; }
+html.is-mobile .cart-item .ci-right { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; }
+html.is-mobile .summary { padding: 16px; }
+html.is-mobile .form-card { padding: 16px; margin-bottom: 12px; }
+html.is-mobile .form-grid { grid-template-columns: 1fr; gap: 10px; }
+html.is-mobile .radio-cards { grid-template-columns: 1fr; }
+html.is-mobile .card-form .form-grid { grid-template-columns: 1fr 1fr; }
+/* Заказы / сравнение / страницы */
+html.is-mobile .order-details { grid-template-columns: 1fr; }
+html.is-mobile .timeline .tl-step span { font-size: 10px; }
+html.is-mobile .order-thumbs img { width: 48px; height: 48px; }
+html.is-mobile .order-actions .btn { flex: 1; }
+html.is-mobile .compare th { width: 110px; font-size: 12px; padding: 8px 10px; } html.is-mobile .compare td { padding: 8px 10px; min-width: 150px; font-size: 13px; }
+html.is-mobile .compare .cmp-head img { width: 90px; height: 90px; }
+html.is-mobile .static-page .page-nav { overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
+html.is-mobile .info-grid { grid-template-columns: 1fr; }
+html.is-mobile .profile-card { flex-direction: column; }
+html.is-mobile .lang-grid { grid-template-columns: 1fr 1fr; }
+html.is-mobile .theme-cards { grid-template-columns: 1fr 1fr; }
+html.is-mobile .page-title { font-size: 22px; margin-bottom: 14px; }
+html.is-mobile .page-head { margin-bottom: 12px; }
+html.is-mobile .page-tools { width: 100%; } html.is-mobile .page-tools .btn { flex: 1; padding: 0 8px; font-size: 13px; }
+/* Избранное: перемещение пальцем — карточка сначала «долгое нажатие», затем тянем */
+html.is-mobile .move-hint { font-size: 13px; padding: 10px 12px; }
+/* Модалки — во весь экран снизу */
+html.is-mobile .modal-wrap { padding: 0; align-items: end; }
+html.is-mobile .modal { width: 100%; max-height: 92vh; border-radius: 20px 20px 0 0; padding: 20px 16px calc(20px + env(safe-area-inset-bottom)); animation: sheetIn .3s var(--t); }
+@keyframes sheetIn { from { transform: translateY(40px); opacity: 0; } }
+html.is-mobile .qv { grid-template-columns: 1fr; gap: 14px; }
+html.is-mobile .qv-gal img:first-child { aspect-ratio: 4 / 3; }
+/* Нижняя панель */
+html.is-mobile .bottom-nav { display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; background: var(--bg-2); border-top: 1px solid var(--border); padding: 6px 0 max(6px, env(safe-area-inset-bottom)); }
+html.is-mobile .bottom-nav a, html.is-mobile .bottom-nav button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 10px; color: var(--text-2); font-weight: 600; padding: 6px 0; min-height: 50px; position: relative; }
+html.is-mobile .bottom-nav a span, html.is-mobile .bottom-nav button span { font-size: 22px; line-height: 1; }
+html.is-mobile .bottom-nav .active { color: var(--accent); }
+html.is-mobile .bottom-nav .nav-badge { position: absolute; top: 2px; left: calc(50% + 6px); right: auto; transform: scale(0); }
+html.is-mobile .bottom-nav .nav-badge.show { transform: scale(1); }
+html.is-mobile .footer { padding: 24px 0 calc(80px + env(safe-area-inset-bottom)); }
+html.is-mobile .footer-inner { grid-template-columns: 1fr 1fr; gap: 18px; }
+html.is-mobile .footer-col:first-child { grid-column: 1 / -1; }
+html.is-mobile .to-top { bottom: calc(76px + env(safe-area-inset-bottom)); left: 10px; width: 42px; height: 42px; }
+html.is-mobile .compare-bar { bottom: calc(76px + env(safe-area-inset-bottom)); right: 10px; padding: 10px 14px; }
+html.is-mobile body.rtl .to-top { left: auto; right: 10px; } html.is-mobile body.rtl .compare-bar { right: auto; left: 10px; }
+html.is-mobile .toast-wrap { bottom: calc(70px + env(safe-area-inset-bottom)); left: 10px; right: 10px; transform: none; }
+html.is-mobile .toast { font-size: 13px; padding: 10px 14px; }
+html.is-mobile .lightbox button { width: 44px; height: 44px; }
+/* Планшеты: 3 колонки */
+html.is-mobile.is-tablet .grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+html.is-mobile.is-tablet .page, html.is-mobile.is-tablet .header-top, html.is-mobile.is-tablet .footer-inner { width: calc(100% - 32px); }
+html.is-mobile.is-tablet .features { grid-template-columns: repeat(4, 1fr); }
+html.is-mobile.is-tablet .lang-grid { grid-template-columns: repeat(3, 1fr); }
+html.is-mobile.is-tablet .product { grid-template-columns: 1fr 1fr; }
+html.is-mobile.is-tablet .buy-box { position: static; grid-column: 1 / -1; border-radius: var(--r-lg); box-shadow: none; }
+html.is-mobile.is-tablet .buy-box .buy-info, html.is-mobile.is-tablet .buy-box .bonus-line, html.is-mobile.is-tablet .buy-box .stock-ok { display: flex; }
+html.is-mobile.is-tablet body:has(.buy-box) .page { padding-bottom: 100px; }
+/* Переключатель версии сайта (кнопка в подвале) */
+.site-mode { display: inline-flex; gap: 4px; margin-top: 12px; padding: 4px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); }
+.site-mode button { padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; color: var(--text-3); transition: var(--t); min-height: 32px; }
+.site-mode button.active { background: var(--accent); color: #fff; }

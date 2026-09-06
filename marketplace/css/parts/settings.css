@@ -1,0 +1,30 @@
+/* ---------- Настройки ---------- */
+.settings { max-width: 760px; animation: fade .5s var(--t); }
+.settings .form-card { padding: 26px; }
+.lang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.lang-btn { padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--surface-2); font-weight: 600; font-size: 13px; text-align: left; transition: var(--t); }
+.lang-btn:hover { border-color: var(--border-2); }
+.lang-btn.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.switch { position: relative; width: 48px; height: 28px; border-radius: 999px; background: var(--border-2); transition: var(--t); flex-shrink: 0; }
+.switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: var(--t); box-shadow: 0 2px 6px rgba(0,0,0,.25); }
+.switch.on { background: var(--accent); }
+.switch.on::after { transform: translateX(20px); }
+.setting-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.setting-row:last-child { border-bottom: 0; }
+.setting-row b { display: block; font-size: 15px; }
+.setting-row small { color: var(--text-2); }
+.theme-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.theme-card { padding: 16px; border-radius: var(--r); border: 1.5px solid var(--border); cursor: pointer; transition: var(--t); display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.theme-card.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.theme-card .sw { width: 34px; height: 34px; border-radius: 9px; border: 1px solid var(--border); }
+
+/* --- настройки: профиль --- */
+.profile-card { display: flex; gap: 20px; align-items: flex-start; background: linear-gradient(135deg, var(--surface), var(--accent-soft)); }
+.avatar { width: 72px; height: 72px; border-radius: 22px; background: linear-gradient(135deg, var(--accent), var(--pink)); color: #fff; font-family: var(--font-display); font-size: 30px; display: grid; place-items: center; flex-shrink: 0; box-shadow: var(--shadow-sm); }
+.profile-info { flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.profile-info > b { font-size: 20px; } .profile-info .level { font-weight: 600; font-size: 14px; }
+.profile-info .bar { height: 6px; border-radius: 6px; background: var(--bg-3); overflow: hidden; max-width: 360px; } .profile-info .bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--pink)); }
+.profile-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 6px; }
+.profile-stats div { padding: 10px 12px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); display: flex; flex-direction: column; gap: 2px; }
+.profile-stats b { font-size: 15px; } .profile-stats span { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: .5px; }
+@media (max-width: 600px) { .profile-card { flex-direction: column; } }

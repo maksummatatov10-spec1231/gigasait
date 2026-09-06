@@ -1,0 +1,40 @@
+/* ---------- Успех / Заказы ---------- */
+.success { text-align: center; padding: 60px 20px; animation: fade .5s var(--t); }
+.success .ic { width: 96px; height: 96px; border-radius: 50%; background: var(--green); color: #fff; font-size: 48px; display: grid; place-items: center; margin: 0 auto 20px; animation: beat .6s var(--t); }
+.success h1 { font-family: var(--font-display); font-size: 30px; margin-bottom: 10px; }
+.success .num { display: inline-block; padding: 8px 16px; border-radius: 10px; background: var(--surface-2); font-family: monospace; font-size: 18px; font-weight: 700; margin: 10px 0 16px; }
+.success p { color: var(--text-2); max-width: 480px; margin: 0 auto 24px; }
+.order-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; margin-bottom: 14px; animation: fade .4s var(--t); }
+.order-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.order-head b { font-size: 16px; }
+.order-head small { color: var(--text-2); }
+.status { padding: 5px 10px; border-radius: 8px; font-size: 12px; font-weight: 700; }
+.status-processing { background: rgba(251,191,36,.15); color: var(--yellow); }
+.status-paid, .status-delivered { background: rgba(34,197,94,.15); color: var(--green); }
+.status-awaiting { background: var(--accent-soft); color: var(--accent); }
+.status-shipped { background: rgba(59,130,246,.15); color: #3b82f6; }
+.order-thumbs { display: flex; gap: 8px; flex-wrap: wrap; }
+.order-thumbs img { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; }
+.order-foot { display: flex; justify-content: space-between; margin-top: 14px; font-size: 14px; color: var(--text-2); flex-wrap: wrap; gap: 8px; }
+.order-foot b { color: var(--text); font-size: 16px; }
+
+/* --- заказ: детали, таймлайн, чек --- */
+.order-details { display: grid; grid-template-columns: 1fr 360px; gap: 24px; align-items: start; }
+.order-details .form-card h3 { align-items: center; }
+.timeline { display: grid; grid-template-columns: repeat(4, 1fr); margin: 6px 0 20px; position: relative; }
+.timeline::before { content: ''; position: absolute; top: 11px; left: 12%; right: 12%; height: 3px; background: var(--border-2); }
+.tl-step { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12px; color: var(--text-3); text-align: center; }
+.tl-step i { width: 24px; height: 24px; border-radius: 50%; background: var(--surface-2); border: 3px solid var(--border-2); z-index: 1; transition: var(--t); }
+.tl-step.done { color: var(--text); } .tl-step.done i { background: var(--green); border-color: var(--green); }
+.tl-step.cur i { box-shadow: 0 0 0 6px rgba(34,197,94,.2); animation: pulse 1.6s infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 10px rgba(34,197,94,.05); } }
+.kv { display: flex; justify-content: space-between; gap: 14px; padding: 9px 0; border-bottom: 1px dashed var(--border); font-size: 14px; }
+.kv span { color: var(--text-2); } .kv b { text-align: end; }
+.order-thumbs img { transition: var(--t); } .order-thumbs:hover img { transform: translateY(-2px); }
+@media (max-width: 900px) { .order-details { grid-template-columns: 1fr; } .timeline .tl-step span { font-size: 11px; } }
+@media print {
+  .header, .header-cats, .footer, .bottom-nav, .to-top, .compare-bar, .no-print, .breadcrumbs, .bg-orbs, #toasts { display: none !important; }
+  body { background: #fff; color: #000; } .page { width: 100%; padding: 0; }
+  .form-card, .summary { border: 1px solid #ccc; box-shadow: none; break-inside: avoid; position: static; }
+  .order-details { grid-template-columns: 1fr; }
+}

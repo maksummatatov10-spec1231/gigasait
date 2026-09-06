@@ -1,0 +1,35 @@
+/* ---------- Каталог ---------- */
+.catalog { display: grid; grid-template-columns: 270px 1fr; gap: 24px; align-items: start; }
+.filters { position: sticky; top: calc(var(--header-h) + 50px); background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; display: flex; flex-direction: column; gap: 22px; max-height: calc(100vh - var(--header-h) - 70px); overflow: auto; }
+.filters h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-3); margin-bottom: 10px; font-weight: 700; }
+.filters-head { display: flex; align-items: center; justify-content: space-between; }
+.filters-head b { font-family: var(--font-display); font-size: 18px; }
+.filters-close { display: none; }
+.f-check { display: flex; align-items: center; gap: 10px; padding: 6px 0; cursor: pointer; font-size: 14px; font-weight: 500; }
+.f-check input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
+.f-check small { margin-left: auto; color: var(--text-3); }
+.f-price { display: flex; gap: 8px; align-items: center; }
+.f-price input { width: 100%; height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); outline: none; }
+.f-price input:focus { border-color: var(--accent); }
+.f-range { width: 100%; accent-color: var(--accent); margin-top: 8px; }
+.f-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.f-rating { display: flex; gap: 4px; }
+.f-rating button { flex: 1; height: 36px; border-radius: 9px; border: 1px solid var(--border); font-weight: 700; font-size: 13px; transition: var(--t); }
+.f-rating button.active { background: var(--accent); color: #fff; border-color: transparent; }
+
+.catalog-main { min-width: 0; }
+.catalog-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.catalog-top h1 { font-family: var(--font-display); font-size: clamp(20px, 3vw, 30px); letter-spacing: -.5px; }
+.catalog-top .count { color: var(--text-2); font-size: 14px; font-weight: 500; }
+.catalog-controls { display: flex; gap: 8px; align-items: center; }
+.select { height: 42px; padding: 0 36px 0 14px; border-radius: 11px; border: 1px solid var(--border); background: var(--surface-2); outline: none; font-weight: 600; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; cursor: pointer; }
+.select:focus { border-color: var(--accent); }
+.filters-toggle { display: none; }
+.active-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px 6px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 13px; font-weight: 600; }
+.chip button { font-size: 15px; line-height: 1; opacity: .7; }
+.chip button:hover { opacity: 1; }
+.breadcrumbs { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; color: var(--text-2); margin-bottom: 14px; }
+.breadcrumbs a:hover { color: var(--accent); }
+.breadcrumbs span::before { content: '/'; margin: 0 4px; color: var(--text-3); }
+.load-more { display: flex; justify-content: center; margin-top: 28px; }

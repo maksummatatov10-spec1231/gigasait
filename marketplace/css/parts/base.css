@@ -1,0 +1,46 @@
+/* ===== GIGASAIT MARKET — стили ===== */
+:root {
+  --font-display: 'Unbounded', 'Manrope', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, -apple-system, sans-serif;
+  --r-sm: 10px; --r: 16px; --r-lg: 22px;
+  --t: .25s cubic-bezier(.2,.8,.2,1);
+  --header-h: 64px;
+  --max: 1320px;
+}
+[data-theme="dark"] {
+  --bg: #0a0b10; --bg-2: #11131b; --bg-3: #181b26;
+  --surface: #141621; --surface-2: #1c1f2c; --border: rgba(255,255,255,.08); --border-2: rgba(255,255,255,.14);
+  --text: #f3f4f9; --text-2: #9ea3b8; --text-3: #6b7088;
+  --accent: #7c5cff; --accent-h: #6a48ff; --accent-soft: rgba(124,92,255,.16);
+  --pink: #ff4f7b; --green: #22c55e; --yellow: #fbbf24; --red: #ef4444;
+  --shadow: 0 12px 40px rgba(0,0,0,.45); --shadow-sm: 0 4px 14px rgba(0,0,0,.35);
+  --skeleton: linear-gradient(90deg, #1c1f2c 25%, #262a3a 50%, #1c1f2c 75%);
+}
+[data-theme="light"] {
+  --bg: #f3f4f9; --bg-2: #ffffff; --bg-3: #eceef6;
+  --surface: #ffffff; --surface-2: #f6f7fb; --border: rgba(15,18,40,.08); --border-2: rgba(15,18,40,.16);
+  --text: #0f1228; --text-2: #5b6080; --text-3: #8b90a8;
+  --accent: #6a4dff; --accent-h: #5838f0; --accent-soft: rgba(106,77,255,.12);
+  --pink: #f03e6c; --green: #16a34a; --yellow: #f59e0b; --red: #dc2626;
+  --shadow: 0 12px 40px rgba(30,40,100,.12); --shadow-sm: 0 4px 14px rgba(30,40,100,.08);
+  --skeleton: linear-gradient(90deg, #eceef6 25%, #f6f7fb 50%, #eceef6 75%);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; transition: background var(--t), color var(--t); }
+body.rtl { direction: rtl; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0; }
+input, select, textarea { font: inherit; color: inherit; }
+img { display: block; max-width: 100%; }
+::selection { background: var(--accent); color: #fff; }
+body.no-scroll { overflow: hidden; }
+
+.container { width: min(var(--max), 100% - 32px); margin-inline: auto; }
+.page { flex: 1; width: min(var(--max), 100% - 32px); margin-inline: auto; padding: 20px 0 80px; }
+
+.skeleton { background: var(--skeleton); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: var(--r); }
+@keyframes shimmer { to { background-position: -200% 0; } }
+@keyframes fade { from { opacity: 0; transform: translateY(10px); } }

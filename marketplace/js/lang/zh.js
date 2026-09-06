@@ -61,6 +61,7 @@ window.MARKET_LANG.zh = {
     resetOrder: '重置排序', addAllToCart: '全部加入购物车', shareList: '分享列表', linkCopied: '链接已复制', importedFromLink: '已从链接添加：{n}',
     translate: '翻译', translating: '翻译中…', translatedBy: '由 Google 翻译提供', showOriginal: '显示原文', translateFailed: '翻译失败 — 请检查网络连接',
     autoTranslate: '自动翻译商品描述', autoTranslateHint: '商品描述为俄语。开启后将通过 Google 翻译自动译为界面语言（需要联网，机器翻译）。', viewGrid: '网格', viewList: '列表', dealOfDay: '今日特惠',
+    trStatus: '翻译器', trWorking: '正在翻译… {n}', trDone: '已翻译', trOff: '自动翻译已关闭', trFailed: '翻译不可用', trFailedHint: '翻译服务器无响应（无网络、网络被拦截或浏览器扩展）。显示俄语原文。', trRetry: '重试', trDiag: '翻译诊断', trProvider: '服务', trProviderNone: '尚未连接', trLastError: '最近错误', trNoErrors: '无错误', trStats: '已翻译批次：{ok}，失败：{fail}，缓存：{cache}', trTest: '测试翻译', trTesting: '检测中…', trTestOk: '翻译正常（{provider}）：“{sample}”', trTestFail: '失败：{error}', trOnlyNonRu: '仅当界面语言不是俄语时才需要翻译', trTranslated: '已翻译', trOriginal: '原文', siteVersion: '网站版本', siteVersionHint: '根据设备自动识别。可以强制使用手机版或电脑版。', deviceAuto: '自动', devicePhone: '手机', deviceDesktop: '电脑', deviceDetected: '已识别：{type}', devPhone: '手机', devTablet: '平板', devDesktop: '电脑',
     endsIn: '剩余时间', boughtTogether: '经常一起购买', addAllFor: '全部加入，共 {sum}', writeReview: '写评价', yourRating: '您的评分',
     reviewText: '评价内容', reviewSent: '谢谢！您的评价已发布', yourName: '您的姓名', ratings: '评分', saveForLater: '稍后再买',
     savedItems: '稍后再买', moveToCart: '移入购物车', estDelivery: '预计送达', orderDetails: '订单详情', trackNumber: '运单号',

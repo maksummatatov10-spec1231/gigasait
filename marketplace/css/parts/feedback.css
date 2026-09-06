@@ -1,0 +1,30 @@
+/* ---------- Overlay / Toast ---------- */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,.55); backdrop-filter: blur(4px); z-index: 80; opacity: 0; pointer-events: none; transition: var(--t); }
+.overlay.show { opacity: 1; pointer-events: auto; }
+.toast-wrap { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+.toast { background: var(--text); color: var(--bg); padding: 12px 18px; border-radius: 12px; font-weight: 600; font-size: 14px; box-shadow: var(--shadow); animation: toastIn .3s var(--t); display: flex; gap: 10px; align-items: center; }
+.toast.out { animation: toastOut .3s var(--t) forwards; }
+@keyframes toastIn { from { opacity: 0; transform: translateY(16px); } }
+@keyframes toastOut { to { opacity: 0; transform: translateY(16px); } }
+
+/* ---------- Пусто ---------- */
+.empty { text-align: center; padding: 70px 20px; animation: fade .5s var(--t); }
+.empty .ic { font-size: 70px; margin-bottom: 14px; }
+.empty h2 { font-family: var(--font-display); font-size: 24px; margin-bottom: 8px; }
+.empty p { color: var(--text-2); margin-bottom: 22px; }
+
+/* --- модальные окна --- */
+.modal-wrap { position: fixed; inset: 0; z-index: 150; background: rgba(5,6,12,.7); backdrop-filter: blur(8px); display: grid; place-items: center; padding: 20px; animation: fadeIn .2s; overflow: auto; }
+.modal { position: relative; width: min(960px, 100%); background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 28px; box-shadow: var(--shadow); animation: modalIn .3s cubic-bezier(.2,.8,.2,1); max-height: calc(100vh - 40px); overflow: auto; }
+.modal-sm { width: min(460px, 100%); }
+@keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(.97); } }
+.modal-close { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border); font-size: 15px; z-index: 2; transition: var(--t); }
+.modal-close:hover { color: var(--red); transform: rotate(90deg); }
+body.rtl .modal-close { right: auto; left: 14px; }
+.qv { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.qv-gal img:first-child { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--r); background: var(--bg-3); }
+.qv-info h2 { font-size: 20px; line-height: 1.3; margin: 8px 0 14px; }
+.qv-desc { color: var(--text-2); font-size: 14px; line-height: 1.6; margin: 14px 0; }
+@media (max-width: 760px) { .qv { grid-template-columns: 1fr; } .modal { padding: 20px; } }
+.kbd-list { display: grid; gap: 10px; } .kbd-list > div { display: flex; align-items: center; gap: 14px; font-size: 14px; }
+kbd { display: inline-block; min-width: 36px; text-align: center; padding: 4px 8px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border-2); border-bottom-width: 3px; font-family: ui-monospace, monospace; font-size: 13px; font-weight: 700; }
