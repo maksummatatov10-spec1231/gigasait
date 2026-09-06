@@ -52,7 +52,7 @@ try:
 except Exception:
     pass
 
-VERSION = '3.3'
+VERSION = '3.4'
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CFG_PATH = os.path.join(ROOT, 'tools', 'import_config.json')
 IDS_PATH = os.path.join(ROOT, 'tools', 'ids.txt')
@@ -1040,6 +1040,7 @@ class Importer:
         self.sellers = cfg.get('wb_sellers') or {}
         self.ym_slugs = cfg.get('ym_slugs') or {}
         self.stats = {}
+        self.pass_no = 1
         self._cards_cache = {}
         self.known = set()       # id всех уже скачанных товаров (во всех категориях)
         self.known_roots = set()
@@ -1098,7 +1099,7 @@ class Importer:
                 break
             if not EP[m].available():
                 continue
-            pages = 5 if m in ('wb.recom', 'wb.catalog') else 3 if m in ('wb.search', 'ym', 'oz') else (len(self.sellers.get(cat_id) or []) if m == 'wb.seller' else 1)
+            pages = (5 if m in ('wb.recom', 'wb.catalog') else 3 if m in ('wb.search', 'ym', 'oz')) + 3 * (self.pass_no - 1) if m in ('wb.recom', 'wb.catalog', 'wb.search', 'ym', 'oz') else (len(self.sellers.get(cat_id) or []) if m == 'wb.seller' else 1)
             empty_pages = 0
             for page in range(1, pages + 1):
                 if len(got) >= need:
@@ -1266,7 +1267,7 @@ def main():
     ap.add_argument('--limit', type=int, help='товаров на подкатегорию (для быстрой проверки)')
     ap.add_argument('--per-category', type=int, help='товаров на категорию (по умолчанию из конфига, 25)')
     ap.add_argument('--delay', type=float, default=1.0, help='множитель пауз между запросами (2 = вдвое медленнее)')
-    ap.add_argument('--passes', type=int, default=2, help='сколько раз пройти по категориям, добирая недостающее')
+    ap.add_argument('--passes', type=int, default=3, help='сколько раз пройти по категориям, добирая недостающее')
     ap.add_argument('--cookies', help='файл cookies (cookies.txt из браузера)')
     ap.add_argument('--proxy', help='прокси, например http://user:pass@host:port')
     ap.add_argument('--build-only', action='store_true', help='только пересобрать products.js')
@@ -1311,11 +1312,13 @@ def main():
                 if not short:
                     break
                 log(f'\n▶▶ Проход {ps}: добираем {len(short)} категорий: {", ".join(short)}')
-                # перед повторным проходом даём лимитам остыть
-                waits = [ep.until - time.time() for ep in EP.values() if not ep.available()]
-                if waits and len(waits) == len(EP):
-                    w = min(min(waits), 300)
-                    log(f'   все источники охлаждаются — ждём {w:.0f} c'); time.sleep(max(0, w))
+                # перед повторным проходом даём основным способам остыть — иначе добирать нечем
+                imp.pass_no = ps
+                waits = [EP[k].until - time.time() for k in ('wb.search', 'wb.recom', 'ym') if not EP[k].available()]
+                if waits:
+                    w = min(max(waits), 240)
+                    if w > 0:
+                        log(f'   ждём {w:.0f} c, пока остынут лимиты WB/Яндекса'); time.sleep(w)
                 cats_run = {c: cats[c] for c in short}
             else:
                 cats_run = cats
