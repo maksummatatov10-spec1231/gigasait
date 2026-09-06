@@ -28,17 +28,22 @@
   </header>
   <main class="soon">
     <div class="ic">💬</div>
-    <h1 data-ru="Сообщество" data-en="Community">Сообщество</h1>
-    <p data-ru="Форум, чаты и профили — в разработке." data-en="Forum, chats and profiles — coming soon.">Форум, чаты и профили — в разработке.</p>
-    <a class="back" href="../index.html" data-ru="← На главную" data-en="← Back to hub">← На главную</a>
+    <h1 id="t">Сообщество</h1>
+    <p id="p">Форум, чаты и профили появятся здесь. Раздел развивается постепенно.</p>
+    <a class="back" href="../index.html" id="b">← На главную</a>
   </main>
   <script>
     (function(){
-      var root=document.documentElement, t=localStorage.getItem('giga.theme'); try{t=JSON.parse(t)}catch(e){}
-      root.setAttribute('data-theme', t==='light'?'light':'dark');
+      var T={"ru": ["Сообщество", "Форум, чаты и профили появятся здесь. Раздел развивается постепенно.", "← На главную", "Скоро"], "en": ["Community", "Forum, chats and profiles will appear here. This section is being built gradually.", "← Back to hub", "Soon"], "uk": ["Спільнота", "Форум, чати та профілі з’являться тут. Розділ розвивається поступово.", "← На головну", "Незабаром"], "be": ["Супольнасць", "Форум, чаты і профілі з’явяцца тут. Раздзел развіваецца паступова.", "← На галоўную", "Хутка"], "kk": ["Қауымдастық", "Форум, чаттар мен профильдер осында пайда болады. Бөлім біртіндеп дамып жатыр.", "← Басты бетке", "Жақында"], "ky": ["Коомчулук", "Форум, чаттар жана профилдер бул жерде пайда болот. Бөлүм акырындык менен өнүгүүдө.", "← Башкы бетке", "Жакында"], "uz": ["Hamjamiyat", "Forum, chatlar va profillar shu yerda paydo boʻladi. Boʻlim asta-sekin rivojlanmoqda.", "← Bosh sahifaga", "Tez orada"], "pl": ["Społeczność", "Forum, czaty i profile pojawią się tutaj. Sekcja rozwija się stopniowo.", "← Strona główna", "Wkrótce"], "de": ["Community", "Forum, Chats und Profile erscheinen hier. Der Bereich wird schrittweise aufgebaut.", "← Zur Startseite", "Bald"], "fr": ["Communauté", "Forum, chats et profils apparaîtront ici. La section se développe progressivement.", "← Accueil", "Bientôt"], "es": ["Comunidad", "El foro, los chats y los perfiles aparecerán aquí. La sección se desarrolla gradualmente.", "← Inicio", "Pronto"], "it": ["Community", "Forum, chat e profili appariranno qui. La sezione è in sviluppo graduale.", "← Home", "Presto"], "tr": ["Topluluk", "Forum, sohbetler ve profiller burada görünecek. Bölüm adım adım geliştiriliyor.", "← Ana sayfa", "Yakında"], "zh": ["社区", "论坛、聊天和个人资料将在这里出现。此板块正在逐步建设中。", "← 返回主页", "即将推出"], "ar": ["المجتمع", "سيظهر هنا المنتدى والدردشات والملفات الشخصية. يتم تطوير هذا القسم تدريجيًا.", "← الصفحة الرئيسية", "قريبًا"]};
+      var root=document.documentElement;
+      function rd(k){var v=localStorage.getItem(k);if(v&&v[0]==='"'){try{v=JSON.parse(v)}catch(e){}}return v;}
+      var t=rd('giga.theme'); root.setAttribute('data-theme', t==='light'?'light':'dark');
       document.getElementById('themeToggle').onclick=function(){var n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);localStorage.setItem('giga.theme',n);};
-      var l=localStorage.getItem('giga.lang'); try{l=JSON.parse(l)}catch(e){}
-      if(l==='en'){document.querySelectorAll('[data-en]').forEach(function(e){e.textContent=e.dataset.en});}
+      var l=rd('giga.lang');
+      if(!l||!T[l]){var c=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'ru']);l='ru';for(var i=0;i<c.length;i++){var b=String(c[i]).toLowerCase().split(/[-_]/)[0];if(T[b]){l=b;break;}}}
+      var d=T[l]; root.lang=l; root.dir=(l==='ar'?'rtl':'ltr');
+      document.getElementById('t').textContent=d[0]; document.getElementById('p').textContent=d[1]; document.getElementById('b').textContent=d[2];
+      document.title='GIGASAIT — '+d[0];
     })();
   </script>
 </body>

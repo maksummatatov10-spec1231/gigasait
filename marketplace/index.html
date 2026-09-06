@@ -27,15 +27,21 @@
 
     <form class="search" id="searchForm" role="search">
       <input type="search" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Искать товары, бренды, категории…" autocomplete="off">
-      <button type="submit" class="search-btn" aria-label="Найти">
+      <button type="submit" class="search-btn" data-i18n-title="search" aria-label="Search">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       </button>
       <div class="search-suggest" id="searchSuggest"></div>
     </form>
 
-    <button class="country-btn" id="countryBtn" title="Страна">
+    <button class="country-btn" id="countryBtn" data-i18n-title="deliveryCountry" title="Страна">
       <span id="countryFlag">🇷🇺</span>
       <span id="countryName">Россия</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+
+    <button class="country-btn lang-btn-top" id="langBtn" data-i18n-title="language" title="Язык">
+      <span id="langFlag">🇷🇺</span>
+      <span id="langCode">RU</span>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
     </button>
 
@@ -54,7 +60,7 @@
         <span class="nav-badge" id="cartBadge">0</span>
         <span class="nav-label" data-i18n="cart">Корзина</span>
       </a>
-      <button class="nav-item" id="themeToggle" title="Тема">
+      <button class="nav-item" id="themeToggle" data-i18n-title="theme" title="Тема">
         <span class="nav-icon theme-icon">🌙</span>
         <span class="nav-label" data-i18n="theme">Тема</span>
       </button>
@@ -86,6 +92,12 @@
   <div id="countryList"></div>
 </div>
 
+<!-- ===== ВЫБОР ЯЗЫКА ===== -->
+<div class="popover popover-lang" id="langPop">
+  <div class="popover-title" data-i18n="language">Язык</div>
+  <div id="langList"></div>
+</div>
+
 <!-- ===== КОНТЕНТ (SPA) ===== -->
 <main class="page" id="app"></main>
 
@@ -99,18 +111,26 @@
     </div>
     <div class="footer-col">
       <b data-i18n="footerHelp">Помощь</b>
-      <a href="#/" data-i18n="footerDelivery">Доставка и оплата</a>
-      <a href="#/" data-i18n="footerReturns">Возврат</a>
-      <a href="#/" data-i18n="footerContacts">Контакты</a>
+      <a href="#/page/delivery" data-i18n="footerDelivery">Доставка и оплата</a>
+      <a href="#/page/returns" data-i18n="footerReturns">Возврат</a>
+      <a href="#/page/faq" data-i18n="footerFaq">Частые вопросы</a>
+      <a href="#/page/contacts" data-i18n="footerContacts">Контакты</a>
     </div>
     <div class="footer-col">
-      <b>GIGASAIT</b>
+      <b data-i18n="footerInfo">Информация</b>
+      <a href="#/page/about" data-i18n="footerAboutLink">О проекте</a>
+      <a href="#/catalog?discount=1&amp;sort=discount" data-i18n="sortDiscount">Скидки</a>
+      <a href="#/compare" data-i18n="compare">Сравнение</a>
+      <a href="#/orders" data-i18n="orders">Заказы</a>
+    </div>
+    <div class="footer-col">
+      <b data-i18n="footerSections">Разделы GIGASAIT</b>
       <a href="../index.html" data-i18n="backToHub">На главную GIGASAIT</a>
-      <a href="../games/index.html">🎮 Games</a>
-      <a href="../community/index.html">💬 Community</a>
+      <a href="../games/index.html">🎮 <span data-i18n="gamesLink">Игры</span> <em class="soon" data-i18n="soonBadge">скоро</em></a>
+      <a href="../community/index.html">💬 <span data-i18n="communityLink">Сообщество</span> <em class="soon" data-i18n="soonBadge">скоро</em></a>
     </div>
   </div>
-  <div class="footer-bottom">© <span id="year"></span> GIGASAIT Market • <span id="ver">v0.5.0</span></div>
+  <div class="footer-bottom">© <span id="year"></span> GIGASAIT Market • <span id="ver">v0.6.0</span></div>
 </footer>
 
 <!-- ===== МОБИЛЬНАЯ НИЖНЯЯ ПАНЕЛЬ ===== -->
@@ -128,6 +148,21 @@
 <script src="js/data.js"></script>
 <script src="js/featured.js"></script>
 <script src="js/products.js"></script>
+<script src="js/lang/ru.js"></script>
+<script src="js/lang/en.js"></script>
+<script src="js/lang/uk.js"></script>
+<script src="js/lang/be.js"></script>
+<script src="js/lang/kk.js"></script>
+<script src="js/lang/ky.js"></script>
+<script src="js/lang/uz.js"></script>
+<script src="js/lang/pl.js"></script>
+<script src="js/lang/de.js"></script>
+<script src="js/lang/fr.js"></script>
+<script src="js/lang/es.js"></script>
+<script src="js/lang/it.js"></script>
+<script src="js/lang/tr.js"></script>
+<script src="js/lang/zh.js"></script>
+<script src="js/lang/ar.js"></script>
 <script src="js/i18n.js"></script>
 <script src="js/app.js"></script>
 </body>
