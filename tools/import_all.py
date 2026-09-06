@@ -1099,7 +1099,14 @@ class Importer:
                 break
             if not EP[m].available():
                 continue
-            pages = (5 if m in ('wb.recom', 'wb.catalog') else 3 if m in ('wb.search', 'ym', 'oz')) + 3 * (self.pass_no - 1) if m in ('wb.recom', 'wb.catalog', 'wb.search', 'ym', 'oz') else (len(self.sellers.get(cat_id) or []) if m == 'wb.seller' else 1)
+            if m in ('wb.recom', 'wb.catalog'):
+                pages = 5 + 3 * (self.pass_no - 1)
+            elif m in ('wb.search', 'ym', 'oz'):
+                pages = 3 + 3 * (self.pass_no - 1)
+            elif m == 'wb.seller':
+                pages = len(self.sellers.get(cat_id) or [])
+            else:
+                pages = 1
             empty_pages = 0
             for page in range(1, pages + 1):
                 if len(got) >= need:
