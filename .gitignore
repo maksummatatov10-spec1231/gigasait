@@ -6,3 +6,4 @@ tools/.basket_cache.json
 __pycache__/
 tools/.wb_menu.json
 tools/.import_state.json
+tools/report.txt

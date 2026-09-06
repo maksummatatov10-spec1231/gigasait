@@ -52,7 +52,7 @@ try:
 except Exception:
     pass
 
-VERSION = '3.0'
+VERSION = '3.1'
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CFG_PATH = os.path.join(ROOT, 'tools', 'import_config.json')
 IDS_PATH = os.path.join(ROOT, 'tools', 'ids.txt')
@@ -65,7 +65,7 @@ COUNTRIES = ['RU', 'KZ', 'BY', 'UZ', 'KG']
 
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
 WB_Q = 'appType=1&curr=rub&dest=-1257786&spp=30'
-CDN_WORKERS = 4
+CDN_WORKERS = 6
 
 _print_lock = threading.Lock()
 
@@ -194,7 +194,7 @@ class Endpoint:
         with self.lock:
             delta = self.last + self.interval * OPTS.get('delay_mult', 1.0) - time.time()
             if delta > 0:
-                time.sleep(delta + random.random() * 1.5)
+                time.sleep(delta + random.random() * 0.5)
             self.last = time.time()
 
     def blocked(self, e):
@@ -209,13 +209,13 @@ class Endpoint:
 
 
 EP = {
-    'wb.recom':   Endpoint('wb.recom', 5),
-    'wb.cards':   Endpoint('wb.cards', 4),
-    'wb.seller':  Endpoint('wb.seller', 7),
-    'wb.catalog': Endpoint('wb.catalog', 10, cool=120),
-    'wb.search':  Endpoint('wb.search', 10, cool=150),
-    'ym':         Endpoint('ym', 4, cool=180),
-    'oz':         Endpoint('oz', 6, cool=240),
+    'wb.recom':   Endpoint('wb.recom', 2, cool=60),
+    'wb.cards':   Endpoint('wb.cards', 1.5, cool=60),
+    'wb.seller':  Endpoint('wb.seller', 3, cool=60),
+    'wb.catalog': Endpoint('wb.catalog', 5, cool=120),
+    'wb.search':  Endpoint('wb.search', 6, cool=150),
+    'ym':         Endpoint('ym', 2.5, cool=180),
+    'oz':         Endpoint('oz', 4, cool=240),
 }
 
 
@@ -778,6 +778,8 @@ def save_product(item, cat_id, sub_name, max_images, img_size):
         'colors': item.get('colors') or [], 'supplier': item.get('supplier') or '', 'description': desc, 'specs': specs, 'images': images,
         'source': {'site': SITE_NAME[item['src']], 'url': url, 'imported': time.strftime('%Y-%m-%d')},
     }
+    if item.get('root'):
+        product['root'] = item['root']
     with open(pj, 'w', encoding='utf-8') as f:
         json.dump(product, f, ensure_ascii=False, indent=2)
     with open(os.path.join(d, 'описание.txt'), 'w', encoding='utf-8') as f:
@@ -804,6 +806,54 @@ def save_state():
             json.dump(STATE, f)
     except Exception:
         pass
+
+
+def all_products():
+    """[(cat, folder, product)] по всем категориям."""
+    out = []
+    if not os.path.isdir(OUT_DIR):
+        return out
+    for cat in sorted(os.listdir(OUT_DIR)):
+        cdir = os.path.join(OUT_DIR, cat)
+        if not os.path.isdir(cdir):
+            continue
+        for fn in os.listdir(cdir):
+            pj = os.path.join(cdir, fn, 'product.json')
+            if os.path.exists(pj):
+                try:
+                    with open(pj, encoding='utf-8') as f:
+                        out.append((cat, fn, json.load(f)))
+                except Exception:
+                    pass
+    return out
+
+
+def relevance(name, query):
+    return len(stems(query) & stems(name))
+
+
+def dedupe_folders(cfg):
+    """Один и тот же товар не должен лежать в двух категориях/подкатегориях.
+    Оставляем копию, чьё название лучше подходит к запросу подкатегории; остальные удаляем."""
+    groups = {}
+    for cat, fn, p in all_products():
+        groups.setdefault(p.get('id'), []).append((cat, fn, p))
+    removed = 0
+    for pid, lst in groups.items():
+        if len(lst) < 2:
+            continue
+
+        def score(x):
+            cat, fn, p = x
+            q = (cfg['categories'].get(cat) or {}).get(p.get('subcategory') or '', '')
+            return (relevance(p.get('title', ''), q), len(p.get('images') or []))
+        lst.sort(key=score, reverse=True)
+        for cat, fn, p in lst[1:]:
+            shutil.rmtree(os.path.join(OUT_DIR, cat, fn), ignore_errors=True)
+            removed += 1
+    if removed:
+        log(f'ℹ убрано дублей товаров (один товар лежал в нескольких категориях): {removed}')
+    return removed
 
 
 def existing(cat_id):
@@ -869,6 +919,12 @@ class Importer:
         self.ym_slugs = cfg.get('ym_slugs') or {}
         self.stats = {}
         self._cards_cache = {}
+        self.known = set()       # id всех уже скачанных товаров (во всех категориях)
+        self.known_roots = set()
+        for cat, fn, p in all_products():
+            self.known.add(p.get('id'))
+            if p.get('root'):
+                self.known_roots.add(p['root'])
 
     # ---- один «способ» = генератор списков найденных товаров для (cat, sub) ----
     def methods(self, cat_id, subs, sub, query):
@@ -913,8 +969,8 @@ class Importer:
 
     def fill_sub(self, cat_id, subs, sub, query, need, have):
         got = list(have)
-        seen = {p['id'] for p in got}
         bad = set(STATE['bad'].get(cat_id, []))
+        tried = set()
         for m in self.methods(cat_id, subs, sub, query):
             if len(got) >= need:
                 break
@@ -927,9 +983,7 @@ class Importer:
                     break
                 try:
                     found = self.run_method(m, cat_id, subs, sub, query, page)
-                except Blocked as e:
-                    if e.why != 'cooldown':
-                        pass
+                except Blocked:
                     break
                 except Exception as e:
                     log(f'     ! {m} «{query}» стр.{page}: {e}')
@@ -937,12 +991,13 @@ class Importer:
                 todo = []
                 for it in found:
                     key = it['id']
-                    if key in seen or (it.get('root') and it['root'] in seen) or key in bad:
+                    # уже скачан (в любой категории/подкатегории), уже пробовали или это цвет-вариант скачанного
+                    if key in self.known or key in tried or key in bad or (it.get('root') and it['root'] in self.known_roots):
                         continue
-                    seen.add(key)
-                    if it.get('root'):
-                        seen.add(it['root'])
+                    tried.add(key)
                     todo.append(it)
+                # сначала те, у кого в названии есть слова запроса (у «личного» поиска WB бывает мусор)
+                todo.sort(key=lambda it: -relevance(it['name'], query))
                 if not todo:
                     empty_pages += 1
                     if empty_pages >= 2 or not found:
@@ -950,7 +1005,11 @@ class Importer:
                     continue
                 self.stats.setdefault(m, 0)
                 while todo and len(got) < need:
-                    batch, todo = todo[: need - len(got) + 1], todo[need - len(got) + 1:]
+                    batch, todo = todo[: need - len(got)], todo[need - len(got):]
+                    for it in batch:                      # бронируем id, чтобы другая подкатегория не взяла его же
+                        self.known.add(it['id'])
+                        if it.get('root'):
+                            self.known_roots.add(it['root'])
                     with ThreadPoolExecutor(max_workers=CDN_WORKERS if m != 'oz' else 1) as ex:
                         futs = {ex.submit(save_product, it, cat_id, sub, self.max_images, self.img_size): it for it in batch}
                         for fu in as_completed(futs):
@@ -959,16 +1018,15 @@ class Importer:
                                 prod, st = fu.result()
                             except Exception as e:
                                 log(f'     ! {it["id"]}: {e}')
-                                continue
-                            if prod and len(got) >= need:
-                                shutil.rmtree(os.path.join(OUT_DIR, cat_id, folder_name(it)), ignore_errors=True)
-                                continue
+                                prod, st = None, 'err'
                             if prod:
                                 got.append(prod)
                                 if st == 'ok':
                                     self.stats[m] += 1
                             else:
-                                STATE['bad'].setdefault(cat_id, []).append(it['id'])
+                                self.known.discard(it['id'])
+                                if st != 'err':
+                                    STATE['bad'].setdefault(cat_id, []).append(it['id'])
                 if len(got) >= need:
                     log(f'       ← {m}: набрано {len(got)}/{need}')
         save_state()
@@ -1032,7 +1090,14 @@ def build_js():
         by_cat[p['category']] = by_cat.get(p['category'], 0) + 1
         s = (p.get('source') or {}).get('site', '?')
         by_src[s] = by_src.get(s, 0) + 1
-    log(f'\nproducts.js: {len(products)} товаров, {os.path.getsize(JS_OUT) // 1024} КБ')
+    report = os.path.join(ROOT, 'tools', 'report.txt')
+    with open(report, 'w', encoding='utf-8') as f:
+        f.write(f'GIGASAIT import v{VERSION} — {time.strftime("%Y-%m-%d %H:%M")} — товаров: {len(products)}\n')
+        f.write('категории: ' + ', '.join(f'{k}={v}' for k, v in sorted(by_cat.items())) + '\n')
+        f.write('источники: ' + ', '.join(f'{k}={v}' for k, v in sorted(by_src.items())) + '\n\n')
+        for p in products:
+            f.write(f"{p['category']:<14}| {p.get('subcategory', ''):<20}| {(p.get('source') or {}).get('site', '?'):<11}| {str(p['id']):<12}| {p['price']:>8} | {len(p['images'])} фото | {p['brand'][:18]:<18}| {p['title'][:80]}\n")
+    log(f'\nproducts.js: {len(products)} товаров, {os.path.getsize(JS_OUT) // 1024} КБ  (сводка: tools/report.txt)')
     log('по категориям: ' + ', '.join(f'{k}={v}' for k, v in sorted(by_cat.items())))
     log('по источникам: ' + ', '.join(f'{k}={v}' for k, v in sorted(by_src.items())))
     return len(products)
@@ -1085,7 +1150,7 @@ def main():
     with open(CFG_PATH, encoding='utf-8') as f:
         cfg = json.load(f)
     if a.build_only:
-        build_js(); return
+        dedupe_folders(cfg); build_js(); return
 
     OPTS['delay_mult'] = max(0.2, a.delay)
     OPTS['proxy'] = a.proxy
@@ -1107,6 +1172,7 @@ def main():
             log(f'Нет категории {a.cat}. Доступны: {", ".join(cats)}'); return
         cats = {a.cat: cats[a.cat]}
     per_category = a.per_category or cfg['per_category']
+    dedupe_folders(cfg)
     imp = Importer(cfg, sources, cfg.get('max_images', 3), cfg.get('image_size', 'c516x688'))
     total = 0
     t0 = time.time()
