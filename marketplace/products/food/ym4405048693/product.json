@@ -1,0 +1,32 @@
+{
+  "id": 4405048693,
+  "title": "Шоколад молочный \"Воздушный\", пористый, 25% какао, 80 г, 1 шт.",
+  "brand": "No name",
+  "category": "food",
+  "subcategory": "Сладости",
+  "tags": [
+    "топ рейтинг",
+    "без сахара",
+    "органик",
+    "халяль"
+  ],
+  "price": 145,
+  "oldPrice": null,
+  "rating": 4.9,
+  "reviews": 187,
+  "country": "RU",
+  "stock": 26,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.png"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/shokolad-molochnyy-poristyy-vozdushnyy/103809388517",
+    "imported": "2026-09-06"
+  }
+}

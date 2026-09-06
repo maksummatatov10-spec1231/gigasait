@@ -1,0 +1,32 @@
+{
+  "id": 103762001032,
+  "title": "Шоколад Красный Октябрь \"Алёнка\", молочный, с кальцием, 75 г",
+  "brand": "No name",
+  "category": "food",
+  "subcategory": "Сладости",
+  "tags": [
+    "топ рейтинг",
+    "без сахара",
+    "органик",
+    "халяль"
+  ],
+  "price": 86,
+  "oldPrice": null,
+  "rating": 4.9,
+  "reviews": 204,
+  "country": "RU",
+  "stock": 29,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.png"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/shokolad-krasnyy-oktyabr-alenka-mnogo-moloka--kaltsiy/4677744660",
+    "imported": "2026-09-06"
+  }
+}

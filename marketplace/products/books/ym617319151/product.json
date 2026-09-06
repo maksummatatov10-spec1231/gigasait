@@ -1,0 +1,32 @@
+{
+  "id": 617319151,
+  "title": "Книга \"Бизнес с нуля: Метод Lean Startup для быстрого тестирования идей и выбора бизнес-модели \"| Рис Эрик",
+  "brand": "No name",
+  "category": "books",
+  "subcategory": "Бизнес",
+  "tags": [
+    "топ рейтинг",
+    "бестселлер",
+    "твёрдый переплёт",
+    "подарок"
+  ],
+  "price": 850,
+  "oldPrice": null,
+  "rating": 4.9,
+  "reviews": 80,
+  "country": "RU",
+  "stock": 75,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.png"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/biznes-s-nulya-metod-lean-startup-dlya-bystrogo-testirovaniya-idey-i-vybora-biznes-modeli-pereplet--biznes-literatura--startap/102230742182",
+    "imported": "2026-09-06"
+  }
+}

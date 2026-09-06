@@ -1,0 +1,32 @@
+{
+  "id": 4405046015,
+  "title": "Батончик вафельный Goodmix Дуо, молочный шоколад, 25% какао, 40 г",
+  "brand": "No name",
+  "category": "food",
+  "subcategory": "Сладости",
+  "tags": [
+    "топ рейтинг",
+    "без сахара",
+    "органик",
+    "халяль"
+  ],
+  "price": 46,
+  "oldPrice": null,
+  "rating": 4.9,
+  "reviews": 102,
+  "country": "RU",
+  "stock": 57,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.png"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/batonchik-vafelnyy-goodmix-duo-molochnyy-shokolad/103809382943",
+    "imported": "2026-09-06"
+  }
+}

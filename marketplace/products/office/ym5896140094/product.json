@@ -1,0 +1,32 @@
+{
+  "id": 5896140094,
+  "title": "Ручка шариковая автоматическая",
+  "brand": "No name",
+  "category": "office",
+  "subcategory": "Ручки",
+  "tags": [
+    "топ рейтинг",
+    "школа",
+    "офис",
+    "набор"
+  ],
+  "price": 165,
+  "oldPrice": null,
+  "rating": 5.0,
+  "reviews": 2,
+  "country": "RU",
+  "stock": 27,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.jpg"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/ruchka-sharikovaya-avtomaticheskaya/5896140094",
+    "imported": "2026-09-06"
+  }
+}

@@ -52,7 +52,7 @@ try:
 except Exception:
     pass
 
-VERSION = '3.4'
+VERSION = '3.5'
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CFG_PATH = os.path.join(ROOT, 'tools', 'import_config.json')
 IDS_PATH = os.path.join(ROOT, 'tools', 'ids.txt')
@@ -299,7 +299,10 @@ def stems(s):
 
 
 def prefix(w):
-    """Основа слова для сравнения: 'стулья'/'стул' -> 'сту', 'кольцо'/'кольца' -> 'кольц', 'духи'/'духов' -> 'дух'."""
+    """Основа слова для сравнения: 'стулья'/'стул' -> 'стул', 'кольцо'/'кольца' -> 'кольц',
+    'видеорегистратор' -> 'видеоре' (а не 'видео', иначе подходит и видеокарта)."""
+    if len(w) >= 9:
+        return w[:7]
     return w[:5] if len(w) >= 6 else w[:max(3, len(w) - 1)]
 
 

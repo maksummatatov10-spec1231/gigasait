@@ -1,0 +1,32 @@
+{
+  "id": 5860040665,
+  "title": "Игрок Достоевский. Роман. Серия \"Роман с книгой\".",
+  "brand": "No name",
+  "category": "books",
+  "subcategory": "Художественная",
+  "tags": [
+    "топ рейтинг",
+    "бестселлер",
+    "твёрдый переплёт",
+    "подарок"
+  ],
+  "price": 184,
+  "oldPrice": null,
+  "rating": 5.0,
+  "reviews": 1,
+  "country": "RU",
+  "stock": 34,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.jpg"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/igrok-dostoyevskiy-roman-seriya-roman-s-knigoy/4717543950",
+    "imported": "2026-09-06"
+  }
+}

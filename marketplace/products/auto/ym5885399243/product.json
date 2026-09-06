@@ -1,0 +1,31 @@
+{
+  "id": 5885399243,
+  "title": "Моторное масло Nissan 5W40, синтетическое, 1л, для легковых автомобилей",
+  "brand": "No name",
+  "category": "auto",
+  "subcategory": "Масла",
+  "tags": [
+    "зима",
+    "универсальный",
+    "премиум"
+  ],
+  "price": 1463,
+  "oldPrice": null,
+  "rating": 4.5,
+  "reviews": 0,
+  "country": "RU",
+  "stock": 48,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.jpg"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/motornoye-maslo-nissan-5w40-sinteticheskoye-1l-dlya-legkovykh-avtomobiley/4690730961",
+    "imported": "2026-09-06"
+  }
+}

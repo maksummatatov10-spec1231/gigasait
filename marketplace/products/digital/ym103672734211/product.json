@@ -1,0 +1,31 @@
+{
+  "id": 103672734211,
+  "title": "Подарочный сертификат Яндекс Маркет, электронный",
+  "brand": "No name",
+  "category": "digital",
+  "subcategory": "Подарочные карты",
+  "tags": [
+    "хит",
+    "моментально",
+    "официально"
+  ],
+  "price": 3000,
+  "oldPrice": null,
+  "rating": 4.1,
+  "reviews": 4200,
+  "country": "RU",
+  "stock": 60,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.png"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/podarochnyy-sertifikat-yandeks-market-elektronnyy/103672734211",
+    "imported": "2026-09-06"
+  }
+}

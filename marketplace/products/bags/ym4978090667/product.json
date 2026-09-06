@@ -1,0 +1,32 @@
+{
+  "id": 4978090667,
+  "title": "Кошелек",
+  "brand": "Сима-ленд",
+  "category": "bags",
+  "subcategory": "Кошельки",
+  "tags": [
+    "топ рейтинг",
+    "кожа",
+    "городской",
+    "водонепроницаемый"
+  ],
+  "price": 540,
+  "oldPrice": null,
+  "rating": 5.0,
+  "reviews": 9,
+  "country": "RU",
+  "stock": 19,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.jpg"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/koshelek-zhen-06-01-01-iyun2522-19310-sm-3-otdotdmoln-dkart-dmonet-na-magnite-krasn-10909/4703744347",
+    "imported": "2026-09-06"
+  }
+}

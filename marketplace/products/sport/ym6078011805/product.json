@@ -1,0 +1,32 @@
+{
+  "id": 6078011805,
+  "title": "Палатка автоматическая туристическая 2 местная",
+  "brand": "No name",
+  "category": "sport",
+  "subcategory": "Туризм",
+  "tags": [
+    "топ рейтинг",
+    "профи",
+    "для дома",
+    "лёгкий"
+  ],
+  "price": 1679,
+  "oldPrice": null,
+  "rating": 4.9,
+  "reviews": 8,
+  "country": "RU",
+  "stock": 48,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.jpg"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/palatki-zelenyy/5713965118",
+    "imported": "2026-09-06"
+  }
+}

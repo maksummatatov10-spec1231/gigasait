@@ -1,0 +1,31 @@
+{
+  "id": 4401530335,
+  "title": "Книга \"Бизнес-план, который работает\" / Издательство: Альпина Паблишер | Барроу Пол",
+  "brand": "No name",
+  "category": "books",
+  "subcategory": "Бизнес",
+  "tags": [
+    "бестселлер",
+    "твёрдый переплёт",
+    "подарок"
+  ],
+  "price": 334,
+  "oldPrice": null,
+  "rating": 4.4,
+  "reviews": 7,
+  "country": "RU",
+  "stock": 45,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.jpg"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/kniga-biznes-plan-kotoryy-rabotayet--izdatelstvo-alpina-pablisher--barrou-pol/102339468572",
+    "imported": "2026-09-06"
+  }
+}

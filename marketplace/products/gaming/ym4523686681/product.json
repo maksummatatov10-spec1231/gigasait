@@ -1,0 +1,31 @@
+{
+  "id": 4523686681,
+  "title": "Игровая приставка SUP GAME BOX, 400 предустановленных игр, красная",
+  "brand": "No name",
+  "category": "gaming",
+  "subcategory": "Консоли",
+  "tags": [
+    "RGB",
+    "беспроводной",
+    "профи"
+  ],
+  "price": 796,
+  "oldPrice": null,
+  "rating": 4.5,
+  "reviews": 362,
+  "country": "RU",
+  "stock": 31,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.jpg"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/pristavka-igrovaya-portativnaya-400-igr-8-bit-dlya-detey/103742914540",
+    "imported": "2026-09-06"
+  }
+}

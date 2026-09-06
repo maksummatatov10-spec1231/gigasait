@@ -1,0 +1,32 @@
+{
+  "id": 4567539854,
+  "title": "Палатка туристическая 3-х местная RSP Hill 3 (цв. зеленый)",
+  "brand": "No name",
+  "category": "sport",
+  "subcategory": "Туризм",
+  "tags": [
+    "топ рейтинг",
+    "профи",
+    "для дома",
+    "лёгкий"
+  ],
+  "price": 5233,
+  "oldPrice": null,
+  "rating": 4.9,
+  "reviews": 99,
+  "country": "RU",
+  "stock": 40,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.jpg"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/palatka-3-kh-mestnaya-rsp-hill-3/4441818675",
+    "imported": "2026-09-06"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": 101625903416,
+  "title": "Солнцезащитные очки",
+  "brand": "Polaroid",
+  "category": "bags",
+  "subcategory": "Очки",
+  "tags": [
+    "топ рейтинг",
+    "кожа",
+    "городской",
+    "водонепроницаемый"
+  ],
+  "price": 3411,
+  "oldPrice": null,
+  "rating": 4.9,
+  "reviews": 510,
+  "country": "RU",
+  "stock": 8,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.jpg"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/solntsezashchitnyye-ochki-polaroid-pld-6042s-807/103194920769",
+    "imported": "2026-09-06"
+  }
+}

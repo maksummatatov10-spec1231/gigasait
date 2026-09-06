@@ -1,0 +1,31 @@
+{
+  "id": 5587709115,
+  "title": "Кошелек",
+  "brand": "No name",
+  "category": "bags",
+  "subcategory": "Кошельки",
+  "tags": [
+    "кожа",
+    "городской",
+    "водонепроницаемый"
+  ],
+  "price": 335,
+  "oldPrice": null,
+  "rating": 4.7,
+  "reviews": 58,
+  "country": "RU",
+  "stock": 16,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.jpg"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/kompaktnyy-zhenskiy-koshelek-ekokozha/5587709115",
+    "imported": "2026-09-06"
+  }
+}

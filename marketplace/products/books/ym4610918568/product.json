@@ -1,0 +1,32 @@
+{
+  "id": 4610918568,
+  "title": "Книга \"Альпина про бизнес. Маркетинг\"| Оносов Алексей, Жолобов Владимир",
+  "brand": "No name",
+  "category": "books",
+  "subcategory": "Бизнес",
+  "tags": [
+    "топ рейтинг",
+    "бестселлер",
+    "твёрдый переплёт",
+    "подарок"
+  ],
+  "price": 1043,
+  "oldPrice": null,
+  "rating": 5.0,
+  "reviews": 1,
+  "country": "RU",
+  "stock": 40,
+  "isNew": false,
+  "colors": [],
+  "supplier": "Яндекс Маркет",
+  "description": "",
+  "specs": {},
+  "images": [
+    "1.jpg"
+  ],
+  "source": {
+    "site": "yandex",
+    "url": "https://market.yandex.ru/card/alpina-pro-biznes-marketing/4594101963",
+    "imported": "2026-09-06"
+  }
+}
