@@ -52,7 +52,7 @@ try:
 except Exception:
     pass
 
-VERSION = '3.5'
+VERSION = '3.6'
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CFG_PATH = os.path.join(ROOT, 'tools', 'import_config.json')
 IDS_PATH = os.path.join(ROOT, 'tools', 'ids.txt')
@@ -769,6 +769,35 @@ def sniff_ext(data):
     return 'jpg'
 
 
+def shrink_image(d, fn):
+    """png/jpg -> webp (<=1000px, q84). Работает только если установлен Pillow (pip install pillow),
+    иначе файл остаётся как есть. Нужно, чтобы папка products/ и zip-релиз оставались маленькими."""
+    if fn.endswith('.webp'):
+        return fn
+    try:
+        from PIL import Image
+    except Exception:
+        return fn
+    try:
+        src = os.path.join(d, fn)
+        im = Image.open(src)
+        if im.mode in ('RGBA', 'LA', 'P'):
+            im = im.convert('RGBA')
+            bg = Image.new('RGB', im.size, (255, 255, 255))
+            bg.paste(im, mask=im.split()[-1])
+            im = bg
+        else:
+            im = im.convert('RGB')
+        if max(im.size) > 1000:
+            im.thumbnail((1000, 1000))
+        out = os.path.splitext(fn)[0] + '.webp'
+        im.save(os.path.join(d, out), 'WEBP', quality=84, method=6)
+        os.remove(src)
+        return out
+    except Exception:
+        return fn
+
+
 def download_image(urls):
     for u in urls:
         try:
@@ -860,6 +889,7 @@ def save_product(item, cat_id, sub_name, max_images, img_size):
             fn = f'{i}.{sniff_ext(data)}'
             with open(os.path.join(d, fn), 'wb') as f:
                 f.write(data)
+            fn = shrink_image(d, fn)
             images.append(fn)
     if not images:
         shutil.rmtree(d, ignore_errors=True)
