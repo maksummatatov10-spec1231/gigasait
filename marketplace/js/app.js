@@ -5,9 +5,11 @@
   const { COUNTRIES, CATEGORIES, generateProducts } = window.MARKET_DATA;
   const I18N = window.MARKET_I18N;
   // Реальные товары (marketplace/js/products.js, создаётся tools/import_wb.py); если файла нет — заглушки
+  // Полный импортированный каталог (products.js) — приоритет. Иначе: витринные товары с реальными фото + заглушки.
+  const FEATURED = (window.MARKET_FEATURED || []).map(p => normalizeProduct({ ...p, source: { site: 'featured', url: '' }, createdAt: Date.now() - (p.id % 20) * 86400000 }));
   const PRODUCTS = (window.MARKET_PRODUCTS && window.MARKET_PRODUCTS.length)
     ? window.MARKET_PRODUCTS.map(normalizeProduct)
-    : generateProducts();
+    : [...FEATURED, ...generateProducts()];
 
   function normalizeProduct(p) {
     return {
@@ -58,6 +60,7 @@
   const catName = c => state.lang === 'en' ? (I18N.CATS_EN[c.id] || c.name) : c.name;
   const countryName = c => state.lang === 'en' ? (I18N.COUNTRIES_EN[c.code] || c.name) : c.name;
   const catById = id => CATEGORIES.find(c => c.id === id);
+  const catImg = c => `img/categories/${c.id}.jpg`;
 
   function money(rub) {
     const c = country();
@@ -210,8 +213,12 @@
       </section>
       <section class="section">
         <div class="section-head"><h2>${T.popularCats}</h2><a href="#/catalog">${T.viewAll} →</a></div>
-        <div class="cat-grid">${CATEGORIES.map(c => `<a class="cat-tile" href="#/catalog?cat=${c.id}"><span class="ic">${c.icon}</span>${esc(catName(c))}</a>`).join('')}</div>
+        <div class="cat-grid">${CATEGORIES.map(c => `<a class="cat-tile" href="#/catalog?cat=${c.id}"><img src="${catImg(c)}" alt="" loading="lazy"><span class="cat-tile-name">${esc(catName(c))}</span></a>`).join('')}</div>
       </section>
+      ${FEATURED.length && !window.MARKET_PRODUCTS?.length ? `<section class="section">
+        <div class="section-head"><h2>⭐ ${T.featured}</h2><a href="#/catalog?featured=1">${T.viewAll} →</a></div>
+        <div class="grid">${FEATURED.slice(0, 12).map(cardHTML).join('')}</div>
+      </section>` : ''}
       <section class="section">
         <div class="section-head"><h2>🔥 ${T.bestsellers}</h2><a href="#/catalog?sort=popular">${T.viewAll} →</a></div>
         <div class="grid">${hits.map(cardHTML).join('')}</div>
@@ -245,6 +252,7 @@
     if (f.max != null) list = list.filter(p => p.price * country().rate <= f.max);
     if (f.discount) list = list.filter(p => p.oldPrice);
     if (f.isNew) list = list.filter(p => p.isNew);
+    if (f.featured) list = list.filter(p => p.source && p.source.site === 'featured');
     if (f.rating) list = list.filter(p => p.rating >= f.rating);
     const sorters = {
       popular: (a, b) => b.reviews - a.reviews,
@@ -261,7 +269,7 @@
       q: params.get('q') || '', cat: params.get('cat') || '', sub: params.get('sub') || '', tag: params.get('tag') || '',
       country: params.get('country') || '', brands: (params.get('brands') || '').split(',').filter(Boolean),
       min: params.get('min') ? +params.get('min') : null, max: params.get('max') ? +params.get('max') : null,
-      discount: params.get('discount') === '1', isNew: params.get('new') === '1', rating: params.get('rating') ? +params.get('rating') : 0,
+      discount: params.get('discount') === '1', isNew: params.get('new') === '1', featured: params.get('featured') === '1', rating: params.get('rating') ? +params.get('rating') : 0,
       sort: params.get('sort') || 'popular', page: +(params.get('page') || 1)
     };
   }
@@ -270,7 +278,7 @@
     if (f.q) p.set('q', f.q); if (f.cat) p.set('cat', f.cat); if (f.sub) p.set('sub', f.sub); if (f.tag) p.set('tag', f.tag);
     if (f.country) p.set('country', f.country); if (f.brands.length) p.set('brands', f.brands.join(','));
     if (f.min != null) p.set('min', f.min); if (f.max != null) p.set('max', f.max);
-    if (f.discount) p.set('discount', '1'); if (f.isNew) p.set('new', '1'); if (f.rating) p.set('rating', f.rating);
+    if (f.discount) p.set('discount', '1'); if (f.isNew) p.set('new', '1'); if (f.featured) p.set('featured', '1'); if (f.rating) p.set('rating', f.rating);
     if (f.sort && f.sort !== 'popular') p.set('sort', f.sort); if (f.page > 1) p.set('page', f.page);
     const s = p.toString();
     return '#/catalog' + (s ? '?' + s : '');
@@ -293,6 +301,7 @@
     else if (f.sub) title = esc(f.sub);
     else if (cat) title = esc(catName(cat));
     else if (f.tag) title = `#${esc(f.tag)}`;
+    else if (f.featured) title = T.featured;
 
     const chips = [];
     if (f.q) chips.push({ l: `🔎 ${f.q}`, k: 'q' });
@@ -446,7 +455,7 @@
           <div class="card-tags" style="margin-bottom:22px">${p.tags.map(t => `<a class="tag" href="#/catalog?tag=${encodeURIComponent(t)}">#${esc(t)}</a>`).join('')}</div>
           <div class="p-block"><h3>${T.description}</h3><p style="white-space:pre-line">${esc(p.description || '—')}</p></div>
           <div class="p-block"><h3>${T.specs}</h3><div class="specs">${Object.entries(p.specs).map(([k, v]) => `<div class="spec"><span>${esc(k)}</span><span>${esc(v)}</span></div>`).join('')}</div></div>
-          ${p.source && p.source.url ? `<div class="p-block"><h3>${T.source}</h3><p>${p.supplier ? esc(p.supplier) + ' · ' : ''}<a href="${esc(p.source.url)}" target="_blank" rel="noopener" style="color:var(--accent)">${p.source.site === 'wildberries' ? 'Wildberries' : esc(p.source.site)} ↗</a></p></div>` : ''}
+          ${p.source && p.source.url && p.source.site !== 'featured' ? `<div class="p-block"><h3>${T.source}</h3><p>${p.supplier ? esc(p.supplier) + ' · ' : ''}<a href="${esc(p.source.url)}" target="_blank" rel="noopener" style="color:var(--accent)">${p.source.site === 'wildberries' ? 'Wildberries' : esc(p.source.site)} ↗</a></p></div>` : ''}
           <div class="p-block"><h3>${T.customerReviews}</h3>
             ${p.reviewsList.length ? '' : `<p>${T.noReviews}</p>`}
             ${p.reviewsList.map(r => `<div class="review"><div class="review-head"><b>${esc(r.name)}</b><span class="star">${stars(r.rating)}</span><small>${r.date}</small></div><p>${esc(r.text)}</p></div>`).join('')}
@@ -782,14 +791,15 @@
   /* ---------- Шапка: категории и каталог ---------- */
   function renderHeaderCats() {
     $('#headerCats').innerHTML = `<a href="#/catalog?discount=1&sort=discount">🔥 ${T.sortDiscount}</a>` + CATEGORIES.map(c => `<a href="#/catalog?cat=${c.id}" data-cat="${c.id}">${c.icon} ${esc(catName(c))}</a>`).join('');
-    $('#catalogDropList').innerHTML = CATEGORIES.map((c, i) => `<button data-ci="${i}" class="${i === 0 ? 'active' : ''}"><span class="ic">${c.icon}</span>${esc(catName(c))}</button>`).join('');
+    $('#catalogDropList').innerHTML = CATEGORIES.map((c, i) => `<button data-ci="${i}" class="${i === 0 ? 'active' : ''}"><img class="ic-img" src="${catImg(c)}" alt="">${esc(catName(c))}</button>`).join('');
     $$('#catalogDropList button').forEach(b => { b.onmouseenter = b.onclick = () => showCatSubs(+b.dataset.ci); });
     showCatSubs(0);
   }
   function showCatSubs(i) {
     const c = CATEGORIES[i];
     $$('#catalogDropList button').forEach((b, j) => b.classList.toggle('active', i === j));
-    $('#catalogDropSubs').innerHTML = `<h3>${c.icon} ${esc(catName(c))} <a class="btn btn-secondary btn-sm" href="#/catalog?cat=${c.id}">${T.seeAllProducts}</a></h3>
+    $('#catalogDropSubs').innerHTML = `<a class="cat-banner" href="#/catalog?cat=${c.id}" style="background-image:url('${catImg(c)}')"><span>${esc(catName(c))}</span></a>
+      <h3>${esc(catName(c))} <a class="btn btn-secondary btn-sm" href="#/catalog?cat=${c.id}">${T.seeAllProducts}</a></h3>
       <div class="subs-grid">${c.subs.map(s => `<a href="#/catalog?cat=${c.id}&sub=${encodeURIComponent(s)}">${esc(s)}</a>`).join('')}</div>
       <div class="tags-row">${c.tags.map(t => `<a class="tag" href="#/catalog?cat=${c.id}&tag=${encodeURIComponent(t)}">#${esc(t)}</a>`).join('')}</div>`;
   }
@@ -809,7 +819,7 @@
         const list = filterProducts({ ...readFilters(new URLSearchParams()), q }).slice(0, 6);
         const cats = CATEGORIES.filter(c => catName(c).toLowerCase().includes(q.toLowerCase()) || c.subs.some(s => s.toLowerCase().includes(q.toLowerCase()))).slice(0, 3);
         if (!list.length && !cats.length) { sug.classList.remove('show'); return; }
-        sug.innerHTML = (cats.length ? `<div class="suggest-head">${T.categoriesTitle}</div>` + cats.map(c => `<a class="suggest-item" href="#/catalog?cat=${c.id}"><span style="font-size:22px;width:40px;text-align:center">${c.icon}</span><div>${esc(catName(c))}<small>${c.subs.slice(0, 3).join(', ')}</small></div></a>`).join('') : '') +
+        sug.innerHTML = (cats.length ? `<div class="suggest-head">${T.categoriesTitle}</div>` + cats.map(c => `<a class="suggest-item" href="#/catalog?cat=${c.id}"><img src="${catImg(c)}" alt=""><div>${esc(catName(c))}<small>${c.subs.slice(0, 3).join(', ')}</small></div></a>`).join('') : '') +
           (list.length ? `<div class="suggest-head">${T.products}</div>` + list.map(p => `<a class="suggest-item" href="#/product/${p.id}"><img src="${p.images[0]}" alt=""><div>${esc(p.title)}<small>${esc(p.brand)} · ${esc(p.subcategory)}</small></div><span class="price">${money(p.price)}</span></a>`).join('') : '');
         sug.classList.add('show');
       }, 120);
