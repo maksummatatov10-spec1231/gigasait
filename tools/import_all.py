@@ -52,7 +52,7 @@ try:
 except Exception:
     pass
 
-VERSION = '3.1'
+VERSION = '3.2'
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CFG_PATH = os.path.join(ROOT, 'tools', 'import_config.json')
 IDS_PATH = os.path.join(ROOT, 'tools', 'ids.txt')
@@ -260,7 +260,7 @@ def wb_items(prods):
             'pics': p.get('pics') or 1, 'supplier': p.get('supplier') or '',
             'colors': [c.get('name') for c in (p.get('colors') or []) if c.get('name')],
             'stock': p.get('totalQuantity') or 0, 'isNew': bool(p.get('isNew')),
-            'subjectId': p.get('subjectId'),
+            'subjectId': p.get('subjectId'), 'subjectParentId': p.get('subjectParentId'),
         })
     return out
 
@@ -279,11 +279,47 @@ def wb_json_products(txt):
 
 # ---------- WB: меню категорий -> subject id / shard (для recom и catalog) ----------
 _menu_leafs = None
-STOP = {'для', 'и', 'в', 'на', 'с', 'из', 'по', 'набор', 'комплект'}
+STOP = {'для', 'и', 'в', 'на', 'с', 'из', 'по', 'набор', 'комплект', 'шт', 'см', 'мл', 'кг', 'от', 'до', 'без', 'со', 'дома', 'дом'}
+CTX = {'hint': ''}   # подсказка для подбора категории WB (женщинам / мужчинам / детям ...), ставится на время категории
+CAT_HINT = {
+    'fashion-women': 'женщинам женская одежда обувь', 'fashion-men': 'мужчинам мужская одежда обувь', 'kids': 'детям детская',
+    'pets': 'зоотовары', 'sport': 'спорт', 'auto': 'автотовары', 'garden': 'дом сад инструменты ремонт', 'home': 'дом',
+    'beauty': 'красота', 'health': 'здоровье', 'books': 'книги', 'food': 'продукты', 'office': 'канцтовары школа',
+    'gaming': 'игровые консоли игры', 'jewelry': 'ювелирные украшения', 'bags': 'аксессуары', 'electronics': 'электроника',
+    'appliances': 'бытовая техника', 'furniture': 'мебель', 'digital': 'цифровые товары',
+}
+
+
+def words(s):
+    return [w for w in re.findall(r'[a-zа-яё0-9]+', (s or '').lower().replace('ё', 'е')) if w not in STOP and len(w) > 1]
 
 
 def stems(s):
-    return {w[:5] for w in re.findall(r'[a-zа-яё0-9]+', (s or '').lower()) if w not in STOP and len(w) > 1}
+    return {w[:6] for w in words(s)}
+
+
+def query_alts(q):
+    """Запрос в конфиге может содержать варианты через |: 'парфюмерная вода|духи'.
+    Первый вариант — основной поисковый запрос, остальные помогают искать и проверять соответствие."""
+    return [x.strip() for x in (q or '').split('|') if x.strip()]
+
+
+def text_relevant(title, query):
+    """Название товара соответствует запросу?
+    1 слово — оно должно быть в названии; 2 слова — оба; 3+ — главное слово и все кроме одного."""
+    ts = stems(title)
+    for alt in query_alts(query):
+        ws = words(alt)
+        if not ws:
+            continue
+        qs = [w[:6] for w in ws]
+        matched = sum(1 for q in qs if q in ts)
+        if len(qs) <= 2:
+            if matched == len(qs):
+                return True
+        elif qs[0] in ts and matched >= len(qs) - 1:
+            return True
+    return False
 
 
 def wb_menu():
@@ -322,35 +358,64 @@ def wb_menu():
     return leafs
 
 
-def wb_subject_for(query, hint=''):
-    """Подбираем subject WB по словам запроса ('пылесос' -> Пылесосы, subject 710, shard ...)."""
-    qs = stems(query)
-    if not qs:
-        return None
+_subj_cache = {}
+
+
+def wb_subject_for(query, hint=None):
+    """Подбираем категорию WB (subject) по запросу: 'пылесос' -> Пылесосы (710).
+    Главное слово запроса обязано быть в названии категории — иначе «видеорегистратор» уехал бы в «Видеокарты».
+    hint (женщинам/мужчинам/детям…) помогает выбрать между одноимёнными категориями в разных разделах."""
+    hint = CTX['hint'] if hint is None else hint
+    key = (query, hint)
+    if key in _subj_cache:
+        return _subj_cache[key]
     best, best_score = None, 0
-    for lf in wb_menu():
-        ns = stems(lf['name'])
-        hit = len(qs & ns)
-        if not hit:
+    hs = stems(hint)
+    for alt in query_alts(query):
+        ws = words(alt)
+        if not ws:
             continue
-        score = hit * 10 + len(qs & stems(' '.join(lf['path']))) * 2 + len(stems(hint) & ns) - abs(len(ns) - len(qs))
-        if score > best_score:
-            best, best_score = lf, score
+        qs = {w[:6] for w in ws}
+        head = ws[0][:6]
+        for lf in wb_menu():
+            ns = stems(lf['name'])
+            if head not in ns:
+                continue
+            ps = stems(' '.join(lf['path']))
+            score = len(qs & ns) * 10 + len(qs & ps) * 4 + len(hs & (ps | ns)) * 3 - abs(len(ns) - len(qs)) * 3
+            if score > best_score:
+                best, best_score = lf, score
+    _subj_cache[key] = best
     return best
+
+
+def item_relevant(item, query):
+    """Товар подходит подкатегории: либо по названию, либо WB сам отнёс его к нужной категории (subjectId)."""
+    if text_relevant(item.get('name') or item.get('title') or '', query):
+        return True
+    if item.get('subjectId'):
+        lf = wb_subject_for(query)
+        if lf and int(item['subjectId']) == lf['subject']:
+            return True
+    return False
 
 
 # =====================================================================================
 #  WB — способы поиска
 # =====================================================================================
 def wb_recom(query, page=1):
+    """«Личный» поиск WB. Без подходящего subject он часто отдаёт персональную ленту (мусор) —
+    поэтому результат обязательно фильтруется через item_relevant."""
     lf = wb_subject_for(query)
-    base = f'https://recom.wb.ru/personal/ru/common/v5/search?{WB_Q}&query={urllib.parse.quote(query)}&resultset=catalog&sort=popular&page={page}'
-    urls = [base + f'&subject={lf["subject"]}', base] if lf else [base]
-    for u in urls:
-        items = wb_items(wb_json_products(call('wb.recom', u)))
-        if items:
-            return items
-    return []
+    out = []
+    for alt in query_alts(query)[:2]:
+        base = f'https://recom.wb.ru/personal/ru/common/v5/search?{WB_Q}&query={urllib.parse.quote(alt)}&resultset=catalog&sort=popular&page={page}'
+        urls = [base + f'&subject={lf["subject"]}', base] if lf else [base]
+        for u in urls:
+            items = [it for it in wb_items(wb_json_products(call('wb.recom', u))) if item_relevant(it, query)]
+            if items:
+                return items
+    return out
 
 
 def wb_catalog(query, page=1):
@@ -371,7 +436,7 @@ def wb_search(query, page=1):
             'https://search.wb.ru/exactmatch/sng/common/v5/search']
     v = vers[_search_ver[0] % len(vers)]
     _search_ver[0] += 1
-    u = f'{v}?{WB_Q}&resultset=catalog&sort=popular&limit=60&page={page}&query={urllib.parse.quote(query)}'
+    u = f'{v}?{WB_Q}&resultset=catalog&sort=popular&limit=60&page={page}&query={urllib.parse.quote(query_alts(query)[0])}'
     return wb_items(wb_json_products(call('wb.search', u)))
 
 
@@ -537,7 +602,7 @@ def ym_search(query, page=1, slug=None):
     if slug:
         u = (slug if slug.startswith('http') else f'https://market.yandex.ru/category/{slug}') + f'?how=dpop&page={page}'
     else:
-        u = f'https://market.yandex.ru/search?text={urllib.parse.quote(query)}&how=dpop&page={page}'
+        u = f'https://market.yandex.ru/search?text={urllib.parse.quote(query_alts(query)[0])}&how=dpop&page={page}'
     html = call('ym', u, html=True, timeout=40)
     return ym_parse(html or '')
 
@@ -561,7 +626,7 @@ def _walk(obj, fn):
 
 
 def oz_search(query, page=1):
-    path = f'/search/?text={urllib.parse.quote(query)}&from_global=true&sorting=rating&page={page}'
+    path = f'/search/?text={urllib.parse.quote(query_alts(query)[0])}&from_global=true&sorting=rating&page={page}'
     u = 'https://www.ozon.ru/api/composer-api.bx/page/json/v2?url=' + urllib.parse.quote(path, safe='')
     txt = call('oz', u, timeout=40)
     try:
@@ -780,6 +845,10 @@ def save_product(item, cat_id, sub_name, max_images, img_size):
     }
     if item.get('root'):
         product['root'] = item['root']
+    if item.get('subjectId'):
+        product['subjectId'] = item['subjectId']
+    if item.get('name') and item['name'] != title:
+        product['searchName'] = item['name']       # название из выдачи (для проверки соответствия)
     with open(pj, 'w', encoding='utf-8') as f:
         json.dump(product, f, ensure_ascii=False, indent=2)
     with open(os.path.join(d, 'описание.txt'), 'w', encoding='utf-8') as f:
@@ -829,7 +898,10 @@ def all_products():
 
 
 def relevance(name, query):
-    return len(stems(query) & stems(name))
+    best = 0
+    for alt in query_alts(query):
+        best = max(best, len(stems(alt) & stems(name)))
+    return best + (5 if text_relevant(name, query) else 0)
 
 
 def dedupe_folders(cfg):
@@ -846,6 +918,7 @@ def dedupe_folders(cfg):
         def score(x):
             cat, fn, p = x
             q = (cfg['categories'].get(cat) or {}).get(p.get('subcategory') or '', '')
+            CTX['hint'] = CAT_HINT.get(cat, '')
             return (relevance(p.get('title', ''), q), len(p.get('images') or []))
         lst.sort(key=score, reverse=True)
         for cat, fn, p in lst[1:]:
@@ -853,6 +926,25 @@ def dedupe_folders(cfg):
             removed += 1
     if removed:
         log(f'ℹ убрано дублей товаров (один товар лежал в нескольких категориях): {removed}')
+    return removed
+
+
+def clean_junk(cfg):
+    """Удаляем скачанные товары, не соответствующие своей подкатегории (мусор из «личной» ленты WB)."""
+    removed, kept = 0, 0
+    for cat, fn, p in all_products():
+        q = (cfg['categories'].get(cat) or {}).get(p.get('subcategory') or '')
+        if not q:
+            continue
+        CTX['hint'] = CAT_HINT.get(cat, '')
+        it = {'name': p.get('title', '') + ' ' + p.get('searchName', ''), 'subjectId': p.get('subjectId')}
+        if item_relevant(it, q):
+            kept += 1
+        else:
+            shutil.rmtree(os.path.join(OUT_DIR, cat, fn), ignore_errors=True)
+            removed += 1
+    if removed:
+        log(f'ℹ удалено нерелевантных товаров (не подходят своей подкатегории): {removed}, оставлено {kept}')
     return removed
 
 
@@ -898,12 +990,13 @@ def read_ids_txt():
     return out
 
 
-def assign_sub(name, subs):
-    """К какой подкатегории отнести товар по названию (по совпадению основ слов запроса)."""
-    ns = stems(name)
+def assign_sub(item, subs):
+    """К какой подкатегории отнести товар (для seed-id и товаров продавцов)."""
     best, best_hit = None, 0
     for sub, q in subs.items():
-        hit = len(stems(q) & ns)
+        if not item_relevant(item, q):
+            continue
+        hit = relevance(item.get('name', ''), q)
         if hit > best_hit:
             best, best_hit = sub, hit
     return best
@@ -948,13 +1041,13 @@ class Importer:
             if cat_id not in self._cards_cache:
                 self._cards_cache[cat_id] = wb_cards(ids)
             found = self._cards_cache[cat_id]
-            return [it for it in found if assign_sub(it['name'], subs) == sub]
+            return [it for it in found if assign_sub(it, subs) == sub]
         if m == 'wb.seller':
             sellers = self.sellers.get(cat_id) or []
             if not sellers or page > len(sellers):
                 return []
             found = wb_seller(sellers[page - 1], 1)
-            return [it for it in found if assign_sub(it['name'], subs) == sub]
+            return [it for it in found if assign_sub(it, subs) == sub]
         if m == 'wb.recom':
             return wb_recom(query, page)
         if m == 'wb.catalog':
@@ -976,7 +1069,7 @@ class Importer:
                 break
             if not EP[m].available():
                 continue
-            pages = 3 if m in ('wb.recom', 'wb.catalog', 'wb.search', 'ym', 'oz') else (len(self.sellers.get(cat_id) or []) if m == 'wb.seller' else 1)
+            pages = 5 if m in ('wb.recom', 'wb.catalog') else 3 if m in ('wb.search', 'ym', 'oz') else (len(self.sellers.get(cat_id) or []) if m == 'wb.seller' else 1)
             empty_pages = 0
             for page in range(1, pages + 1):
                 if len(got) >= need:
@@ -995,6 +1088,8 @@ class Importer:
                     if key in self.known or key in tried or key in bad or (it.get('root') and it['root'] in self.known_roots):
                         continue
                     tried.add(key)
+                    if not item_relevant(it, query):     # мусор из ленты/рекламы — не берём
+                        continue
                     todo.append(it)
                 # сначала те, у кого в названии есть слова запроса (у «личного» поиска WB бывает мусор)
                 todo.sort(key=lambda it: -relevance(it['name'], query))
@@ -1033,6 +1128,7 @@ class Importer:
         return got
 
     def import_category(self, cat_id, subs, per_category, limit_per_sub=None):
+        CTX['hint'] = CAT_HINT.get(cat_id, '')
         per_sub = limit_per_sub or max(1, round(per_category / len(subs)))
         have = existing(cat_id)
         results = []
@@ -1150,7 +1246,7 @@ def main():
     with open(CFG_PATH, encoding='utf-8') as f:
         cfg = json.load(f)
     if a.build_only:
-        dedupe_folders(cfg); build_js(); return
+        clean_junk(cfg); dedupe_folders(cfg); build_js(); return
 
     OPTS['delay_mult'] = max(0.2, a.delay)
     OPTS['proxy'] = a.proxy
@@ -1172,6 +1268,7 @@ def main():
             log(f'Нет категории {a.cat}. Доступны: {", ".join(cats)}'); return
         cats = {a.cat: cats[a.cat]}
     per_category = a.per_category or cfg['per_category']
+    clean_junk(cfg)
     dedupe_folders(cfg)
     imp = Importer(cfg, sources, cfg.get('max_images', 3), cfg.get('image_size', 'c516x688'))
     total = 0
