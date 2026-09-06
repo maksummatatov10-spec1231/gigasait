@@ -17,11 +17,13 @@ marketplace/        маркетплейс (SPA на hash-роутинге)
 games/, community/  заглушки разделов (следующие этапы)
 release/            zip-архивы версий сайта
 tools/              build_release.sh — сборка zip-релиза
+                    import_wb.py + import_config.json — импорт реальных товаров с Wildberries
+marketplace/products/  папки товаров (картинки + product.json), появляются после импорта
 ```
 
 ## Этапы
 1. ✅ Основной сайт + маркетплейс (товары-заглушки, 300 шт.)
-2. ⏳ Реальные товары (Ozon / Wildberries / Яндекс Маркет, 1000 шт.)
+2. 🔧 Реальные товары — импортёр готов: `python3 tools/import_wb.py` (см. `tools/README.md`)
 3. ⏳ Полировка: 30 языков, игры, сообщество
 
 ## Сборка релиза

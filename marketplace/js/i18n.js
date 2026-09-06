@@ -49,7 +49,7 @@ window.MARKET_I18N = (function () {
     themeTitle: 'Оформление', addressSaved: 'Адрес сохранён', defaultAddress: 'Адрес по умолчанию', deliveryCountry: 'Страна доставки',
     processing: 'Обработка…', brand: 'Бренд', inFav: 'В избранном', seeAllProducts: 'Все товары', paidNow: 'Оплачено онлайн',
     payLater: 'К оплате при получении', comment: 'Комментарий к заказу', optional: 'необязательно', shortName: 'Имя',
-    promoHint: 'Попробуйте GIGA10, GIGA20 или FREE', currencyHint: 'Цены пересчитываются автоматически по выбранной стране'
+    promoHint: 'Попробуйте GIGA10, GIGA20 или FREE', source: 'Источник', noReviews: 'Отзывов пока нет — станьте первым!', currencyHint: 'Цены пересчитываются автоматически по выбранной стране'
   };
 
   D.en = {
@@ -92,7 +92,7 @@ window.MARKET_I18N = (function () {
     themeTitle: 'Appearance', addressSaved: 'Address saved', defaultAddress: 'Default address', deliveryCountry: 'Delivery country',
     processing: 'Processing…', brand: 'Brand', inFav: 'In favorites', seeAllProducts: 'All products', paidNow: 'Paid online',
     payLater: 'Due on delivery', comment: 'Order comment', optional: 'optional', shortName: 'Name',
-    promoHint: 'Try GIGA10, GIGA20 or FREE', currencyHint: 'Prices are converted automatically based on the selected country'
+    promoHint: 'Try GIGA10, GIGA20 or FREE', source: 'Source', noReviews: 'No reviews yet — be the first!', currencyHint: 'Prices are converted automatically based on the selected country'
   };
 
   // Названия категорий и стран на английском (для переключения языка)

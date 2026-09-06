@@ -4,7 +4,25 @@
 
   const { COUNTRIES, CATEGORIES, generateProducts } = window.MARKET_DATA;
   const I18N = window.MARKET_I18N;
-  const PRODUCTS = generateProducts();
+  // Реальные товары (marketplace/js/products.js, создаётся tools/import_wb.py); если файла нет — заглушки
+  const PRODUCTS = (window.MARKET_PRODUCTS && window.MARKET_PRODUCTS.length)
+    ? window.MARKET_PRODUCTS.map(normalizeProduct)
+    : generateProducts();
+
+  function normalizeProduct(p) {
+    return {
+      ...p,
+      rating: p.rating || 4.5,
+      reviews: p.reviews || 0,
+      stock: p.stock || 10,
+      tags: p.tags || [],
+      specs: p.specs || {},
+      description: p.description || '',
+      reviewsList: p.reviewsList || [],
+      createdAt: p.createdAt || (Date.now() - (p.id % 90) * 86400000),
+      source: p.source || { site: 'placeholder', url: '' }
+    };
+  }
   const BY_ID = new Map(PRODUCTS.map(p => [p.id, p]));
 
   /* ---------- Хранилище (localStorage) ---------- */
@@ -426,9 +444,11 @@
             <span>${c.flag} ${esc(countryName(c))}</span>
           </div>
           <div class="card-tags" style="margin-bottom:22px">${p.tags.map(t => `<a class="tag" href="#/catalog?tag=${encodeURIComponent(t)}">#${esc(t)}</a>`).join('')}</div>
-          <div class="p-block"><h3>${T.description}</h3><p>${esc(p.description)}</p></div>
+          <div class="p-block"><h3>${T.description}</h3><p style="white-space:pre-line">${esc(p.description || '—')}</p></div>
           <div class="p-block"><h3>${T.specs}</h3><div class="specs">${Object.entries(p.specs).map(([k, v]) => `<div class="spec"><span>${esc(k)}</span><span>${esc(v)}</span></div>`).join('')}</div></div>
+          ${p.source && p.source.url ? `<div class="p-block"><h3>${T.source}</h3><p>${p.supplier ? esc(p.supplier) + ' · ' : ''}<a href="${esc(p.source.url)}" target="_blank" rel="noopener" style="color:var(--accent)">${p.source.site === 'wildberries' ? 'Wildberries' : esc(p.source.site)} ↗</a></p></div>` : ''}
           <div class="p-block"><h3>${T.customerReviews}</h3>
+            ${p.reviewsList.length ? '' : `<p>${T.noReviews}</p>`}
             ${p.reviewsList.map(r => `<div class="review"><div class="review-head"><b>${esc(r.name)}</b><span class="star">${stars(r.rating)}</span><small>${r.date}</small></div><p>${esc(r.text)}</p></div>`).join('')}
           </div>
         </div>
