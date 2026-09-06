@@ -56,7 +56,22 @@ window.MARKET_LANG.be = {
     cancelOrder: 'Адмяніць заказ', confirmCancel: 'Адмяніць гэты заказ?', orderCancelled: 'Заказ адменены', repeatOrder: 'Паўтарыць заказ', addedItems: 'Тавары дададзены ў кошык',
     autoLang: 'Аўта (па браўзеры)', langDetected: 'Мова выбрана аўтаматычна: {lang}', langHint: 'Мова вызначаецца па наладах браўзера. Тут яе можна выбраць уручную.',
     toTop: 'Уверх', freeShipFrom: 'Бясплатная дастаўка ад {sum}', shipMore: 'Да бясплатнай дастаўкі яшчэ {sum}', menu: 'Меню',
-    perPage: 'На старонцы', ofTotal: 'з', item: 'Тавар'
+    perPage: 'На старонцы', ofTotal: 'з', item: 'Тавар',
+    quickView: 'Хуткі прагляд', moveMode: 'Рэжым перамяшчэння', moveHint: 'Перацягніце картку на новае месца — астатнія зрушацца. Парадак захоўваецца аўтаматычна.', done: 'Гатова', orderSaved: 'Парадак захаваны',
+    resetOrder: 'Скінуць парадак', addAllToCart: 'Усё ў кошык', shareList: 'Падзяліцца спісам', linkCopied: 'Спасылка скапіравана', importedFromLink: 'Дададзена са спасылкі: {n}',
+    translate: 'Перакласці', translating: 'Перакладаем…', translatedBy: 'Перакладзена Google Перакладчыкам', showOriginal: 'Паказаць арыгінал', translateFailed: 'Не ўдалося перакласці — праверце інтэрнэт',
+    autoTranslate: 'Аўтапераклад апісанняў', autoTranslateHint: 'Апісанні тавараў напісаны па-руску. Пры ўключэнні яны перакладаюцца на мову інтэрфейсу праз Google Перакладчык (патрэбны інтэрнэт, пераклад машынны).', viewGrid: 'Плітка', viewList: 'Спіс', dealOfDay: 'Зніжка дня',
+    endsIn: 'Да канца акцыі', boughtTogether: 'Часта купляюць разам', addAllFor: 'Дадаць усё за {sum}', writeReview: 'Напісаць водгук', yourRating: 'Ваша адзнака',
+    reviewText: 'Тэкст водгуку', reviewSent: 'Дзякуй! Водгук апублікаваны', yourName: 'Ваша імя', ratings: 'Адзнакі', saveForLater: 'Адкласці',
+    savedItems: 'Адкладзеныя', moveToCart: 'У кошык', estDelivery: 'Дастаўка прыкладна', orderDetails: 'Дэталі заказу', trackNumber: 'Трэк-нумар',
+    deliveryStatus: 'Статус дастаўкі', printReceipt: 'Раздрукаваць чэк', backToOrders: 'Да заказаў', bonuses: 'Бонусы', bonusEarn: 'Налічым {n} бонусаў за гэты заказ',
+    useBonuses: 'Спісаць бонусы', bonusBalance: 'Баланс бонусаў', bonusHint: '3% ад кожнага заказу вяртаецца бонусамі. 1 бонус = 1 ₽, бонусамі можна аплаціць да 30% заказу.', level: 'Узровень', spent: 'Патрачана',
+    ordersCount: 'Заказаў', memberSince: 'З намі з', shortcuts: 'Гарачыя клавішы', lowStock: 'Заканчваецца', liveBackground: 'Жывы фон',
+    liveBackgroundHint: 'Мяккія анімаваныя плямы на фоне. Адключыце, калі прылада слабая.', infiniteScroll: 'Аўтападгрузка', infiniteScrollHint: 'Падгружаць тавары аўтаматычна пры пракрутцы каталога.', goToCart: 'Перайсці ў кошык', skuCopied: 'Артыкул скапіраваны',
+    undo: 'Адмяніць', levelBronze: 'Бронза', levelSilver: 'Срэбра', levelGold: 'Золата', recommended: 'Рэкамендуем',
+    scSearch: 'Фокус на пошук', scClose: 'Закрыць акно або меню', scHome: 'Галоўная', scCart: 'Кошык', scFav: 'Абранае',
+    scHelp: 'Гэтая падказка', bonusSpent: 'Аплачана бонусамі', bonusEarned: 'Налічана бонусаў', themeSwitch: 'Пераключыць тэму', reviewsCount: 'водгукаў',
+    originalText: 'Арыгінал'
   },
   plural: {
     products: { one: 'тавар', few: 'тавары', many: 'тавараў', other: 'тавару' },

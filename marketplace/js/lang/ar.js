@@ -56,7 +56,22 @@ window.MARKET_LANG.ar = {
     cancelOrder: 'إلغاء الطلب', confirmCancel: 'إلغاء هذا الطلب؟', orderCancelled: 'تم إلغاء الطلب', repeatOrder: 'إعادة الطلب', addedItems: 'تمت إضافة المنتجات إلى السلة',
     autoLang: 'تلقائي (المتصفح)', langDetected: 'تم اختيار اللغة تلقائياً: {lang}', langHint: 'يتم تحديد اللغة من إعدادات المتصفح. يمكنك اختيارها يدوياً هنا.',
     toTop: 'إلى الأعلى', freeShipFrom: 'توصيل مجاني من {sum}', shipMore: 'تبقى {sum} للتوصيل المجاني', menu: 'القائمة',
-    perPage: 'في الصفحة', ofTotal: 'من', item: 'منتج'
+    perPage: 'في الصفحة', ofTotal: 'من', item: 'منتج',
+    quickView: 'عرض سريع', moveMode: 'وضع النقل', moveHint: 'اسحب البطاقة إلى مكان جديد — ستتحرك البقية. يُحفظ الترتيب تلقائيًا.', done: 'تم', orderSaved: 'تم حفظ الترتيب',
+    resetOrder: 'إعادة ضبط الترتيب', addAllToCart: 'إضافة الكل إلى السلة', shareList: 'مشاركة القائمة', linkCopied: 'تم نسخ الرابط', importedFromLink: 'تمت الإضافة من الرابط: {n}',
+    translate: 'ترجمة', translating: 'جارٍ الترجمة…', translatedBy: 'تمت الترجمة بواسطة ترجمة Google', showOriginal: 'عرض النص الأصلي', translateFailed: 'تعذّرت الترجمة — تحقق من الاتصال بالإنترنت',
+    autoTranslate: 'الترجمة التلقائية للأوصاف', autoTranslateHint: 'أوصاف المنتجات مكتوبة بالروسية. عند التفعيل تُترجم إلى لغة الواجهة عبر ترجمة Google (يتطلب الإنترنت، ترجمة آلية).', viewGrid: 'شبكة', viewList: 'قائمة', dealOfDay: 'عرض اليوم',
+    endsIn: 'ينتهي خلال', boughtTogether: 'يُشترى معًا غالبًا', addAllFor: 'إضافة الكل مقابل {sum}', writeReview: 'كتابة مراجعة', yourRating: 'تقييمك',
+    reviewText: 'نص المراجعة', reviewSent: 'شكرًا! تم نشر مراجعتك', yourName: 'اسمك', ratings: 'التقييمات', saveForLater: 'حفظ لوقت لاحق',
+    savedItems: 'محفوظ لوقت لاحق', moveToCart: 'نقل إلى السلة', estDelivery: 'التوصيل المتوقع', orderDetails: 'تفاصيل الطلب', trackNumber: 'رقم التتبع',
+    deliveryStatus: 'حالة التوصيل', printReceipt: 'طباعة الإيصال', backToOrders: 'العودة إلى الطلبات', bonuses: 'نقاط المكافآت', bonusEarn: 'ستحصل على {n} نقطة مقابل هذا الطلب',
+    useBonuses: 'استخدام النقاط', bonusBalance: 'رصيد النقاط', bonusHint: 'يعود 3% من كل طلب على شكل نقاط. النقطة = 1 ₽، ويمكن للنقاط تغطية ما يصل إلى 30% من الطلب.', level: 'المستوى', spent: 'تم إنفاقه',
+    ordersCount: 'الطلبات', memberSince: 'عضو منذ', shortcuts: 'اختصارات لوحة المفاتيح', lowStock: 'على وشك النفاد', liveBackground: 'خلفية حية',
+    liveBackgroundHint: 'بقع متحركة ناعمة خلف الصفحة. أوقفها على الأجهزة البطيئة.', infiniteScroll: 'تحميل تلقائي', infiniteScrollHint: 'تحميل المزيد من المنتجات تلقائيًا أثناء تمرير الكتالوج.', goToCart: 'الانتقال إلى السلة', skuCopied: 'تم نسخ رمز المنتج',
+    undo: 'تراجع', levelBronze: 'برونزي', levelSilver: 'فضي', levelGold: 'ذهبي', recommended: 'موصى به',
+    scSearch: 'التركيز على البحث', scClose: 'إغلاق النافذة أو القائمة', scHome: 'الرئيسية', scCart: 'السلة', scFav: 'المفضلة',
+    scHelp: 'هذه المساعدة', bonusSpent: 'مدفوع بالنقاط', bonusEarned: 'النقاط المكتسبة', themeSwitch: 'تبديل السمة', reviewsCount: 'مراجعات',
+    originalText: 'النص الأصلي'
   },
   plural: {
     products: { zero: 'منتجات', one: 'منتج', two: 'منتجان', few: 'منتجات', many: 'منتجاً', other: 'منتج' },

@@ -54,9 +54,11 @@
   let savedTheme = readStr(STORAGE_THEME);
   if (savedTheme !== 'light' && savedTheme !== 'dark') savedTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   root.setAttribute('data-theme', savedTheme);
+  themeBtn.setAttribute('aria-checked', savedTheme === 'light');
   themeBtn.addEventListener('click', () => {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
+    themeBtn.setAttribute('aria-checked', next === 'light');
     localStorage.setItem(STORAGE_THEME, next);
   });
 

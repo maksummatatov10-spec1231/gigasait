@@ -56,7 +56,22 @@ window.MARKET_LANG.pl = {
     cancelOrder: 'Anuluj zamówienie', confirmCancel: 'Anulować to zamówienie?', orderCancelled: 'Zamówienie anulowane', repeatOrder: 'Zamów ponownie', addedItems: 'Produkty dodano do koszyka',
     autoLang: 'Auto (przeglądarka)', langDetected: 'Język wybrany automatycznie: {lang}', langHint: 'Język jest wykrywany na podstawie ustawień przeglądarki. Tutaj możesz wybrać go ręcznie.',
     toTop: 'Do góry', freeShipFrom: 'Darmowa dostawa od {sum}', shipMore: 'Jeszcze {sum} do darmowej dostawy', menu: 'Menu',
-    perPage: 'Na stronie', ofTotal: 'z', item: 'Produkt'
+    perPage: 'Na stronie', ofTotal: 'z', item: 'Produkt',
+    quickView: 'Szybki podgląd', moveMode: 'Tryb przenoszenia', moveHint: 'Przeciągnij kartę w nowe miejsce — pozostałe się przesuną. Kolejność zapisuje się automatycznie.', done: 'Gotowe', orderSaved: 'Kolejność zapisana',
+    resetOrder: 'Resetuj kolejność', addAllToCart: 'Wszystko do koszyka', shareList: 'Udostępnij listę', linkCopied: 'Link skopiowany', importedFromLink: 'Dodano z linku: {n}',
+    translate: 'Przetłumacz', translating: 'Tłumaczenie…', translatedBy: 'Przetłumaczono przez Tłumacza Google', showOriginal: 'Pokaż oryginał', translateFailed: 'Nie udało się przetłumaczyć — sprawdź połączenie',
+    autoTranslate: 'Automatyczne tłumaczenie opisów', autoTranslateHint: 'Opisy produktów są napisane po rosyjsku. Po włączeniu są tłumaczone na język interfejsu przez Tłumacza Google (wymagany internet, tłumaczenie maszynowe).', viewGrid: 'Kafelki', viewList: 'Lista', dealOfDay: 'Oferta dnia',
+    endsIn: 'Koniec za', boughtTogether: 'Często kupowane razem', addAllFor: 'Dodaj wszystko za {sum}', writeReview: 'Napisz opinię', yourRating: 'Twoja ocena',
+    reviewText: 'Treść opinii', reviewSent: 'Dziękujemy! Opinia została opublikowana', yourName: 'Twoje imię', ratings: 'Oceny', saveForLater: 'Zachowaj na później',
+    savedItems: 'Zachowane na później', moveToCart: 'Do koszyka', estDelivery: 'Szacowana dostawa', orderDetails: 'Szczegóły zamówienia', trackNumber: 'Numer przesyłki',
+    deliveryStatus: 'Status dostawy', printReceipt: 'Drukuj paragon', backToOrders: 'Do zamówień', bonuses: 'Punkty bonusowe', bonusEarn: 'Za to zamówienie otrzymasz {n} punktów',
+    useBonuses: 'Wykorzystaj punkty', bonusBalance: 'Saldo punktów', bonusHint: '3% każdego zamówienia wraca w punktach. 1 punkt = 1 ₽; punktami można opłacić do 30% zamówienia.', level: 'Poziom', spent: 'Wydano',
+    ordersCount: 'Zamówień', memberSince: 'Z nami od', shortcuts: 'Skróty klawiszowe', lowStock: 'Kończy się', liveBackground: 'Żywe tło',
+    liveBackgroundHint: 'Miękkie animowane plamy w tle. Wyłącz na słabszych urządzeniach.', infiniteScroll: 'Autoładowanie', infiniteScrollHint: 'Automatycznie doładowuj produkty podczas przewijania katalogu.', goToCart: 'Przejdź do koszyka', skuCopied: 'SKU skopiowano',
+    undo: 'Cofnij', levelBronze: 'Brąz', levelSilver: 'Srebro', levelGold: 'Złoto', recommended: 'Polecamy',
+    scSearch: 'Fokus na wyszukiwarkę', scClose: 'Zamknij okno lub menu', scHome: 'Strona główna', scCart: 'Koszyk', scFav: 'Ulubione',
+    scHelp: 'Ta pomoc', bonusSpent: 'Opłacono punktami', bonusEarned: 'Naliczone punkty', themeSwitch: 'Przełącz motyw', reviewsCount: 'opinii',
+    originalText: 'Oryginał'
   },
   plural: {
     products: { one: 'produkt', few: 'produkty', many: 'produktów', other: 'produktu' },

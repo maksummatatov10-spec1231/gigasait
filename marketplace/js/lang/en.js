@@ -57,7 +57,22 @@ window.MARKET_LANG.en = {
     cancelOrder: 'Cancel order', confirmCancel: 'Cancel this order?', orderCancelled: 'Order cancelled', repeatOrder: 'Reorder', addedItems: 'Items added to cart',
     autoLang: 'Auto (browser)', langDetected: 'Language selected automatically: {lang}', langHint: 'The language is detected from your browser settings. You can choose it manually here.',
     toTop: 'Back to top', freeShipFrom: 'Free delivery from {sum}', shipMore: '{sum} more for free delivery', menu: 'Menu',
-    perPage: 'Per page', ofTotal: 'of', item: 'Item'
+    perPage: 'Per page', ofTotal: 'of', item: 'Item',
+    quickView: 'Quick view', moveMode: 'Move mode', moveHint: 'Drag a card to a new spot — the others will shift. The order is saved automatically.', done: 'Done', orderSaved: 'Order saved',
+    resetOrder: 'Reset order', addAllToCart: 'Add all to cart', shareList: 'Share list', linkCopied: 'Link copied', importedFromLink: 'Added from link: {n}',
+    translate: 'Translate', translating: 'Translating…', translatedBy: 'Translated by Google Translate', showOriginal: 'Show original', translateFailed: 'Translation failed — check your connection',
+    autoTranslate: 'Auto-translate descriptions', autoTranslateHint: 'Product descriptions are written in Russian. When enabled, they are translated into the interface language via Google Translate (internet required, machine translation).', viewGrid: 'Grid', viewList: 'List', dealOfDay: 'Deal of the day',
+    endsIn: 'Ends in', boughtTogether: 'Frequently bought together', addAllFor: 'Add all for {sum}', writeReview: 'Write a review', yourRating: 'Your rating',
+    reviewText: 'Review text', reviewSent: 'Thank you! Your review is published', yourName: 'Your name', ratings: 'Ratings', saveForLater: 'Save for later',
+    savedItems: 'Saved for later', moveToCart: 'Move to cart', estDelivery: 'Estimated delivery', orderDetails: 'Order details', trackNumber: 'Tracking number',
+    deliveryStatus: 'Delivery status', printReceipt: 'Print receipt', backToOrders: 'Back to orders', bonuses: 'Bonus points', bonusEarn: 'You will earn {n} points for this order',
+    useBonuses: 'Use bonus points', bonusBalance: 'Points balance', bonusHint: '3% of every order comes back as points. 1 point = 1 ₽; points can cover up to 30% of an order.', level: 'Level', spent: 'Spent',
+    ordersCount: 'Orders', memberSince: 'Member since', shortcuts: 'Keyboard shortcuts', lowStock: 'Running out', liveBackground: 'Live background',
+    liveBackgroundHint: 'Soft animated blobs behind the page. Turn off on slow devices.', infiniteScroll: 'Auto-load', infiniteScrollHint: 'Load more products automatically while scrolling the catalog.', goToCart: 'Go to cart', skuCopied: 'SKU copied',
+    undo: 'Undo', levelBronze: 'Bronze', levelSilver: 'Silver', levelGold: 'Gold', recommended: 'Recommended',
+    scSearch: 'Focus the search', scClose: 'Close dialog or menu', scHome: 'Home', scCart: 'Cart', scFav: 'Favorites',
+    scHelp: 'This help', bonusSpent: 'Paid with points', bonusEarned: 'Points earned', themeSwitch: 'Toggle theme', reviewsCount: 'reviews',
+    originalText: 'Original'
   },
   plural: {
     products: { one: 'product', other: 'products' },

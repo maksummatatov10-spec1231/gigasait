@@ -56,7 +56,22 @@ window.MARKET_LANG.de = {
     cancelOrder: 'Bestellung stornieren', confirmCancel: 'Diese Bestellung stornieren?', orderCancelled: 'Bestellung storniert', repeatOrder: 'Erneut bestellen', addedItems: 'Artikel in den Warenkorb gelegt',
     autoLang: 'Auto (Browser)', langDetected: 'Sprache automatisch gewählt: {lang}', langHint: 'Die Sprache wird aus den Browsereinstellungen erkannt. Hier können Sie sie manuell wählen.',
     toTop: 'Nach oben', freeShipFrom: 'Kostenlose Lieferung ab {sum}', shipMore: 'Noch {sum} bis zur kostenlosen Lieferung', menu: 'Menü',
-    perPage: 'Pro Seite', ofTotal: 'von', item: 'Artikel'
+    perPage: 'Pro Seite', ofTotal: 'von', item: 'Artikel',
+    quickView: 'Schnellansicht', moveMode: 'Verschiebemodus', moveHint: 'Ziehe eine Karte an eine neue Stelle — die anderen rücken nach. Die Reihenfolge wird automatisch gespeichert.', done: 'Fertig', orderSaved: 'Reihenfolge gespeichert',
+    resetOrder: 'Reihenfolge zurücksetzen', addAllToCart: 'Alles in den Warenkorb', shareList: 'Liste teilen', linkCopied: 'Link kopiert', importedFromLink: 'Aus Link hinzugefügt: {n}',
+    translate: 'Übersetzen', translating: 'Wird übersetzt…', translatedBy: 'Übersetzt mit Google Übersetzer', showOriginal: 'Original anzeigen', translateFailed: 'Übersetzung fehlgeschlagen — Internetverbindung prüfen',
+    autoTranslate: 'Beschreibungen automatisch übersetzen', autoTranslateHint: 'Produktbeschreibungen sind auf Russisch verfasst. Wenn aktiviert, werden sie per Google Übersetzer in die Oberflächensprache übersetzt (Internet erforderlich, maschinelle Übersetzung).', viewGrid: 'Kacheln', viewList: 'Liste', dealOfDay: 'Angebot des Tages',
+    endsIn: 'Endet in', boughtTogether: 'Wird oft zusammen gekauft', addAllFor: 'Alles für {sum} hinzufügen', writeReview: 'Bewertung schreiben', yourRating: 'Deine Bewertung',
+    reviewText: 'Bewertungstext', reviewSent: 'Danke! Deine Bewertung ist veröffentlicht', yourName: 'Dein Name', ratings: 'Bewertungen', saveForLater: 'Für später merken',
+    savedItems: 'Für später gemerkt', moveToCart: 'In den Warenkorb', estDelivery: 'Voraussichtliche Lieferung', orderDetails: 'Bestelldetails', trackNumber: 'Sendungsnummer',
+    deliveryStatus: 'Lieferstatus', printReceipt: 'Beleg drucken', backToOrders: 'Zu den Bestellungen', bonuses: 'Bonuspunkte', bonusEarn: 'Für diese Bestellung erhältst du {n} Punkte',
+    useBonuses: 'Punkte einlösen', bonusBalance: 'Punktestand', bonusHint: '3 % jeder Bestellung kommen als Punkte zurück. 1 Punkt = 1 ₽; mit Punkten lassen sich bis zu 30 % einer Bestellung bezahlen.', level: 'Stufe', spent: 'Ausgegeben',
+    ordersCount: 'Bestellungen', memberSince: 'Dabei seit', shortcuts: 'Tastenkürzel', lowStock: 'Fast ausverkauft', liveBackground: 'Lebendiger Hintergrund',
+    liveBackgroundHint: 'Sanft animierte Farbflecken im Hintergrund. Auf schwachen Geräten ausschalten.', infiniteScroll: 'Automatisch nachladen', infiniteScrollHint: 'Beim Scrollen im Katalog automatisch weitere Produkte laden.', goToCart: 'Zum Warenkorb', skuCopied: 'Artikelnummer kopiert',
+    undo: 'Rückgängig', levelBronze: 'Bronze', levelSilver: 'Silber', levelGold: 'Gold', recommended: 'Empfohlen',
+    scSearch: 'Suche fokussieren', scClose: 'Dialog oder Menü schließen', scHome: 'Startseite', scCart: 'Warenkorb', scFav: 'Favoriten',
+    scHelp: 'Diese Hilfe', bonusSpent: 'Mit Punkten bezahlt', bonusEarned: 'Punkte erhalten', themeSwitch: 'Design wechseln', reviewsCount: 'Bewertungen',
+    originalText: 'Original'
   },
   plural: { products: { one: 'Produkt', other: 'Produkte' }, reviews: { one: 'Bewertung', other: 'Bewertungen' } },
   cats: {

@@ -20,9 +20,8 @@
   <header class="hub-header">
     <a class="logo" href="../index.html"><span class="logo-mark">⚡</span><span class="logo-text">GIGA<span>SAIT</span></span></a>
     <div class="hub-actions">
-      <button id="themeToggle" class="icon-btn" title="Тема">
-        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <button id="themeToggle" class="theme-switch" role="switch" aria-checked="false" title="Тема / Theme" aria-label="Theme">
+        <span class="ts-track"><span class="ts-icon ts-moon">🌙</span><span class="ts-icon ts-sun">☀️</span><span class="ts-knob"></span></span>
       </button>
     </div>
   </header>
@@ -38,7 +37,7 @@
       var root=document.documentElement;
       function rd(k){var v=localStorage.getItem(k);if(v&&v[0]==='"'){try{v=JSON.parse(v)}catch(e){}}return v;}
       var t=rd('giga.theme'); root.setAttribute('data-theme', t==='light'?'light':'dark');
-      document.getElementById('themeToggle').onclick=function(){var n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);localStorage.setItem('giga.theme',n);};
+      var tb=document.getElementById('themeToggle'); tb.setAttribute('aria-checked', root.getAttribute('data-theme')==='light'); tb.onclick=function(){var n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);tb.setAttribute('aria-checked',n==='light');localStorage.setItem('giga.theme',n);};
       var l=rd('giga.lang');
       if(!l||!T[l]){var c=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'ru']);l='ru';for(var i=0;i<c.length;i++){var b=String(c[i]).toLowerCase().split(/[-_]/)[0];if(T[b]){l=b;break;}}}
       var d=T[l]; root.lang=l; root.dir=(l==='ar'?'rtl':'ltr');

@@ -56,7 +56,22 @@ window.MARKET_LANG.ky = {
     cancelOrder: 'Заказды жокко чыгаруу', confirmCancel: 'Бул заказды жокко чыгарасызбы?', orderCancelled: 'Заказ жокко чыгарылды', repeatOrder: 'Заказды кайталоо', addedItems: 'Товарлар себетке кошулду',
     autoLang: 'Авто (браузер боюнча)', langDetected: 'Тил автоматтык түрдө тандалды: {lang}', langHint: 'Тил браузердин жөндөөлөрү боюнча аныкталат. Бул жерден аны кол менен тандаса болот.',
     toTop: 'Жогору', freeShipFrom: '{sum} баштап акысыз жеткирүү', shipMore: 'Акысыз жеткирүүгө чейин дагы {sum}', menu: 'Меню',
-    perPage: 'Баракта', ofTotal: '/', item: 'Товар'
+    perPage: 'Баракта', ofTotal: '/', item: 'Товар',
+    quickView: 'Тез көрүү', moveMode: 'Жылдыруу режими', moveHint: 'Картаны жаңы орунга сүйрөңүз — калгандары жылат. Тартиби автоматтык түрдө сакталат.', done: 'Даяр', orderSaved: 'Тартиби сакталды',
+    resetOrder: 'Тартибин баштапкы абалга келтирүү', addAllToCart: 'Баарын себетке', shareList: 'Тизме менен бөлүшүү', linkCopied: 'Шилтеме көчүрүлдү', importedFromLink: 'Шилтемеден кошулду: {n}',
+    translate: 'Которуу', translating: 'Которулууда…', translatedBy: 'Google Translate аркылуу которулду', showOriginal: 'Түп нусканы көрсөтүү', translateFailed: 'Которуу мүмкүн болбоду — интернетти текшериңиз',
+    autoTranslate: 'Сүрөттөмөлөрдү автокоторуу', autoTranslateHint: 'Товар сүрөттөмөлөрү орус тилинде жазылган. Күйгүзүлгөндө алар Google Translate аркылуу интерфейс тилине которулат (интернет керек, машиналык котормо).', viewGrid: 'Тор', viewList: 'Тизме', dealOfDay: 'Күндүн арзандатуусу',
+    endsIn: 'Акция аяктаганга чейин', boughtTogether: 'Көбүнчө чогуу сатып алышат', addAllFor: 'Баарын {sum} баасына кошуу', writeReview: 'Пикир жазуу', yourRating: 'Сиздин бааңыз',
+    reviewText: 'Пикир тексти', reviewSent: 'Рахмат! Пикир жарыяланды', yourName: 'Атыңыз', ratings: 'Баалар', saveForLater: 'Кийинкиге калтыруу',
+    savedItems: 'Калтырылгандар', moveToCart: 'Себетке', estDelivery: 'Жеткирүү болжол менен', orderDetails: 'Буйрутманын чоо-жайы', trackNumber: 'Трек-номер',
+    deliveryStatus: 'Жеткирүү абалы', printReceipt: 'Чекти басып чыгаруу', backToOrders: 'Буйрутмаларга', bonuses: 'Бонустар', bonusEarn: 'Бул буйрутма үчүн {n} бонус эсептейбиз',
+    useBonuses: 'Бонусторду колдонуу', bonusBalance: 'Бонус балансы', bonusHint: 'Ар бир буйрутманын 3%ы бонус түрүндө кайтат. 1 бонус = 1 ₽, бонус менен буйрутманын 30%ына чейин төлөсө болот.', level: 'Деңгээл', spent: 'Сарпталды',
+    ordersCount: 'Буйрутмалар', memberSince: 'Биз менен', shortcuts: 'Ыкчам баскычтар', lowStock: 'Түгөнүп баратат', liveBackground: 'Жандуу фон',
+    liveBackgroundHint: 'Фондогу жумшак анимациялуу тактар. Түзмөк алсыз болсо, өчүрүңүз.', infiniteScroll: 'Автожүктөө', infiniteScrollHint: 'Каталогду сыдырганда товарларды автоматтык түрдө жүктөө.', goToCart: 'Себетке өтүү', skuCopied: 'Артикул көчүрүлдү',
+    undo: 'Жокко чыгаруу', levelBronze: 'Коло', levelSilver: 'Күмүш', levelGold: 'Алтын', recommended: 'Сунуштайбыз',
+    scSearch: 'Издөөгө фокус', scClose: 'Терезени же менюну жабуу', scHome: 'Башкы бет', scCart: 'Себет', scFav: 'Тандалмалар',
+    scHelp: 'Бул көрсөтмө', bonusSpent: 'Бонус менен төлөндү', bonusEarned: 'Эсептелген бонус', themeSwitch: 'Теманы алмаштыруу', reviewsCount: 'пикир',
+    originalText: 'Түп нуска'
   },
   plural: { products: { one: 'товар', other: 'товар' }, reviews: { one: 'пикир', other: 'пикир' } },
   cats: {

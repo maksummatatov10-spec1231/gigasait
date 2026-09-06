@@ -56,7 +56,22 @@ window.MARKET_LANG.uk = {
     cancelOrder: 'Скасувати замовлення', confirmCancel: 'Скасувати це замовлення?', orderCancelled: 'Замовлення скасовано', repeatOrder: 'Повторити замовлення', addedItems: 'Товари додано до кошика',
     autoLang: 'Авто (за браузером)', langDetected: 'Мову обрано автоматично: {lang}', langHint: 'Мова визначається за налаштуваннями браузера. Тут її можна обрати вручну.',
     toTop: 'Догори', freeShipFrom: 'Безкоштовна доставка від {sum}', shipMore: 'До безкоштовної доставки ще {sum}', menu: 'Меню',
-    perPage: 'На сторінці', ofTotal: 'з', item: 'Товар'
+    perPage: 'На сторінці', ofTotal: 'з', item: 'Товар',
+    quickView: 'Швидкий перегляд', moveMode: 'Режим переміщення', moveHint: 'Перетягніть картку на нове місце — решта зсунуться. Порядок зберігається автоматично.', done: 'Готово', orderSaved: 'Порядок збережено',
+    resetOrder: 'Скинути порядок', addAllToCart: 'Усе в кошик', shareList: 'Поділитися списком', linkCopied: 'Посилання скопійовано', importedFromLink: 'Додано з посилання: {n}',
+    translate: 'Перекласти', translating: 'Перекладаємо…', translatedBy: 'Перекладено Google Перекладачем', showOriginal: 'Показати оригінал', translateFailed: 'Не вдалося перекласти — перевірте інтернет',
+    autoTranslate: 'Автопереклад описів', autoTranslateHint: 'Описи товарів написані російською. Якщо ввімкнено, вони перекладаються мовою інтерфейсу через Google Перекладач (потрібен інтернет, переклад машинний).', viewGrid: 'Плитка', viewList: 'Список', dealOfDay: 'Знижка дня',
+    endsIn: 'До кінця акції', boughtTogether: 'Часто купують разом', addAllFor: 'Додати все за {sum}', writeReview: 'Написати відгук', yourRating: 'Ваша оцінка',
+    reviewText: 'Текст відгуку', reviewSent: 'Дякуємо! Відгук опубліковано', yourName: 'Ваше ім’я', ratings: 'Оцінки', saveForLater: 'Відкласти',
+    savedItems: 'Відкладені', moveToCart: 'У кошик', estDelivery: 'Доставка приблизно', orderDetails: 'Деталі замовлення', trackNumber: 'Трек-номер',
+    deliveryStatus: 'Статус доставки', printReceipt: 'Роздрукувати чек', backToOrders: 'До замовлень', bonuses: 'Бонуси', bonusEarn: 'Нарахуємо {n} бонусів за це замовлення',
+    useBonuses: 'Списати бонуси', bonusBalance: 'Баланс бонусів', bonusHint: '3% від кожного замовлення повертається бонусами. 1 бонус = 1 ₽, бонусами можна оплатити до 30% замовлення.', level: 'Рівень', spent: 'Витрачено',
+    ordersCount: 'Замовлень', memberSince: 'З нами з', shortcuts: 'Гарячі клавіші', lowStock: 'Закінчується', liveBackground: 'Живий фон',
+    liveBackgroundHint: 'М’які анімовані плями на фоні. Вимкніть, якщо пристрій слабкий.', infiniteScroll: 'Автопідвантаження', infiniteScrollHint: 'Підвантажувати товари автоматично під час прокручування каталогу.', goToCart: 'Перейти до кошика', skuCopied: 'Артикул скопійовано',
+    undo: 'Скасувати', levelBronze: 'Бронза', levelSilver: 'Срібло', levelGold: 'Золото', recommended: 'Рекомендуємо',
+    scSearch: 'Фокус на пошук', scClose: 'Закрити вікно або меню', scHome: 'Головна', scCart: 'Кошик', scFav: 'Обране',
+    scHelp: 'Ця підказка', bonusSpent: 'Сплачено бонусами', bonusEarned: 'Нараховано бонусів', themeSwitch: 'Перемкнути тему', reviewsCount: 'відгуків',
+    originalText: 'Оригінал'
   },
   plural: {
     products: { one: 'товар', few: 'товари', many: 'товарів', other: 'товару' },

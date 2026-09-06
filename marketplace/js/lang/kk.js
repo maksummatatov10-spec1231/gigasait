@@ -56,7 +56,22 @@ window.MARKET_LANG.kk = {
     cancelOrder: 'Тапсырысты болдырмау', confirmCancel: 'Осы тапсырысты болдырмау керек пе?', orderCancelled: 'Тапсырыс болдырылмады', repeatOrder: 'Тапсырысты қайталау', addedItems: 'Тауарлар себетке қосылды',
     autoLang: 'Авто (браузер бойынша)', langDetected: 'Тіл автоматты түрде таңдалды: {lang}', langHint: 'Тіл браузер баптаулары бойынша анықталады. Мұнда оны қолмен таңдауға болады.',
     toTop: 'Жоғары', freeShipFrom: '{sum} бастап тегін жеткізу', shipMore: 'Тегін жеткізуге дейін тағы {sum}', menu: 'Мәзір',
-    perPage: 'Бетте', ofTotal: '/', item: 'Тауар'
+    perPage: 'Бетте', ofTotal: '/', item: 'Тауар',
+    quickView: 'Жылдам қарау', moveMode: 'Жылжыту режимі', moveHint: 'Картаны жаңа орынға сүйреңіз — қалғандары ығысады. Реті автоматты түрде сақталады.', done: 'Дайын', orderSaved: 'Реті сақталды',
+    resetOrder: 'Ретін қалпына келтіру', addAllToCart: 'Барлығын себетке', shareList: 'Тізіммен бөлісу', linkCopied: 'Сілтеме көшірілді', importedFromLink: 'Сілтемеден қосылды: {n}',
+    translate: 'Аудару', translating: 'Аударылуда…', translatedBy: 'Google Translate арқылы аударылды', showOriginal: 'Түпнұсқаны көрсету', translateFailed: 'Аудару мүмкін болмады — интернетті тексеріңіз',
+    autoTranslate: 'Сипаттамаларды автоаудару', autoTranslateHint: 'Тауар сипаттамалары орыс тілінде жазылған. Қосылған кезде олар Google Translate арқылы интерфейс тіліне аударылады (интернет қажет, машиналық аударма).', viewGrid: 'Тор', viewList: 'Тізім', dealOfDay: 'Күн жеңілдігі',
+    endsIn: 'Акция аяқталуына', boughtTogether: 'Жиі бірге сатып алады', addAllFor: 'Барлығын {sum} бағасына қосу', writeReview: 'Пікір жазу', yourRating: 'Сіздің бағаңыз',
+    reviewText: 'Пікір мәтіні', reviewSent: 'Рақмет! Пікір жарияланды', yourName: 'Атыңыз', ratings: 'Бағалар', saveForLater: 'Кейінге қалдыру',
+    savedItems: 'Кейінге қалдырылған', moveToCart: 'Себетке', estDelivery: 'Жеткізу шамамен', orderDetails: 'Тапсырыс мәліметтері', trackNumber: 'Трек-нөмір',
+    deliveryStatus: 'Жеткізу күйі', printReceipt: 'Чекті басып шығару', backToOrders: 'Тапсырыстарға', bonuses: 'Бонустар', bonusEarn: 'Осы тапсырыс үшін {n} бонус есептейміз',
+    useBonuses: 'Бонустарды пайдалану', bonusBalance: 'Бонус балансы', bonusHint: 'Әр тапсырыстың 3%-ы бонус түрінде қайтады. 1 бонус = 1 ₽, бонуспен тапсырыстың 30%-ына дейін төлеуге болады.', level: 'Деңгей', spent: 'Жұмсалды',
+    ordersCount: 'Тапсырыстар', memberSince: 'Бізбен бірге', shortcuts: 'Жылдам пернелер', lowStock: 'Таусылып жатыр', liveBackground: 'Тірі фон',
+    liveBackgroundHint: 'Фондағы жұмсақ анимациялық дақтар. Құрылғы әлсіз болса, өшіріңіз.', infiniteScroll: 'Автожүктеу', infiniteScrollHint: 'Каталогты айналдырғанда тауарларды автоматты түрде жүктеу.', goToCart: 'Себетке өту', skuCopied: 'Артикул көшірілді',
+    undo: 'Болдырмау', levelBronze: 'Қола', levelSilver: 'Күміс', levelGold: 'Алтын', recommended: 'Ұсынамыз',
+    scSearch: 'Іздеуге фокус', scClose: 'Терезені немесе мәзірді жабу', scHome: 'Басты бет', scCart: 'Себет', scFav: 'Таңдаулылар',
+    scHelp: 'Осы анықтама', bonusSpent: 'Бонуспен төленді', bonusEarned: 'Есептелген бонус', themeSwitch: 'Тақырыпты ауыстыру', reviewsCount: 'пікір',
+    originalText: 'Түпнұсқа'
   },
   plural: { products: { one: 'тауар', other: 'тауар' }, reviews: { one: 'пікір', other: 'пікір' } },
   cats: {

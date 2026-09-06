@@ -56,7 +56,22 @@ window.MARKET_LANG.fr = {
     cancelOrder: 'Annuler la commande', confirmCancel: 'Annuler cette commande ?', orderCancelled: 'Commande annulée', repeatOrder: 'Commander à nouveau', addedItems: 'Articles ajoutés au panier',
     autoLang: 'Auto (navigateur)', langDetected: 'Langue choisie automatiquement : {lang}', langHint: 'La langue est détectée d’après votre navigateur. Vous pouvez la choisir manuellement ici.',
     toTop: 'Haut de page', freeShipFrom: 'Livraison gratuite dès {sum}', shipMore: 'Encore {sum} pour la livraison gratuite', menu: 'Menu',
-    perPage: 'Par page', ofTotal: 'sur', item: 'Article'
+    perPage: 'Par page', ofTotal: 'sur', item: 'Article',
+    quickView: 'Aperçu rapide', moveMode: 'Mode déplacement', moveHint: 'Faites glisser une carte vers un nouvel emplacement — les autres se décalent. L’ordre est enregistré automatiquement.', done: 'Terminé', orderSaved: 'Ordre enregistré',
+    resetOrder: 'Réinitialiser l’ordre', addAllToCart: 'Tout ajouter au panier', shareList: 'Partager la liste', linkCopied: 'Lien copié', importedFromLink: 'Ajouté depuis le lien : {n}',
+    translate: 'Traduire', translating: 'Traduction…', translatedBy: 'Traduit par Google Traduction', showOriginal: 'Afficher l’original', translateFailed: 'Échec de la traduction — vérifiez votre connexion',
+    autoTranslate: 'Traduction automatique des descriptions', autoTranslateHint: 'Les descriptions des produits sont rédigées en russe. Une fois activée, elles sont traduites dans la langue de l’interface via Google Traduction (internet requis, traduction automatique).', viewGrid: 'Grille', viewList: 'Liste', dealOfDay: 'Offre du jour',
+    endsIn: 'Se termine dans', boughtTogether: 'Souvent achetés ensemble', addAllFor: 'Tout ajouter pour {sum}', writeReview: 'Écrire un avis', yourRating: 'Votre note',
+    reviewText: 'Texte de l’avis', reviewSent: 'Merci ! Votre avis est publié', yourName: 'Votre nom', ratings: 'Notes', saveForLater: 'Garder pour plus tard',
+    savedItems: 'Gardés pour plus tard', moveToCart: 'Ajouter au panier', estDelivery: 'Livraison estimée', orderDetails: 'Détails de la commande', trackNumber: 'Numéro de suivi',
+    deliveryStatus: 'Statut de livraison', printReceipt: 'Imprimer le reçu', backToOrders: 'Retour aux commandes', bonuses: 'Points bonus', bonusEarn: 'Vous gagnerez {n} points pour cette commande',
+    useBonuses: 'Utiliser les points', bonusBalance: 'Solde de points', bonusHint: '3 % de chaque commande revient en points. 1 point = 1 ₽ ; les points peuvent couvrir jusqu’à 30 % d’une commande.', level: 'Niveau', spent: 'Dépensé',
+    ordersCount: 'Commandes', memberSince: 'Membre depuis', shortcuts: 'Raccourcis clavier', lowStock: 'Bientôt épuisé', liveBackground: 'Fond animé',
+    liveBackgroundHint: 'Taches animées douces en arrière-plan. Désactivez sur les appareils lents.', infiniteScroll: 'Chargement automatique', infiniteScrollHint: 'Charger automatiquement plus de produits en faisant défiler le catalogue.', goToCart: 'Aller au panier', skuCopied: 'Référence copiée',
+    undo: 'Annuler', levelBronze: 'Bronze', levelSilver: 'Argent', levelGold: 'Or', recommended: 'Recommandé',
+    scSearch: 'Focus sur la recherche', scClose: 'Fermer la fenêtre ou le menu', scHome: 'Accueil', scCart: 'Panier', scFav: 'Favoris',
+    scHelp: 'Cette aide', bonusSpent: 'Payé en points', bonusEarned: 'Points gagnés', themeSwitch: 'Changer de thème', reviewsCount: 'avis',
+    originalText: 'Original'
   },
   plural: { products: { one: 'produit', other: 'produits' }, reviews: { one: 'avis', other: 'avis' } },
   cats: {

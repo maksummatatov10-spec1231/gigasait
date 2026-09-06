@@ -57,7 +57,22 @@ window.MARKET_LANG.ru = {
     cancelOrder: 'Отменить заказ', confirmCancel: 'Отменить этот заказ?', orderCancelled: 'Заказ отменён', repeatOrder: 'Повторить заказ', addedItems: 'Товары добавлены в корзину',
     autoLang: 'Авто (по браузеру)', langDetected: 'Язык выбран автоматически: {lang}', langHint: 'Язык определяется по настройкам браузера. Здесь его можно выбрать вручную.',
     toTop: 'Наверх', freeShipFrom: 'Бесплатная доставка от {sum}', shipMore: 'До бесплатной доставки ещё {sum}', menu: 'Меню',
-    perPage: 'На странице', ofTotal: 'из', item: 'Товар'
+    perPage: 'На странице', ofTotal: 'из', item: 'Товар',
+    quickView: 'Быстрый просмотр', moveMode: 'Режим перемещения', moveHint: 'Перетащите карточку на новое место — остальные сдвинутся. Порядок сохраняется автоматически.', done: 'Готово', orderSaved: 'Порядок сохранён',
+    resetOrder: 'Сбросить порядок', addAllToCart: 'Всё в корзину', shareList: 'Поделиться списком', linkCopied: 'Ссылка скопирована', importedFromLink: 'Добавлено из ссылки: {n}',
+    translate: 'Перевести', translating: 'Переводим…', translatedBy: 'Переведено Google Переводчиком', showOriginal: 'Показать оригинал', translateFailed: 'Не удалось перевести — проверьте интернет',
+    autoTranslate: 'Автоперевод описаний', autoTranslateHint: 'Описания товаров написаны по-русски. При включении они переводятся на язык интерфейса через Google Переводчик (нужен интернет, перевод машинный).', viewGrid: 'Плитка', viewList: 'Список', dealOfDay: 'Скидка дня',
+    endsIn: 'До конца акции', boughtTogether: 'Часто покупают вместе', addAllFor: 'Добавить всё за {sum}', writeReview: 'Написать отзыв', yourRating: 'Ваша оценка',
+    reviewText: 'Текст отзыва', reviewSent: 'Спасибо! Отзыв опубликован', yourName: 'Ваше имя', ratings: 'Оценки', saveForLater: 'Отложить',
+    savedItems: 'Отложенные', moveToCart: 'В корзину', estDelivery: 'Доставка примерно', orderDetails: 'Детали заказа', trackNumber: 'Трек-номер',
+    deliveryStatus: 'Статус доставки', printReceipt: 'Распечатать чек', backToOrders: 'К заказам', bonuses: 'Бонусы', bonusEarn: 'Начислим {n} бонусов за этот заказ',
+    useBonuses: 'Списать бонусы', bonusBalance: 'Баланс бонусов', bonusHint: '3% от каждого заказа возвращается бонусами. 1 бонус = 1 ₽, бонусами можно оплатить до 30% заказа.', level: 'Уровень', spent: 'Потрачено',
+    ordersCount: 'Заказов', memberSince: 'С нами с', shortcuts: 'Горячие клавиши', lowStock: 'Заканчивается', liveBackground: 'Живой фон',
+    liveBackgroundHint: 'Мягкие анимированные пятна на фоне. Отключите, если устройство слабое.', infiniteScroll: 'Автоподгрузка', infiniteScrollHint: 'Подгружать товары автоматически при прокрутке каталога.', goToCart: 'Перейти в корзину', skuCopied: 'Артикул скопирован',
+    undo: 'Отменить', levelBronze: 'Бронза', levelSilver: 'Серебро', levelGold: 'Золото', recommended: 'Рекомендуем',
+    scSearch: 'Фокус на поиск', scClose: 'Закрыть окно или меню', scHome: 'Главная', scCart: 'Корзина', scFav: 'Избранное',
+    scHelp: 'Эта подсказка', bonusSpent: 'Списано бонусами', bonusEarned: 'Начислено бонусов', themeSwitch: 'Переключить тему', reviewsCount: 'отзывов',
+    originalText: 'Оригинал'
   },
   plural: {
     products: { one: 'товар', few: 'товара', many: 'товаров', other: 'товаров' },

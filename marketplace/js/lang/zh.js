@@ -56,7 +56,22 @@ window.MARKET_LANG.zh = {
     cancelOrder: '取消订单', confirmCancel: '取消此订单？', orderCancelled: '订单已取消', repeatOrder: '再次购买', addedItems: '商品已加入购物车',
     autoLang: '自动（浏览器）', langDetected: '已自动选择语言：{lang}', langHint: '语言根据浏览器设置自动检测，也可在此手动选择。',
     toTop: '回到顶部', freeShipFrom: '满 {sum} 免运费', shipMore: '再买 {sum} 即可免运费', menu: '菜单',
-    perPage: '每页', ofTotal: '/', item: '商品'
+    perPage: '每页', ofTotal: '/', item: '商品',
+    quickView: '快速查看', moveMode: '移动模式', moveHint: '将卡片拖到新位置，其余卡片会自动让位。排序会自动保存。', done: '完成', orderSaved: '排序已保存',
+    resetOrder: '重置排序', addAllToCart: '全部加入购物车', shareList: '分享列表', linkCopied: '链接已复制', importedFromLink: '已从链接添加：{n}',
+    translate: '翻译', translating: '翻译中…', translatedBy: '由 Google 翻译提供', showOriginal: '显示原文', translateFailed: '翻译失败 — 请检查网络连接',
+    autoTranslate: '自动翻译商品描述', autoTranslateHint: '商品描述为俄语。开启后将通过 Google 翻译自动译为界面语言（需要联网，机器翻译）。', viewGrid: '网格', viewList: '列表', dealOfDay: '今日特惠',
+    endsIn: '剩余时间', boughtTogether: '经常一起购买', addAllFor: '全部加入，共 {sum}', writeReview: '写评价', yourRating: '您的评分',
+    reviewText: '评价内容', reviewSent: '谢谢！您的评价已发布', yourName: '您的姓名', ratings: '评分', saveForLater: '稍后再买',
+    savedItems: '稍后再买', moveToCart: '移入购物车', estDelivery: '预计送达', orderDetails: '订单详情', trackNumber: '运单号',
+    deliveryStatus: '配送状态', printReceipt: '打印小票', backToOrders: '返回订单', bonuses: '积分', bonusEarn: '本订单将获得 {n} 积分',
+    useBonuses: '使用积分', bonusBalance: '积分余额', bonusHint: '每笔订单返还 3% 积分。1 积分 = 1 ₽，积分最多可抵扣订单的 30%。', level: '等级', spent: '已消费',
+    ordersCount: '订单数', memberSince: '加入时间', shortcuts: '快捷键', lowStock: '即将售罄', liveBackground: '动态背景',
+    liveBackgroundHint: '页面背后柔和的动态光斑。设备较慢时可关闭。', infiniteScroll: '自动加载', infiniteScrollHint: '滚动目录时自动加载更多商品。', goToCart: '前往购物车', skuCopied: '货号已复制',
+    undo: '撤销', levelBronze: '青铜', levelSilver: '白银', levelGold: '黄金', recommended: '推荐',
+    scSearch: '聚焦搜索框', scClose: '关闭窗口或菜单', scHome: '首页', scCart: '购物车', scFav: '收藏',
+    scHelp: '本帮助', bonusSpent: '积分抵扣', bonusEarned: '获得积分', themeSwitch: '切换主题', reviewsCount: '条评价',
+    originalText: '原文'
   },
   plural: { products: { other: '件商品' }, reviews: { other: '条评价' } },
   cats: {

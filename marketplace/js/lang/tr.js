@@ -56,7 +56,22 @@ window.MARKET_LANG.tr = {
     cancelOrder: 'Siparişi iptal et', confirmCancel: 'Bu sipariş iptal edilsin mi?', orderCancelled: 'Sipariş iptal edildi', repeatOrder: 'Tekrar sipariş ver', addedItems: 'Ürünler sepete eklendi',
     autoLang: 'Otomatik (tarayıcı)', langDetected: 'Dil otomatik seçildi: {lang}', langHint: 'Dil, tarayıcı ayarlarından algılanır. Burada elle seçebilirsiniz.',
     toTop: 'Yukarı', freeShipFrom: '{sum} üzeri ücretsiz teslimat', shipMore: 'Ücretsiz teslimata {sum} kaldı', menu: 'Menü',
-    perPage: 'Sayfa başına', ofTotal: '/', item: 'Ürün'
+    perPage: 'Sayfa başına', ofTotal: '/', item: 'Ürün',
+    quickView: 'Hızlı bakış', moveMode: 'Taşıma modu', moveHint: 'Bir kartı yeni bir yere sürükleyin — diğerleri kayar. Sıralama otomatik kaydedilir.', done: 'Bitti', orderSaved: 'Sıralama kaydedildi',
+    resetOrder: 'Sıralamayı sıfırla', addAllToCart: 'Tümünü sepete ekle', shareList: 'Listeyi paylaş', linkCopied: 'Bağlantı kopyalandı', importedFromLink: 'Bağlantıdan eklendi: {n}',
+    translate: 'Çevir', translating: 'Çevriliyor…', translatedBy: 'Google Çeviri ile çevrildi', showOriginal: 'Orijinali göster', translateFailed: 'Çeviri başarısız — bağlantınızı kontrol edin',
+    autoTranslate: 'Açıklamaları otomatik çevir', autoTranslateHint: 'Ürün açıklamaları Rusça yazılmıştır. Etkinleştirildiğinde Google Çeviri ile arayüz diline çevrilir (internet gerekir, makine çevirisi).', viewGrid: 'Izgara', viewList: 'Liste', dealOfDay: 'Günün fırsatı',
+    endsIn: 'Bitmesine', boughtTogether: 'Sıkça birlikte alınanlar', addAllFor: 'Tümünü {sum} karşılığında ekle', writeReview: 'Yorum yaz', yourRating: 'Puanınız',
+    reviewText: 'Yorum metni', reviewSent: 'Teşekkürler! Yorumunuz yayınlandı', yourName: 'Adınız', ratings: 'Puanlar', saveForLater: 'Sonraya sakla',
+    savedItems: 'Sonraya saklananlar', moveToCart: 'Sepete taşı', estDelivery: 'Tahmini teslimat', orderDetails: 'Sipariş detayları', trackNumber: 'Takip numarası',
+    deliveryStatus: 'Teslimat durumu', printReceipt: 'Fişi yazdır', backToOrders: 'Siparişlere dön', bonuses: 'Bonus puanlar', bonusEarn: 'Bu sipariş için {n} puan kazanacaksınız',
+    useBonuses: 'Puanları kullan', bonusBalance: 'Puan bakiyesi', bonusHint: 'Her siparişin %3’ü puan olarak geri döner. 1 puan = 1 ₽; puanlarla siparişin %30’una kadar ödenebilir.', level: 'Seviye', spent: 'Harcanan',
+    ordersCount: 'Sipariş', memberSince: 'Üyelik tarihi', shortcuts: 'Klavye kısayolları', lowStock: 'Tükeniyor', liveBackground: 'Canlı arka plan',
+    liveBackgroundHint: 'Sayfanın arkasında yumuşak animasyonlu lekeler. Yavaş cihazlarda kapatın.', infiniteScroll: 'Otomatik yükleme', infiniteScrollHint: 'Katalogda kaydırırken ürünleri otomatik yükle.', goToCart: 'Sepete git', skuCopied: 'Ürün kodu kopyalandı',
+    undo: 'Geri al', levelBronze: 'Bronz', levelSilver: 'Gümüş', levelGold: 'Altın', recommended: 'Önerilen',
+    scSearch: 'Aramaya odaklan', scClose: 'Pencereyi veya menüyü kapat', scHome: 'Ana sayfa', scCart: 'Sepet', scFav: 'Favoriler',
+    scHelp: 'Bu yardım', bonusSpent: 'Puanla ödendi', bonusEarned: 'Kazanılan puan', themeSwitch: 'Temayı değiştir', reviewsCount: 'yorum',
+    originalText: 'Orijinal'
   },
   plural: { products: { one: 'ürün', other: 'ürün' }, reviews: { one: 'yorum', other: 'yorum' } },
   cats: {

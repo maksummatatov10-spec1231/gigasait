@@ -56,7 +56,22 @@ window.MARKET_LANG.uz = {
     cancelOrder: 'Buyurtmani bekor qilish', confirmCancel: 'Bu buyurtma bekor qilinsinmi?', orderCancelled: 'Buyurtma bekor qilindi', repeatOrder: 'Qayta buyurtma berish', addedItems: 'Mahsulotlar savatga qo‘shildi',
     autoLang: 'Avto (brauzer bo‘yicha)', langDetected: 'Til avtomatik tanlandi: {lang}', langHint: 'Til brauzer sozlamalari bo‘yicha aniqlanadi. Bu yerda uni qo‘lda tanlash mumkin.',
     toTop: 'Yuqoriga', freeShipFrom: '{sum} dan bepul yetkazish', shipMore: 'Bepul yetkazishgacha yana {sum}', menu: 'Menyu',
-    perPage: 'Sahifada', ofTotal: '/', item: 'Mahsulot'
+    perPage: 'Sahifada', ofTotal: '/', item: 'Mahsulot',
+    quickView: 'Tez koʻrish', moveMode: 'Koʻchirish rejimi', moveHint: 'Kartochkani yangi joyga sudrang — qolganlari siljiydi. Tartib avtomatik saqlanadi.', done: 'Tayyor', orderSaved: 'Tartib saqlandi',
+    resetOrder: 'Tartibni tiklash', addAllToCart: 'Hammasini savatga', shareList: 'Roʻyxatni ulashish', linkCopied: 'Havola nusxalandi', importedFromLink: 'Havoladan qoʻshildi: {n}',
+    translate: 'Tarjima qilish', translating: 'Tarjima qilinmoqda…', translatedBy: 'Google Translate orqali tarjima qilindi', showOriginal: 'Aslini koʻrsatish', translateFailed: 'Tarjima qilib boʻlmadi — internetni tekshiring',
+    autoTranslate: 'Tavsiflarni avtotarjima', autoTranslateHint: 'Mahsulot tavsiflari rus tilida yozilgan. Yoqilganda ular Google Translate orqali interfeys tiliga tarjima qilinadi (internet kerak, mashina tarjimasi).', viewGrid: 'Katak', viewList: 'Roʻyxat', dealOfDay: 'Kun chegirmasi',
+    endsIn: 'Aksiya tugashiga', boughtTogether: 'Koʻpincha birga sotib olinadi', addAllFor: 'Hammasini {sum} ga qoʻshish', writeReview: 'Sharh yozish', yourRating: 'Sizning bahoyingiz',
+    reviewText: 'Sharh matni', reviewSent: 'Rahmat! Sharh eʼlon qilindi', yourName: 'Ismingiz', ratings: 'Baholar', saveForLater: 'Keyinga qoldirish',
+    savedItems: 'Keyinga qoldirilgan', moveToCart: 'Savatga', estDelivery: 'Yetkazib berish taxminan', orderDetails: 'Buyurtma tafsilotlari', trackNumber: 'Trek-raqam',
+    deliveryStatus: 'Yetkazib berish holati', printReceipt: 'Chekni chop etish', backToOrders: 'Buyurtmalarga', bonuses: 'Bonuslar', bonusEarn: 'Bu buyurtma uchun {n} bonus hisoblaymiz',
+    useBonuses: 'Bonuslardan foydalanish', bonusBalance: 'Bonus balansi', bonusHint: 'Har bir buyurtmaning 3% bonus sifatida qaytadi. 1 bonus = 1 ₽, bonus bilan buyurtmaning 30% gacha toʻlash mumkin.', level: 'Daraja', spent: 'Sarflandi',
+    ordersCount: 'Buyurtmalar', memberSince: 'Biz bilan', shortcuts: 'Tezkor tugmalar', lowStock: 'Tugab bormoqda', liveBackground: 'Jonli fon',
+    liveBackgroundHint: 'Fondagi yumshoq animatsiyali dogʻlar. Qurilma kuchsiz boʻlsa, oʻchiring.', infiniteScroll: 'Avtoyuklash', infiniteScrollHint: 'Katalogni aylantirganda mahsulotlarni avtomatik yuklash.', goToCart: 'Savatga oʻtish', skuCopied: 'Artikul nusxalandi',
+    undo: 'Bekor qilish', levelBronze: 'Bronza', levelSilver: 'Kumush', levelGold: 'Oltin', recommended: 'Tavsiya qilamiz',
+    scSearch: 'Qidiruvga fokus', scClose: 'Oyna yoki menyuni yopish', scHome: 'Bosh sahifa', scCart: 'Savat', scFav: 'Sevimlilar',
+    scHelp: 'Ushbu yordam', bonusSpent: 'Bonus bilan toʻlandi', bonusEarned: 'Hisoblangan bonus', themeSwitch: 'Mavzuni almashtirish', reviewsCount: 'sharh',
+    originalText: 'Asl matn'
   },
   plural: { products: { one: 'mahsulot', other: 'mahsulot' }, reviews: { one: 'sharh', other: 'sharh' } },
   cats: {

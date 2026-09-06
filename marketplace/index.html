@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/market.css">
+  <script>(function(){try{var t=localStorage.getItem("giga.theme");if(t&&t[0]==="\"")t=JSON.parse(t);if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>">
 </head>
 <body>
@@ -60,9 +61,8 @@
         <span class="nav-badge" id="cartBadge">0</span>
         <span class="nav-label" data-i18n="cart">Корзина</span>
       </a>
-      <button class="nav-item" id="themeToggle" data-i18n-title="theme" title="Тема">
-        <span class="nav-icon theme-icon">🌙</span>
-        <span class="nav-label" data-i18n="theme">Тема</span>
+      <button class="theme-switch" id="themeToggle" role="switch" aria-checked="false" data-i18n-title="themeSwitch" title="Переключить тему">
+        <span class="ts-track"><span class="ts-icon ts-moon">🌙</span><span class="ts-icon ts-sun">☀️</span><span class="ts-knob"></span></span>
       </button>
       <a href="#/settings" class="nav-item">
         <span class="nav-icon">⚙️</span>
@@ -130,7 +130,7 @@
       <a href="../community/index.html">💬 <span data-i18n="communityLink">Сообщество</span> <em class="soon" data-i18n="soonBadge">скоро</em></a>
     </div>
   </div>
-  <div class="footer-bottom">© <span id="year"></span> GIGASAIT Market • <span id="ver">v0.6.0</span></div>
+  <div class="footer-bottom">© <span id="year"></span> GIGASAIT Market • <span id="ver">v0.7.0</span></div>
 </footer>
 
 <!-- ===== МОБИЛЬНАЯ НИЖНЯЯ ПАНЕЛЬ ===== -->
@@ -164,6 +164,7 @@
 <script src="js/lang/zh.js"></script>
 <script src="js/lang/ar.js"></script>
 <script src="js/i18n.js"></script>
+<script src="js/translate.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
