@@ -1,0 +1,129 @@
+/* ---------- Анимации и плавность (v0.9.0) ----------
+   Принципы: анимируем только transform/opacity (композитор, 60 fps), длительности 200–500 мс,
+   единая кривая var(--t); всё отключается при prefers-reduced-motion (см. base.css). */
+
+/* Плавная смена темы: цвета всех элементов перетекают, а не прыгают */
+html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after {
+  transition: background-color .45s ease, color .45s ease, border-color .45s ease, box-shadow .45s ease, fill .45s ease, stroke .45s ease !important;
+  transition-delay: 0s !important;
+}
+/* View Transitions: круговая волна из точки клика (theme.js анимирует clip-path у ::view-transition-new) */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(root) { z-index: 1; } ::view-transition-new(root) { z-index: 2; }
+html.theme-vt .card, html.theme-vt .page > * { animation: none !important; }
+
+/* Полоса загрузки сверху при переходе между страницами */
+.nprogress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 400; background: linear-gradient(90deg, var(--accent), var(--pink)); border-radius: 0 3px 3px 0; opacity: 0; transition: width .25s ease, opacity .3s ease; pointer-events: none; box-shadow: 0 0 10px var(--accent); }
+.nprogress.on { opacity: 1; }
+
+/* Переход между страницами: старая уходит вверх и тает, новая появляется */
+#app { transition: opacity .18s ease, transform .18s ease; }
+#app.leaving { opacity: 0; transform: translateY(-6px); }
+#app.entering { animation: pageIn .38s var(--t) both; }
+@keyframes pageIn { from { opacity: 0; transform: translateY(12px); } }
+/* Каскад появления карточек — задержка ставится в cardHTML (animation-delay) */
+.page > * { animation: fade .45s var(--t) both; }
+.page > *:nth-child(2) { animation-delay: .05s; } .page > *:nth-child(3) { animation-delay: .1s; } .page > *:nth-child(4) { animation-delay: .15s; } .page > *:nth-child(n+5) { animation-delay: .2s; }
+
+/* Появление при прокрутке (motion.js добавляет .in, когда блок попал в экран) */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .55s var(--t), transform .55s var(--t); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* Изображения: плавное проявление вместо резкого появления */
+img.ok { animation: imgIn .45s ease both; }
+@keyframes imgIn { from { opacity: 0; filter: blur(6px) saturate(.6); } to { opacity: 1; filter: none; } }
+
+/* Кнопки: мягкое нажатие + рябь от точки клика */
+.btn, .tag, .theme-card, .lang-btn, .country-btn, .filters-toggle, .qty button, .site-mode button, .popover button, .catalog-drop-list button { position: relative; overflow: hidden; }
+.nav-item, .bottom-nav a, .bottom-nav button { position: relative; } /* без overflow:hidden — бейдж не должен обрезаться */
+.nav-item .ripple, .bottom-nav .ripple { border-radius: 12px; }
+.ripple { position: absolute; border-radius: 50%; transform: scale(0); background: currentColor; opacity: .18; pointer-events: none; animation: ripple .55s ease-out forwards; }
+@keyframes ripple { to { transform: scale(2.6); opacity: 0; } }
+.btn { transition: transform .18s var(--t), background .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease; }
+.btn:active { transform: scale(.96); }
+.btn-primary.in-cart { animation: popIn .35s cubic-bezier(.34,1.56,.64,1); }
+@keyframes popIn { 0% { transform: scale(.92); } 60% { transform: scale(1.04); } 100% { transform: scale(1); } }
+
+/* Бейджи корзины/избранного и иконка «летящего товара» */
+.nav-badge { transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .2s; }
+.fly { position: fixed; z-index: 500; width: 64px; height: 64px; border-radius: 14px; object-fit: cover; pointer-events: none; box-shadow: var(--shadow); will-change: transform, opacity; }
+.nav-item.bump, .bottom-nav a.bump { animation: bump .45s cubic-bezier(.34,1.56,.64,1); }
+@keyframes bump { 30% { transform: scale(1.25); } }
+.card-title, .card-desc { transition: color .2s ease; }
+
+/* Сердечко избранного */
+.fav-btn .heart { display: inline-block; transition: transform .25s cubic-bezier(.34,1.56,.64,1); }
+.fav-btn:active .heart { transform: scale(.8); }
+.fav-btn.active .heart { animation: heartPop .45s cubic-bezier(.34,1.56,.64,1); }
+@keyframes heartPop { 0% { transform: scale(.6); } 50% { transform: scale(1.5); } 100% { transform: scale(1); } }
+
+/* Поповеры, подсказки поиска, дропдаун каталога, шторка фильтров */
+.popover.show { animation: pop .22s var(--t); }
+.search-suggest.show { animation: pop .22s var(--t); }
+.catalog-drop { transition: opacity .28s ease, transform .35s var(--t); }
+.catalog-drop.open .catalog-drop-list button { animation: fade .35s var(--t) both; }
+.catalog-drop.open .catalog-drop-list button:nth-child(n+2) { animation-delay: calc(var(--i, 0) * 25ms); }
+.catalog-drop-subs .subs-grid a { transition: transform .2s var(--t), background .2s ease, color .2s ease; }
+.catalog-drop-subs .subs-grid a:hover { transform: translateX(4px); }
+.filters { transition: transform .35s var(--t), opacity .25s ease; }
+
+/* Модалки: появление и закрытие */
+.modal-wrap { transition: opacity .2s ease; }
+.modal-wrap.closing { opacity: 0; } .modal-wrap.closing .modal { animation: modalOut .2s ease both; }
+@keyframes modalOut { to { opacity: 0; transform: translateY(12px) scale(.98); } }
+.lightbox { animation: fadeIn .25s ease; } .lightbox img { animation: lbIn .3s var(--t); }
+.lightbox.closing { animation: fadeOut .2s ease both; }
+@keyframes lbIn { from { transform: scale(.94); opacity: 0; } } @keyframes fadeOut { to { opacity: 0; } }
+
+/* Тосты — пружинка */
+.toast { animation: toastIn .4s cubic-bezier(.34,1.56,.64,1); }
+@keyframes toastIn { from { opacity: 0; transform: translateY(24px) scale(.95); } }
+
+/* Переключатели и поля */
+.switch { transition: background .3s ease; } .switch::after { transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .2s; }
+.switch.on::after { box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+.field input, .field select, .field textarea, .search input { transition: border-color .2s ease, box-shadow .25s ease, background .2s ease; }
+.field.shake { animation: shake .4s ease; }
+@keyframes shake { 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
+
+/* Числа, которые «пробегают» (motion.js: [data-count]) */
+[data-count] { font-variant-numeric: tabular-nums; }
+.sum-row.total span:last-child { display: inline-block; transition: color .2s ease; }
+.sum-row.total span.flash { animation: flashNum .5s ease; }
+@keyframes flashNum { 30% { color: var(--accent); transform: scale(1.06); } }
+
+/* Плитки категорий и карточки: hover-подъём (только на устройствах с hover) */
+@media (hover: hover) {
+  .cat-tile { transition: transform .3s var(--t), box-shadow .3s var(--t); }
+  .cat-tile:hover { transform: translateY(-4px) scale(1.02); }
+  .cat-tile img { transition: transform .6s var(--t); } .cat-tile:hover img { transform: scale(1.08); }
+  .together-item { transition: transform .25s var(--t); } .together-item:hover { transform: translateY(-3px); }
+  .review { transition: transform .25s var(--t), box-shadow .25s var(--t); } .review:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+  .order-card { transition: transform .25s var(--t), box-shadow .25s var(--t); } .order-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+  .footer a { transition: color .2s, transform .2s; } .footer a:hover { transform: translateX(3px); }
+}
+
+/* Скелетоны при первичной отрисовке */
+.skeleton-card { border-radius: var(--r); background: var(--surface); border: 1px solid var(--border); overflow: hidden; }
+.skeleton-card::before { content: ''; display: block; aspect-ratio: 1; background: var(--skeleton); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+.skeleton-card i { display: block; height: 12px; margin: 12px 14px; border-radius: 6px; background: var(--skeleton); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+.skeleton-card i:last-child { width: 50%; margin-bottom: 16px; }
+
+/* Таймер скидки дня: цифры плавно меняются */
+.deal-timer b { transition: transform .2s ease; } .deal-timer b.tick { animation: tickNum .3s ease; }
+@keyframes tickNum { 0% { transform: translateY(-6px); opacity: .4; } 100% { transform: none; opacity: 1; } }
+
+/* Плавный скролл контейнеров и якорей */
+html { scroll-behavior: smooth; }
+.gallery-thumbs, .cat-grid, .grid-6, .together-row { scroll-behavior: smooth; }
+
+/* Шторка мобильных фильтров и модалки-шторки — плавнее */
+html.is-mobile .filters { transition: transform .38s cubic-bezier(.32,.72,0,1); }
+html.is-mobile .modal { animation: sheetIn .38s cubic-bezier(.32,.72,0,1); }
+html.is-mobile .modal-wrap.closing .modal { animation: sheetOut .25s ease both; }
+@keyframes sheetOut { to { transform: translateY(40px); opacity: 0; } }
+/* На телефоне — без hover-подъёмов, но с откликом на нажатие */
+html.is-mobile .card:active { transform: scale(.985); transition: transform .12s ease; }
+html.is-mobile .cat-tile:active, html.is-mobile .together-item:active { transform: scale(.97); }
+.catalog-drop-subs.swap > * { animation: fade .3s var(--t) both; }
+.catalog-drop-subs.swap > *:nth-child(2) { animation-delay: .04s; } .catalog-drop-subs.swap > *:nth-child(3) { animation-delay: .08s; } .catalog-drop-subs.swap > *:nth-child(4) { animation-delay: .12s; }

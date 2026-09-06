@@ -17,7 +17,11 @@
     translateIn(m);
     return m;
   }
-  function closeModal() { const m = $('#modal'); if (m) { m.remove(); if (!$('#lightbox')) document.body.classList.remove('no-scroll'); } }
+  function closeModal(instant) {
+    const m = $('#modal'); if (!m) return;
+    const after = () => { if (!$('#lightbox') && !$('#modal')) document.body.classList.remove('no-scroll'); };
+    if (instant || !A.closeAnimated) { m.remove(); after(); } else { m.id = ''; A.closeAnimated(m, 'closing', 220, after); }
+  }
 
   function quickView(id) {
     const p = BY_ID.get(id); if (!p) return;

@@ -209,8 +209,8 @@
       const more = () => {
         const next = list.slice(shown.length, shown.length + pageSize);
         if (!next.length) return;
-        const frag = document.createElement('template'); frag.innerHTML = next.map(cardHTML).join('');
-        $('#grid').appendChild(frag.content);
+        const frag = document.createElement('template'); frag.innerHTML = next.map((p, i) => cardHTML(p, i)).join('');
+        $('#grid').appendChild(frag.content); // у новых карточек — свой каскад появления (animation-delay в cardHTML)
         f.page++; history.replaceState(null, '', buildQuery(f));
         shown.push(...next);
         translateIn($('#grid'));

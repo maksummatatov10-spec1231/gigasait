@@ -13,12 +13,15 @@
   const renderLangUI = (...args) => A.renderLangUI(...args);
 
   /* ---------- Тема / язык / оформление ---------- */
-  function applyTheme() {
-    document.documentElement.setAttribute('data-theme', state.theme);
-    const sw = $('#themeToggle');
-    if (sw) sw.setAttribute('aria-checked', state.theme === 'light');
+  // Тема живёт в общем assets/js/theme.js (GIGA_THEME) — один источник истины для всех разделов.
+  // applyTheme(ev) переключает с анимацией из точки клика (если ev передан) и синхронизирует state.
+  function applyTheme(ev) {
+    const G = window.GIGA_THEME;
+    if (G) { if (G.get() !== state.theme) G.set(state.theme, ev && ev.clientX != null ? { x: ev.clientX, y: ev.clientY } : {}); state.theme = G.get(); }
+    else { document.documentElement.setAttribute('data-theme', state.theme); const sw = $('#themeToggle'); if (sw) sw.setAttribute('aria-checked', state.theme === 'light'); }
     store.set('theme', state.theme);
   }
+  window.addEventListener('themechange', e => { state.theme = e.detail.theme; store.set('theme', state.theme); $$('[data-theme-pick]').forEach(b => b.classList.toggle('active', b.dataset.themePick === state.theme)); });
   function applyPrefs() {
     document.body.classList.toggle('live-bg', !!state.prefs.liveBg);
     if (state.prefs.liveBg && !$('#bgOrbs')) {

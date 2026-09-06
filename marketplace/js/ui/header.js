@@ -36,7 +36,7 @@
   /* ---------- Шапка: категории и каталог ---------- */
   function renderHeaderCats() {
     $('#headerCats').innerHTML = `<a href="#/catalog?discount=1&sort=discount">🔥 ${T.sortDiscount}</a>` + CATEGORIES.map(c => `<a href="#/catalog?cat=${c.id}" data-cat="${c.id}">${c.icon} ${esc(catName(c))}</a>`).join('');
-    $('#catalogDropList').innerHTML = CATEGORIES.map((c, i) => `<button data-ci="${i}" class="${i === 0 ? 'active' : ''}"><img class="ic-img" src="${catImg(c)}" alt="" loading="lazy">${esc(catName(c))}</button>`).join('');
+    $('#catalogDropList').innerHTML = CATEGORIES.map((c, i) => `<button data-ci="${i}" class="${i === 0 ? 'active' : ''}" style="--i:${i}"><img class="ic-img" src="${catImg(c)}" alt="" loading="lazy">${esc(catName(c))}</button>`).join('');
     $$('#catalogDropList button').forEach(b => { b.onmouseenter = b.onclick = () => showCatSubs(+b.dataset.ci); });
     showCatSubs(0);
   }
@@ -44,7 +44,8 @@
     const c = CATEGORIES[i];
     $$('#catalogDropList button').forEach((b, j) => b.classList.toggle('active', i === j));
     const count = PRODUCTS.filter(p => p.category === c.id).length;
-    $('#catalogDropSubs').innerHTML = `<a class="cat-banner" href="#/catalog?cat=${c.id}" style="background-image:url('${catImg(c)}')"><span>${c.icon} ${esc(catName(c))}</span></a>
+    const subs = $('#catalogDropSubs'); subs.classList.remove('swap'); void subs.offsetWidth; subs.classList.add('swap');
+    subs.innerHTML = `<a class="cat-banner" href="#/catalog?cat=${c.id}" style="background-image:url('${catImg(c)}')"><span>${c.icon} ${esc(catName(c))}</span></a>
       <h3>${esc(catName(c))} <small class="muted">${count} ${productsWord(count)}</small> <a class="btn btn-secondary btn-sm" href="#/catalog?cat=${c.id}">${T.seeAllProducts}</a></h3>
       <div class="subs-grid">${c.subs.map(s => `<a href="#/catalog?cat=${c.id}&sub=${encodeURIComponent(s)}">${esc(subName(s))}</a>`).join('')}</div>
       <div class="tags-row">${c.tags.map(t => `<a class="tag" href="#/catalog?cat=${c.id}&tag=${encodeURIComponent(t)}">#${esc(tagName(t))}</a>`).join('')}</div>`;

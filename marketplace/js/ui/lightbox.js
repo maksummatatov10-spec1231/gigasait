@@ -16,7 +16,14 @@
       ${images.length > 1 ? `<button class="lb-prev" aria-label="‹">‹</button><button class="lb-next" aria-label="›">›</button>` : ''}
       <img src="${images[cur]}" alt=""><div class="lb-count">${cur + 1} / ${images.length}</div>`;
     document.body.appendChild(lb); document.body.classList.add('no-scroll');
-    const show = n => { cur = (n + images.length) % images.length; $('img', lb).src = images[cur]; $('.lb-count', lb).textContent = `${cur + 1} / ${images.length}`; };
+    const show = n => {
+      cur = (n + images.length) % images.length;
+      const im = $('img', lb);
+      // плавная смена кадра
+      im.style.transition = 'opacity .15s ease, transform .15s ease'; im.style.opacity = '0'; im.style.transform = 'scale(.97)';
+      setTimeout(() => { im.src = images[cur]; im.style.opacity = '1'; im.style.transform = ''; }, 150);
+      $('.lb-count', lb).textContent = `${cur + 1} / ${images.length}`;
+    };
     lb.onclick = e => { if (e.target === lb || e.target.classList.contains('lb-close')) closeLightbox(); };
     if (images.length > 1) { $('.lb-prev', lb).onclick = () => show(cur - 1); $('.lb-next', lb).onclick = () => show(cur + 1); }
     lb._key = e => { if (e.key === 'ArrowLeft') show(cur - 1); if (e.key === 'ArrowRight') show(cur + 1); };
@@ -26,7 +33,9 @@
   }
   function closeLightbox() {
     const lb = $('#lightbox'); if (!lb) return;
-    document.removeEventListener('keydown', lb._key); lb.remove(); if (!$('#modal')) document.body.classList.remove('no-scroll');
+    document.removeEventListener('keydown', lb._key);
+    const after = () => { if (!$('#modal') && !$('#lightbox')) document.body.classList.remove('no-scroll'); };
+    if (A.closeAnimated) { lb.id = ''; A.closeAnimated(lb, 'closing', 220, after); } else { lb.remove(); after(); }
   }
 
   Object.assign(A, { openLightbox, closeLightbox });

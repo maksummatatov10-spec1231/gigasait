@@ -13,7 +13,7 @@
     applyLang();
     updateBadges();
     setupSearch();
-    $('#themeToggle').onclick = () => { state.theme = state.theme === 'dark' ? 'light' : 'dark'; applyTheme(); };
+    // #themeToggle обрабатывает общий assets/js/theme.js; сюда прилетает событие themechange (см. core/theme.js)
     $('#catalogBtn').onclick = toggleCatalog;
     $('#mCatalogBtn').onclick = toggleCatalog;
     $('#catalogDrop').addEventListener('click', e => { if (e.target.closest('a')) closeCatalog(); });

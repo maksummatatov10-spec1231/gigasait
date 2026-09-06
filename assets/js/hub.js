@@ -50,18 +50,7 @@
   const themeBtn = document.getElementById('themeToggle');
   const langSel = document.getElementById('hubLang');
 
-  // Тема
-  let savedTheme = readStr(STORAGE_THEME);
-  if (savedTheme !== 'light' && savedTheme !== 'dark') savedTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-  root.setAttribute('data-theme', savedTheme);
-  themeBtn.setAttribute('aria-checked', savedTheme === 'light');
-  themeBtn.addEventListener('click', () => {
-    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    themeBtn.setAttribute('aria-checked', next === 'light');
-    localStorage.setItem(STORAGE_THEME, next);
-  });
-
+  // Тема — общий assets/js/theme.js (GIGA_THEME); здесь только подпись кнопки в applyLang
   // Язык
   function applyLang(lang, auto) {
     const d = dict(i18n[lang] ? lang : 'ru');
@@ -87,4 +76,15 @@
   });
 
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Цифры статистики «пробегают» до значения при появлении
+  (function () {
+    var reduce = false; try { reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    document.querySelectorAll('.stat b').forEach(function (b) {
+      var to = parseInt(b.textContent, 10); if (!isFinite(to) || reduce || /\D/.test(b.textContent.trim())) return;
+      var t0 = null, dur = 1100;
+      function step(now) { if (!t0) t0 = now; var k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3); b.textContent = Math.round(to * e); if (k < 1) requestAnimationFrame(step); }
+      b.textContent = '0'; setTimeout(function () { requestAnimationFrame(step); }, 500);
+    });
+  })();
 })();

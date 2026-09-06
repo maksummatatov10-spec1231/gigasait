@@ -70,6 +70,7 @@
     const refresh = () => {
       if (!cartCount()) return renderCart(app);
       $('#sumBox').innerHTML = summaryHTML(calcTotals());
+      const tb = $('#sumBox .sum-row.total span:last-child'); if (tb) { tb.classList.add('flash'); }
       $('.page-title small').textContent = `${cartCount()} ${productsWord(cartCount())}`;
     };
     $('#cartList').addEventListener('click', e => {
@@ -81,8 +82,9 @@
         if (b.dataset.later) { if (!state.later.includes(id)) state.later.unshift(id); store.set('later', state.later); renderCart(app); translateIn(app); return; }
         toast(T.remove + ' ✓', '🗑', { label: T.undo, fn: () => { state.cart[id] = prevQty; saveCart(); renderCart(app); translateIn(app); } });
       }
-      if (state.cart[id]) row.outerHTML = cartItemHTML(BY_ID.get(id), state.cart[id]); else row.remove();
-      refresh();
+      if (state.cart[id]) { row.outerHTML = cartItemHTML(BY_ID.get(id), state.cart[id]); refresh(); }
+      else if (A.closeAnimated && cartCount()) { row.style.transition = 'opacity .25s ease, transform .25s ease'; row.style.opacity = '0'; row.style.transform = 'translateX(24px)'; setTimeout(() => { row.remove(); refresh(); }, 240); }
+      else { row.remove(); refresh(); }
     });
     $('#clearCart').onclick = () => { if (confirm(T.clearCart + '?')) { const backup = { ...state.cart }; state.cart = {}; saveCart(); renderCart(app); toast(T.clearCart + ' ✓', '🗑', { label: T.undo, fn: () => { state.cart = backup; saveCart(); renderCart(app); translateIn(app); } }); } };
     const applyPromo = () => {

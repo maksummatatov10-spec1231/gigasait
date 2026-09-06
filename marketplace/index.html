@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#0b0f1a">
   <meta name="mobile-web-app-capable" content="yes">
   <title>GIGASAIT Market — Маркетплейс</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet">
+  <script src="../assets/js/theme.js"></script>
   <script src="../assets/js/device.js"></script>
   <!-- Стили разбиты по разделам (css/parts/), порядок важен: базовые → компоненты → страницы → мобильная версия -->
   <link rel="stylesheet" href="css/parts/base.css">
@@ -27,8 +27,8 @@
   <link rel="stylesheet" href="css/parts/footer.css">
   <link rel="stylesheet" href="css/parts/extras.css">
   <link rel="stylesheet" href="css/parts/translate.css">
+  <link rel="stylesheet" href="css/parts/motion.css">
   <link rel="stylesheet" href="css/parts/mobile.css">
-  <script>(function(){try{var t=localStorage.getItem("giga.theme");if(t&&t[0]==="\"")t=JSON.parse(t);if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>">
 </head>
 <body>
@@ -150,7 +150,7 @@
       <a href="../community/index.html">💬 <span data-i18n="communityLink">Сообщество</span> <em class="soon" data-i18n="soonBadge">скоро</em></a>
     </div>
   </div>
-  <div class="footer-bottom">© <span id="year"></span> GIGASAIT Market • <span id="ver">v0.8.0</span>
+  <div class="footer-bottom">© <span id="year"></span> GIGASAIT Market • <span id="ver">v0.9.0</span>
     <div class="site-mode" id="footerSiteMode" aria-label="Версия сайта"><button type="button" data-device-mode="auto" data-i18n="deviceAuto">Авто</button><button type="button" data-device-mode="phone" data-i18n="devicePhone">Телефон</button><button type="button" data-device-mode="desktop" data-i18n="deviceDesktop">Компьютер</button></div>
   </div>
 </footer>
@@ -194,6 +194,7 @@
 <script src="js/core/state.js"></script>
 <script src="js/core/utils.js"></script>
 <script src="js/ui/toast.js"></script>
+<script src="js/features/motion.js"></script>
 <script src="js/core/theme.js"></script>
 <script src="js/features/translate-dom.js"></script>
 <script src="js/features/cart.js"></script>

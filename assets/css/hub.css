@@ -167,3 +167,16 @@ html.is-mobile .card-cta { min-height: 44px; display: inline-flex; align-items: 
 html.is-mobile .stats { gap: 12px 26px; margin-top: 28px; animation: none; }
 html.is-mobile .hub-footer { flex-wrap: wrap; text-align: center; padding: 18px 14px calc(18px + env(safe-area-inset-bottom)); }
 html.is-mobile.is-tablet .cards { grid-template-columns: 1fr 1fr; }
+
+/* ===== Плавность (v0.9.0): смена темы, появление, отклик кнопок ===== */
+html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after { transition: background-color .45s ease, color .45s ease, border-color .45s ease, box-shadow .45s ease !important; }
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(root) { z-index: 1; } ::view-transition-new(root) { z-index: 2; }
+body { transition: background-color .45s ease, color .45s ease; }
+.card { transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background-color .45s ease; }
+.card:active { transform: scale(.985); }
+.stat b { font-variant-numeric: tabular-nums; }
+.hub-select, .icon-btn { transition: border-color .2s ease, box-shadow .25s ease, background-color .3s ease, color .3s ease; }
+.hub-select:focus-visible, .icon-btn:focus-visible { box-shadow: 0 0 0 4px rgba(124,92,255,.25); outline: none; }
+.theme-switch:active .ts-knob { transform: scale(.9); } [data-theme="light"] .theme-switch:active .ts-knob { transform: translateX(32px) scale(.9); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

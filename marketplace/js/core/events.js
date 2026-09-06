@@ -20,6 +20,7 @@
     if (fav) {
       e.preventDefault(); const id = +fav.dataset.fav; toggleFav(id);
       fav.classList.toggle('active', isFav(id)); const h = fav.querySelector('.heart'); if (h) h.textContent = isFav(id) ? '♥' : '♡';
+      if (isFav(id) && A.flyToCart) A.flyToCart(fav, '#navFav');
       if (location.hash.startsWith('#/favorites') && !isFav(id)) { const card = fav.closest('.card'); if (card) card.remove(); const s = $('.page-title small'); if (s) s.textContent = state.fav.length; }
       return;
     }
@@ -29,7 +30,8 @@
     if (add) {
       e.preventDefault(); const id = +add.dataset.add;
       if (state.cart[id]) { location.hash = '#/cart'; return; }
-      addToCart(id); add.classList.add('in-cart'); add.textContent = '✓ ' + T.inCart; return;
+      addToCart(id); add.classList.add('in-cart'); add.textContent = '✓ ' + T.inCart;
+      if (A.flyToCart) A.flyToCart(add, '#navCart'); return;
     }
     const favCart = e.target.closest('[data-fav-cart]');
     if (favCart) { const id = +favCart.dataset.favCart; toggleFav(id); favCart.textContent = isFav(id) ? '♥' : '♡'; return; }

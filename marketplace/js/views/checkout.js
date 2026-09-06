@@ -88,12 +88,12 @@
       e.preventDefault();
       let ok = true;
       $$('input[required]', form).forEach(i => { const bad = !i.value.trim(); i.classList.toggle('error', bad); if (bad) ok = false; });
-      if (!ok) { toast(T.fillRequired, '⚠️'); form.querySelector('.error').focus(); return; }
+      if (!ok) { toast(T.fillRequired, '⚠️'); const first = form.querySelector('.error'); $$('.error', form).forEach(i => A.shake && A.shake(i)); if (A.scrollToEl) A.scrollToEl(first, 120); first.focus({ preventScroll: true }); return; }
       const payNow = F.payment.value === 'now';
       if (payNow) {
         const num = F.cardNumber.value.replace(/\s/g, '');
         const okCard = num.length === 16 && /^\d{2}\/\d{2}$/.test(F.cardExp.value) && F.cardCvc.value.length === 3;
-        if (!okCard) { toast(T.invalidCard, '💳'); F.cardNumber.focus(); return; }
+        if (!okCard) { toast(T.invalidCard, '💳'); if (A.shake) A.shake(F.cardNumber); F.cardNumber.focus(); return; }
       }
       state.profile = { ...state.profile, name: F.name.value, phone: F.phone.value, email: F.email.value, city: F.city.value, street: F.street.value, postal: F.postal.value };
       store.set('profile', state.profile);

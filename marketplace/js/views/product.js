@@ -112,7 +112,7 @@
       $('#addBtn').className = 'btn btn-primary btn-lg' + (q ? ' in-cart' : '');
       $('#addBtn').textContent = q ? '✓ ' + T.inCart : T.addToCart;
     };
-    $('#addBtn').onclick = () => { if (state.cart[p.id]) location.hash = '#/cart'; else { addToCart(p.id); syncQty(); } };
+    $('#addBtn').onclick = e => { if (state.cart[p.id]) location.hash = '#/cart'; else { addToCart(p.id); syncQty(); if (A.flyToCart) A.flyToCart($('.gallery-main', app) || e.currentTarget, '#navCart'); } };
     $$('.buy-box [data-q]').forEach(b => b.onclick = () => { setQty(p.id, (state.cart[p.id] || 0) + +b.dataset.q); syncQty(); });
     $('#buyNow').onclick = () => { if (!state.cart[p.id]) { state.cart[p.id] = 1; saveCart(); } location.hash = '#/checkout'; };
     $('#favBtn').onclick = () => { toggleFav(p.id); $('#favBtn').textContent = isFav(p.id) ? '♥' : '♡'; $('#favBtn').classList.toggle('active', isFav(p.id)); };

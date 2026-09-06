@@ -4,7 +4,7 @@
   'use strict';
   const A = window.APP;
   const T = new Proxy({}, { get: (_, k) => A.T[k] }); // живая ссылка на словарь текущего языка
-  const { $, BY_ID, CATEGORIES, I18N, PRODUCTS, cardHTML, catImg, catName, dayNumber, esc, money, pct, productsWord, state, timers } = A;
+  const { $, $$, BY_ID, CATEGORIES, I18N, PRODUCTS, cardHTML, catImg, catName, dayNumber, esc, money, pct, productsWord, state, timers } = A;
 
   /* ---------- Главная ---------- */
   function dealOfDay() {
@@ -28,9 +28,9 @@
           <a class="btn btn-lg" href="#/catalog?discount=1&sort=discount">${T.promoBtn}</a>
         </div>
         <div class="promo-stats">
-          <div><b>${PRODUCTS.length}</b><span>${productsWord(PRODUCTS.length)}</span></div>
-          <div><b>${CATEGORIES.length}</b><span>${T.categoriesTitle.toLowerCase()}</span></div>
-          <div><b>${I18N.LANGS.length}</b><span>🌐</span></div>
+          <div><b data-count="${PRODUCTS.length}">0</b><span>${productsWord(PRODUCTS.length)}</span></div>
+          <div><b data-count="${CATEGORIES.length}">0</b><span>${T.categoriesTitle.toLowerCase()}</span></div>
+          <div><b data-count="${I18N.LANGS.length}">0</b><span>🌐</span></div>
         </div>
       </section>
       <section class="features">
@@ -49,12 +49,12 @@
           <div class="buy-row"><button class="btn btn-primary btn-lg" data-add="${deal.id}">${state.cart[deal.id] ? '✓ ' + T.inCart : T.addToCart}</button><a class="btn btn-secondary btn-lg" href="#/product/${deal.id}">${T.description}</a></div>
         </div>
       </section>` : ''}
-      <section class="section">
+      <section class="section reveal">
         <div class="section-head"><h2>${T.popularCats}</h2><a href="#/catalog">${T.viewAll} →</a></div>
         <div class="cat-grid">${CATEGORIES.map(c => `<a class="cat-tile" href="#/catalog?cat=${c.id}"><img src="${catImg(c)}" alt="" loading="lazy"><span class="cat-tile-name">${c.icon} ${esc(catName(c))}</span></a>`).join('')}</div>
       </section>
-      ${recommended.length ? `<section class="section"><div class="section-head"><h2>💜 ${T.recommended}</h2></div><div class="grid grid-6">${recommended.map(cardHTML).join('')}</div></section>` : ''}
-      ${recent.length ? `<section class="section"><div class="section-head"><h2>🕘 ${T.recentlyViewed}</h2></div><div class="grid grid-6">${recent.map(cardHTML).join('')}</div></section>` : ''}
+      ${recommended.length ? `<section class="section reveal"><div class="section-head"><h2>💜 ${T.recommended}</h2></div><div class="grid grid-6">${recommended.map(cardHTML).join('')}</div></section>` : ''}
+      ${recent.length ? `<section class="section reveal"><div class="section-head"><h2>🕘 ${T.recentlyViewed}</h2></div><div class="grid grid-6">${recent.map(cardHTML).join('')}</div></section>` : ''}
       <section class="section">
         <div class="section-head"><h2>🔥 ${T.bestsellers}</h2><a href="#/catalog?sort=popular">${T.viewAll} →</a></div>
         <div class="grid">${hits.map(cardHTML).join('')}</div>
@@ -72,10 +72,13 @@
         const el = $('#dealTimer'); if (!el) return;
         const end = new Date(); end.setHours(24, 0, 0, 0);
         const s = Math.max(0, Math.floor((end - Date.now()) / 1000));
-        el.textContent = [s / 3600, s % 3600 / 60, s % 60].map(x => String(Math.floor(x)).padStart(2, '0')).join(':');
+        const txt = [s / 3600, s % 3600 / 60, s % 60].map(x => String(Math.floor(x)).padStart(2, '0')).join(':');
+        if (el.textContent !== txt) { el.textContent = txt; el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick'); }
       };
       tick(); timers.push(setInterval(tick, 1000));
     }
+    // цифры статистики «пробегают» до значения
+    if (A.countUp) $$('[data-count]', app).forEach(el => A.countUp(el, +el.dataset.count, { duration: 900 }));
   }
 
   Object.assign(A, { dealOfDay, renderHome });

@@ -119,7 +119,7 @@
         </div>
         <a class="btn btn-secondary" href="../index.html">⏏ ${T.backToHub}</a>
       </div>`;
-    $$('[data-theme-pick]').forEach(b => b.onclick = () => { state.theme = b.dataset.themePick; applyTheme(); renderSettings(app); });
+    $$('[data-theme-pick]').forEach(b => b.onclick = e => { state.theme = b.dataset.themePick; applyTheme(e); $$('[data-theme-pick]').forEach(x => x.classList.toggle('active', x === b)); });
     $$('[data-lang]').forEach(b => b.onclick = () => { if (b.dataset.lang === 'auto') setLang(I18N.detect(), true); else setLang(b.dataset.lang, false); });
     $$('[data-country]').forEach(b => b.onclick = () => { setCountry(b.dataset.country); renderSettings(app); });
     $('#profileForm').onsubmit = e => {

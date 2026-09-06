@@ -34,17 +34,22 @@
     timers.splice(0).forEach(clearInterval);
     state.moveMode = false; document.body.classList.remove('no-scroll');
     const app = $('#app');
-    app.innerHTML = '';
-    window.scrollTo({ top: 0 });
-    document.title = 'GIGASAIT Market';
-    (routes[seg] || renderNotFound)(app, params, arg);
     $$('.header-nav .nav-item, .bottom-nav a').forEach(a => {
       const href = a.getAttribute('href') || '';
       a.classList.toggle('active', href === '#' + seg || (seg === '/' && href === '#/'));
     });
     $$('.header-cats a').forEach(a => a.classList.toggle('active', seg === '/catalog' && a.dataset.cat === params.get('cat')));
-    renderCompareBar();
-    translateIn(app);
+    const render = () => {
+      app.innerHTML = '';
+      window.scrollTo({ top: 0 });
+      document.title = 'GIGASAIT Market';
+      (routes[seg] || renderNotFound)(app, params, arg);
+      renderCompareBar();
+      translateIn(app);
+      if (A.reveal) A.reveal(app);
+    };
+    // плавный переход: старая страница тает, сверху бежит полоса загрузки, новая появляется
+    if (A.pageTransition) A.pageTransition(render); else render();
   }
 
   Object.assign(A, { parseHash, routes, navigate });

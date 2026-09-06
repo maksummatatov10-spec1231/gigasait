@@ -6,7 +6,7 @@
   const { COUNTRIES, I18N, arr, obj, store } = A;
 
   const state = {
-    theme: store.get('theme', matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'),
+    theme: window.GIGA_THEME ? window.GIGA_THEME.get() : store.get('theme', 'dark'),
     lang: 'ru', langAuto: false,
     country: store.get('country', 'RU'),
     cart: obj(store.get('cart', {})),
