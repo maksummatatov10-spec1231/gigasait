@@ -28,3 +28,7 @@
 .profile-stats div { padding: 10px 12px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); display: flex; flex-direction: column; gap: 2px; }
 .profile-stats b { font-size: 15px; } .profile-stats span { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: .5px; }
 @media (max-width: 600px) { .profile-card { flex-direction: column; } }
+
+/* подсказка, если браузер принудительно затемняет сайт (Chrome Android «Тёмная тема для сайтов») */
+.auto-dark-note { display: none; margin-top: 12px; padding: 10px 14px; border-radius: 12px; background: rgba(251,191,36,.15); color: #b45309; font-size: 13px; font-weight: 600; line-height: 1.5; }
+html.auto-dark .auto-dark-note { display: block; }

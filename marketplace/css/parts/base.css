@@ -8,6 +8,7 @@
   --max: 1320px;
 }
 [data-theme="dark"] {
+  color-scheme: dark;
   --bg: #0a0b10; --bg-2: #11131b; --bg-3: #181b26;
   --surface: #141621; --surface-2: #1c1f2c; --border: rgba(255,255,255,.08); --border-2: rgba(255,255,255,.14);
   --text: #f3f4f9; --text-2: #9ea3b8; --text-3: #6b7088;
@@ -17,6 +18,7 @@
   --skeleton: linear-gradient(90deg, #1c1f2c 25%, #262a3a 50%, #1c1f2c 75%);
 }
 [data-theme="light"] {
+  color-scheme: only light; /* запрет принудительного затемнения браузером */
   --bg: #f3f4f9; --bg-2: #ffffff; --bg-3: #eceef6;
   --surface: #ffffff; --surface-2: #f6f7fb; --border: rgba(15,18,40,.08); --border-2: rgba(15,18,40,.16);
   --text: #0f1228; --text-2: #5b6080; --text-3: #8b90a8;
@@ -26,6 +28,9 @@
   --skeleton: linear-gradient(90deg, #eceef6 25%, #f6f7fb 50%, #eceef6 75%);
 }
 
+/* сайт сам поддерживает тёмную тему — «умные затемнители» браузеров не должны вмешиваться */
+@media (prefers-color-scheme: dark) { :root { --supports-dark: 1; } }
+html, body { background-color: var(--bg); }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

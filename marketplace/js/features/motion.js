@@ -58,7 +58,7 @@
   /* ---------- рябь на кнопках ---------- */
   document.addEventListener('pointerdown', e => {
     if (reduce() || e.button > 0) return;
-    const el = e.target.closest('.btn, .nav-item, .tag, .theme-card, .lang-btn, .country-btn, .filters-toggle, .qty button, .bottom-nav a, .bottom-nav button, .site-mode button, .popover button, .catalog-drop-list button');
+    const el = e.target.closest('.btn, .nav-item, .tag, .theme-card, .lang-btn, .country-btn, .filters-toggle, .qty button, .bottom-nav a, .bottom-nav button, .popover button, .catalog-drop-list button');
     if (!el || el.disabled) return;
     const r = el.getBoundingClientRect();
     const size = Math.max(r.width, r.height) * 1.2;

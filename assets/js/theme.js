@@ -36,8 +36,11 @@
   }
   function paint(t) {
     root.setAttribute('data-theme', t);
-    root.style.colorScheme = t;
-    try { meta('color-scheme').setAttribute('content', t === 'light' ? 'light dark' : 'dark light'); meta('theme-color').setAttribute('content', COLORS[t]); } catch (e) {}
+    // «only light» — явный отказ от принудительного затемнения браузером (Chrome Android «Тёмная тема для сайтов»,
+    // Яндекс.Браузер, флаг force-dark): иначе браузер сам перекрашивает светлую страницу обратно в тёмную.
+    var scheme = t === 'light' ? 'only light' : 'dark';
+    root.style.colorScheme = scheme;
+    try { meta('color-scheme').setAttribute('content', scheme); meta('theme-color').setAttribute('content', COLORS[t]); } catch (e) {}
     var sw = document.getElementById('themeToggle');
     if (sw) sw.setAttribute('aria-checked', t === 'light');
   }
@@ -85,7 +88,25 @@
   window.addEventListener('storage', function (e) { if (e.key === KEY) { var t = read(); if (t !== current) { current = t; paint(t); try { window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: t } })); } catch (err) {} } } });
   // кнопка #themeToggle подхватывается автоматически на любой странице
   document.addEventListener('click', function (e) { var b = e.target.closest && e.target.closest('#themeToggle'); if (b) { e.preventDefault(); toggle(e); } });
-  document.addEventListener('DOMContentLoaded', function () { paint(current); });
+  document.addEventListener('DOMContentLoaded', function () { paint(current); setTimeout(detectAutoDark, 300); });
+  window.addEventListener('themechange', function () { setTimeout(detectAutoDark, 700); });
 
-  window.GIGA_THEME = { get: function () { return current; }, set: set, toggle: toggle };
+  // Определяем, перекрашивает ли браузер страницу принудительно (Auto Dark Theme): элемент с фоном «canvas»
+  // в светлой схеме должен быть белым; если нет — браузер затемняет сайт сам. Тогда ставим html.auto-dark,
+  // а настройки показывают подсказку, как это выключить.
+  var autoDark = false;
+  function detectAutoDark() {
+    if (!document.body || current !== 'light') { autoDark = false; root.classList.remove('auto-dark'); return false; }
+    try {
+      var probe = document.createElement('div');
+      probe.style.cssText = 'position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;background-color:Canvas;color-scheme:light';
+      document.body.appendChild(probe);
+      var bg = getComputedStyle(probe).backgroundColor; document.body.removeChild(probe);
+      autoDark = !!bg && bg !== 'rgb(255, 255, 255)' && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'Canvas' && bg !== 'canvas';
+    } catch (e) { autoDark = false; }
+    root.classList.toggle('auto-dark', autoDark);
+    return autoDark;
+  }
+
+  window.GIGA_THEME = { get: function () { return current; }, set: set, toggle: toggle, autoDark: function () { return detectAutoDark(); } };
 })();

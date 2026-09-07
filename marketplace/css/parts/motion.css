@@ -34,7 +34,7 @@ img.ok { animation: imgIn .45s ease both; }
 @keyframes imgIn { from { opacity: 0; filter: blur(6px) saturate(.6); } to { opacity: 1; filter: none; } }
 
 /* Кнопки: мягкое нажатие + рябь от точки клика */
-.btn, .tag, .theme-card, .lang-btn, .country-btn, .filters-toggle, .qty button, .site-mode button, .popover button, .catalog-drop-list button { position: relative; overflow: hidden; }
+.btn, .tag, .theme-card, .lang-btn, .country-btn, .filters-toggle, .qty button, .popover button, .catalog-drop-list button { position: relative; overflow: hidden; }
 .nav-item, .bottom-nav a, .bottom-nav button { position: relative; } /* без overflow:hidden — бейдж не должен обрезаться */
 .nav-item .ripple, .bottom-nav .ripple { border-radius: 12px; }
 .ripple { position: absolute; border-radius: 50%; transform: scale(0); background: currentColor; opacity: .18; pointer-events: none; animation: ripple .55s ease-out forwards; }

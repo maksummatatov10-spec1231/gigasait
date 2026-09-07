@@ -240,7 +240,3 @@ html.is-mobile.is-tablet .product { grid-template-columns: 1fr 1fr; }
 html.is-mobile.is-tablet .buy-box { position: static; grid-column: 1 / -1; border-radius: var(--r-lg); box-shadow: none; }
 html.is-mobile.is-tablet .buy-box .buy-info, html.is-mobile.is-tablet .buy-box .bonus-line, html.is-mobile.is-tablet .buy-box .stock-ok { display: flex; }
 html.is-mobile.is-tablet body:has(.buy-box) .page { padding-bottom: 100px; }
-/* Переключатель версии сайта (кнопка в подвале) */
-.site-mode { display: inline-flex; gap: 4px; margin-top: 12px; padding: 4px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); }
-.site-mode button { padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; color: var(--text-3); transition: var(--t); min-height: 32px; }
-.site-mode button.active { background: var(--accent); color: #fff; }

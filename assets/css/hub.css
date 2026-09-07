@@ -7,6 +7,7 @@
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
   --bg: #07080d;
   --bg-2: #0e1018;
   --surface: rgba(255,255,255,.04);
@@ -21,6 +22,7 @@
 }
 
 [data-theme="light"] {
+  color-scheme: only light;
   --bg: #f4f5fb;
   --bg-2: #ffffff;
   --surface: rgba(255,255,255,.75);
@@ -180,3 +182,9 @@ body { transition: background-color .45s ease, color .45s ease; }
 .hub-select:focus-visible, .icon-btn:focus-visible { box-shadow: 0 0 0 4px rgba(124,92,255,.25); outline: none; }
 .theme-switch:active .ts-knob { transform: scale(.9); } [data-theme="light"] .theme-switch:active .ts-knob { transform: translateX(32px) scale(.9); }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+@media (prefers-color-scheme: dark) { :root { --supports-dark: 1; } }
+html { background-color: var(--bg); }
+/* подсказка, если браузер принудительно затемняет сайт */
+.auto-dark-note { display: none; }
+html.auto-dark .auto-dark-note { display: block; margin: 0 auto 16px; padding: 10px 14px; border-radius: 12px; background: rgba(251,191,36,.15); color: #b45309; font-size: 13px; font-weight: 600; max-width: 720px; text-align: center; }

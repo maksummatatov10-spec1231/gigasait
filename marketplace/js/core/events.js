@@ -7,12 +7,7 @@
   const { $, $$, addToCart, inCompare, isFav, placeholderImage, quickView, state, toggleCompare, toggleFav } = A;
 
   /* ---------- Глобальные делегированные клики ---------- */
-  // переключатель версии сайта в подвале (в настройках — свой, с описанием)
-  function syncSiteMode() { const m = window.GIGA_DEVICE ? window.GIGA_DEVICE.mode : 'auto'; $$('#footerSiteMode [data-device-mode]').forEach(b => b.classList.toggle('active', b.dataset.deviceMode === m)); }
-  syncSiteMode(); window.addEventListener('devicechange', syncSiteMode);
   document.addEventListener('click', e => {
-    const dm = e.target.closest('#footerSiteMode [data-device-mode]');
-    if (dm && window.GIGA_DEVICE) { window.GIGA_DEVICE.setMode(dm.dataset.deviceMode); syncSiteMode(); window.scrollTo({ top: 0 }); return; }
     if (state.moveMode && e.target.closest('#favGrid')) return;
     const qv = e.target.closest('[data-qv]');
     if (qv) { e.preventDefault(); quickView(+qv.dataset.qv); return; }

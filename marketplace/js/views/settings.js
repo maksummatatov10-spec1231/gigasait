@@ -9,7 +9,6 @@
   const setCountry = (...args) => A.setCountry(...args);
 
   /* ---------- Настройки ---------- */
-  const devName = t => ({ phone: T.devPhone, tablet: T.devTablet, desktop: T.devDesktop }[t] || t);
   function trDiagHTML() {
     if (state.lang === 'ru') return `<div>${T.trOnlyNonRu}</div>`;
     if (!state.prefs.autoTr) return `<div>${T.trOff}</div>`;
@@ -58,18 +57,12 @@
           </div>
         </div>
         <div class="form-card">
-          <h3>📱 ${T.siteVersion}</h3>
-          <div class="setting-row"><div><b>${T.siteVersion}</b><small>${T.siteVersionHint} ${window.GIGA_DEVICE ? fmt(T.deviceDetected, { type: devName(window.GIGA_DEVICE.detected()) }) : ''}</small></div></div>
-          <div class="site-mode" id="siteMode" role="radiogroup" aria-label="${esc(T.siteVersion)}">
-            ${[['auto', T.deviceAuto], ['phone', T.devicePhone], ['desktop', T.deviceDesktop]].map(([m, l]) => `<button type="button" data-device-mode="${m}" role="radio" aria-checked="${(window.GIGA_DEVICE ? window.GIGA_DEVICE.mode : 'auto') === m}" class="${(window.GIGA_DEVICE ? window.GIGA_DEVICE.mode : 'auto') === m ? 'active' : ''}">${l}</button>`).join('')}
-          </div>
-        </div>
-        <div class="form-card">
           <h3>🎨 ${T.themeTitle}</h3>
           <div class="theme-cards">
             <div class="theme-card ${state.theme === 'dark' ? 'active' : ''}" data-theme-pick="dark"><span class="sw" style="background:#0a0b10"></span>🌙 ${T.dark}</div>
             <div class="theme-card ${state.theme === 'light' ? 'active' : ''}" data-theme-pick="light"><span class="sw" style="background:#f3f4f9"></span>☀️ ${T.light}</div>
           </div>
+          <div class="auto-dark-note" id="autoDarkNote">⚠️ ${T.autoDarkNote}</div>
           <div style="margin-top:14px">${sw('liveBg', T.liveBackground, T.liveBackgroundHint)}</div>
         </div>
         <div class="form-card">
@@ -133,12 +126,7 @@
       if (b.dataset.pref === 'autoTr') { const d = $('#trDiag'); if (d) d.innerHTML = trDiagHTML(); bindTrTest(app); }
     });
     bindTrTest(app);
-    $$('[data-device-mode]').forEach(b => b.onclick = () => {
-      if (!window.GIGA_DEVICE) return;
-      window.GIGA_DEVICE.setMode(b.dataset.deviceMode);
-      $$('[data-device-mode]').forEach(x => { const on = x === b; x.classList.toggle('active', on); x.setAttribute('aria-checked', on); });
-      toast(T.saved, '📱');
-    });
+
     $('#clearRecent').onclick = () => { state.recent = []; store.set('recent', []); state.searches = []; store.set('searches', []); toast(T.saved); };
     $('#clearTr').onclick = () => { TR.clear(); toast(T.saved); renderSettings(app); };
     $('#clearAll').onclick = () => { if (confirm(T.confirmClear)) { Object.keys(localStorage).filter(k => k.startsWith('giga.')).forEach(k => localStorage.removeItem(k)); location.reload(); } };

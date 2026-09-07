@@ -41,8 +41,8 @@
     window.addEventListener('hashchange', navigate);
     navigate();
     window.addEventListener('storage', () => { state.cart = obj(store.get('cart', {})); state.fav = arr(store.get('fav', [])); updateBadges(); });
-    // смена типа устройства (ручной выбор в настройках или поворот планшета) — применяем настройки и перерисовываем страницу
-    window.addEventListener('devicechange', e => { applyPrefs(); if (e.detail && e.detail.changed !== false) navigate(); });
+    // смена типа устройства (поворот планшета / изменение окна) — применяем настройки и перерисовываем страницу
+    window.addEventListener('devicechange', () => { applyPrefs(); navigate(); });
     if (firstVisitLang && state.lang !== 'ru') setTimeout(() => toast(fmt(T.langDetected, { lang: I18N.meta(state.lang).name }), '🌐'), 600);
   }
   init();
